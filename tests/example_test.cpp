@@ -1,4 +1,4 @@
-#include "/Users/oanttoor/.brew/Cellar/cpputest/4.0/include/CppUTest/TestHarness.h"
+#include "../testing_framework/cpputest/4.0/include/CppUTest/TestHarness.h"
 
 extern "C" {
 #include "example.h"

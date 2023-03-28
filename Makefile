@@ -2,7 +2,7 @@ CC = gcc
 CXX = g++
 CFLAGS = -Iinclude -Wall
 CXXFLAGS = $(CFLAGS)
-LDFLAGS = -L/Users/oanttoor/.brew/Cellar/cpputest/4.0/lib -lCppUTest -lCppUTestExt
+LDFLAGS = -L./testing_framework/cpputest/4.0/lib -lCppUTest -lCppUTestExt
 
 SRC_FILES = $(wildcard src/*.c)
 OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))

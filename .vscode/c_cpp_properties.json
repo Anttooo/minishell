@@ -3,8 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-				"/Users/oanttoor/.brew/Cellar/cpputest/4.0/include/CppUTest/"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "macFrameworkPath": [
