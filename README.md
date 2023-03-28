@@ -6,7 +6,7 @@ Hive minishell project
 Run 'brew install automake autoconf libtool'
 
 Then run the following
-$ cd cpputest_build
+$ cd testing_framework/cpputest-3.8/cpputest_build
 $ autoreconf .. -i
 $ ../configure
 $ make
