@@ -1,4 +1,4 @@
-#include "../testing_framework/cpputest/4.0/include/CppUTest/TestHarness.h"
+#include "../testing_framework/cpputest-3.8/include/CppUTest/CommandLineTestRunner.h"
 
 extern "C" {
 #include "example.h"

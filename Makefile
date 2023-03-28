@@ -1,8 +1,8 @@
 CC = gcc
 CXX = g++
-CFLAGS = -Iinclude -Wall
+CFLAGS = -Iinclude -Itesting_framework/cpputest-3.8/include/CppUTest -Wall
 CXXFLAGS = $(CFLAGS)
-LDFLAGS = -L./testing_framework/cpputest/4.0/lib -lCppUTest -lCppUTestExt
+LDFLAGS = -Ltesting_framework/cpputest-3.8/cpputest_build/lib -lCppUTest -lCppUTestExt
 
 SRC_FILES = $(wildcard src/*.c)
 OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
