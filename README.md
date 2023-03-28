@@ -5,4 +5,8 @@ Hive minishell project
 # To get tests running locally
 Run 'brew install automake autoconf libtool'
 
-Then run 
+Then run the following
+$ cd cpputest_build
+$ autoreconf .. -i
+$ ../configure
+$ make
