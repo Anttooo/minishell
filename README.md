@@ -1,0 +1,2 @@
+# minishell
+Hive minishell project
