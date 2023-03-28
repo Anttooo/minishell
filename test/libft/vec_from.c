@@ -13,9 +13,7 @@
 #include "vec.h"
 
 int	vec_from(t_vec *dst, void *src, size_t len, size_t elem_size)
-{
-	unsigned int	src_size;
-
+{	
 	if (!dst | !src)
 		return (-1);
 	if (vec_new(dst, len, elem_size) == 1)

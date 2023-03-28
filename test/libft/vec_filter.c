@@ -15,7 +15,7 @@
 int	vec_filter(t_vec *dst, t_vec *src, bool (*f) (void *))
 {
 	void	*res;
-	int		idx;
+	size_t	idx;
 
 	if (!dst || !src || !src->memory)
 		return (-1);

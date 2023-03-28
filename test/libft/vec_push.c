@@ -14,8 +14,6 @@
 
 int	vec_push(t_vec *dst, void *src)
 {
-	size_t	new_size;
-
 	if (!dst || !src)
 		return (-1);
 	else if (!dst->memory)
