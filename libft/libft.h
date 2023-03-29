@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmykkane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:06:12 by jmykkane          #+#    #+#             */
-/*   Updated: 2022/11/30 16:36:41 by jmykkane         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:14:48 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa_hex(unsigned long long num);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstadd_front(t_list **lst, t_list *new);
 void	*ft_memchr(const void *s, int c, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
+void	ft_lstadd_back(t_list **lst, t_list *new_list);
+void	ft_lstadd_front(t_list **lst, t_list *new_list);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memrcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
