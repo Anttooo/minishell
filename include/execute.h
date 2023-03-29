@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/29 12:03:10 by oanttoor         ###   ########.fr       */
+/*   Created: 2023/03/29 11:54:22 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/03/29 12:08:56 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXECUTE_H
+# define EXECUTE_H
 
-# include "debug.h"
-
-# include <stdio.h>
-# include "execute.h"
-# include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <unistd.h>
 
 // add functions here 
+int	execute_command(char *command, char **options, char **args);
 
 #endif

@@ -41,7 +41,7 @@ char *get_command_path(char *token)
 		cmd_path = ft_strjoin(path_with_slash, token);
 		if(access(cmd_path, X_OK) == 0) {
 			printf("Command is an environment command, can be executed\n");
-			return (paths[i]);
+			return (cmd_path);
 		}
 		free(path_with_slash);
 		free(cmd_path);
@@ -60,9 +60,10 @@ int	parse_input(char *input)
 	if (!tokens)
 		return (-1);
 	// print out tokens to see if they are separated correctly using a loop
-	// debug_print_list(tokens, __func__);
 	// Find the command path
 	command_path = get_command_path(tokens[0]);
+	execute_command(command_path, NULL, tokens);
 	if (!command_path)
 		return (-1);
+	return (1);
 }
