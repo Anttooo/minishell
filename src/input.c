@@ -8,7 +8,7 @@ int	handle_input(char *input)
 	if (strcmp(input, "quit") == 0) 
 	{
 		free(input);
-		quit(1);
+		exit(0);
 	}
 	return (1);
 }
