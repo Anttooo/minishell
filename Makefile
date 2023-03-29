@@ -17,6 +17,9 @@ all: $(NAME)
 $(NAME): $(OBJ_FILES)
 	$(CC) $(LDFLAGS) $^ -o bin/$@ -lreadline
 
+run: $(NAME)
+	./bin/$(NAME)
+
 .PHONY: clean
 clean:
 	rm -f obj/* bin/*
