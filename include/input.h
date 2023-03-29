@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/03/29 08:57:44 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/03/29 08:56:37 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/03/29 09:05:02 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef INPUT_H
+# define INPUT_H
 
-int main(void)
-{
-    char *input;
+# include "../libft/libft.h"
 
-    while (42) {
-        input = readline("sHeL>> ");
-        if (!input) 
-            printf("\n");
-		else
-			input_handle(input);
-        free(input);
-    }
-    return (0);
-}
+int	handle_input(char *input);
+
+#endif
