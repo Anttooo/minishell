@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/03/29 08:57:44 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/03/29 09:10:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int main(void)
         if (!input) 
             printf("\n");
 		else
-			input_handle(input);
+		{
+			if (handle_input(input) < 0)
+		}
         free(input);
     }
     return (0);
