@@ -12,17 +12,29 @@
 
 #include "../include/minishell.h"
 
+t_data	data;
+
 int main(void)
 {
     char    *input;
 
-    while (42) {
-        input = readline("sHeL>> ");
-        if (!input) 
-            printf("\n");
-		else
-		    handle_input(input);
-        free(input);
+    while (42) 
+		{
+			input = readline("sHeL>> ");
+			if (!input)
+			{
+					printf("\n");
+			}
+			else
+			{
+				handle_input(input);
+				free(input);
+			}
     }
     return (0);
+}
+
+void	init_struct(void)
+{
+	
 }

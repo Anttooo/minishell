@@ -40,7 +40,7 @@ char *get_command_path(char *token)
 		path_with_slash = ft_strjoin(paths[i], "/");
 		cmd_path = ft_strjoin(path_with_slash, token);
 		if(access(cmd_path, X_OK) == 0) {
-			printf("Command is an environment command, can be executed\n");
+			// printf("Command is an environment command, can be executed\n");
 			return (cmd_path);
 		}
 		free(path_with_slash);
