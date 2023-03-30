@@ -4,14 +4,20 @@
 
 extern "C" {
 #include "init.h"
+#include "minishell.h"
 #include "debug.h"
 }
 
-TEST_GROUP(GetPathsTestGroup)
+extern t_data g_data;
+
+TEST_GROUP(InitialisationTestGroup)
 {
+	void teardown() {
+		clean_exit();
+	}
 };
 
-TEST(GetPathsTestGroup, GetPathsNotNull)
+TEST(InitialisationTestGroup, GetPathsNotNull)
 {
 		char **paths = get_paths();
     CHECK(paths != NULL);
@@ -22,4 +28,12 @@ TEST(GetPathsTestGroup, GetPathsNotNull)
     free(paths);
 }
 
-IMPORT_TEST_GROUP(GetPathsTestGroup);
+TEST(InitialisationTestGroup, StartDirectoryCorrectlySet)
+{
+	init_struct();
+	
+	// Check that g_data.dir.start contains "/minishell" after initialisation
+	STRCMP_CONTAINS("/minishell", g_data.dir.start);
+}
+
+IMPORT_TEST_GROUP(InitialisationTestGroup);

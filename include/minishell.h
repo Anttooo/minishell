@@ -16,8 +16,9 @@
 // struct for directory-related variables
 typedef	struct	s_dir
 {
-	char	*dir_current;
-  char	*dir_home;
+	char	*current;
+  char	*home;
+	char	*start;
 }								t_dir;
 
 // struct for environment-related variables
@@ -41,6 +42,7 @@ typedef	struct	s_data
 # include "execute.h"
 # include "command.h"
 # include	"init.h"
+# include "clean_exit.h"
 # include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>

@@ -32,5 +32,6 @@ int main(void)
 				free(input);
 			}
     }
+		clean_exit();
     return (0);
 }
