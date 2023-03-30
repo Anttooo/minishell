@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 09:44:43 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/03/29 11:55:00 by oanttoor         ###   ########.fr       */
+/*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
+/*   Updated: 2023/03/29 10:47:38 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#include "../include/init.h"
+#include "../include/minishell.h"
 
-# include "../libft/libft.h"
-# include <fcntl.h>
+extern t_data	g_data;
 
-int		parse_input(char *input);
-char 	*get_command_path(char *token);
+char	**get_paths(void)
+{
+	char	*env_vars;
+	char	**paths;
 
-#endif
+	env_vars = getenv("PATH");
+	if (!env_vars)
+		return (NULL);
+	paths = ft_split(env_vars, ':');
+	// debug_print_list(paths, __func__);
+	return (paths);
+}
+
+void	init_struct(void)
+{
+	g_data.env.paths = get_paths();
+}
