@@ -11,6 +11,12 @@ extern "C" {
 
 TEST_GROUP(CommandTestGroup)
 {
+	void	setup() {
+		init_struct();
+	}
+	void	teardown() {
+		clean_exit();
+	}
 };
 
 TEST(CommandTestGroup, ValidCommand)

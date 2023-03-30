@@ -41,7 +41,7 @@ TEST(ExecuteCommandTestGroup, EchoHelloTest)
     fgets(output, sizeof(output), file);
     fclose(file);
     // Remove the temporary file
-    // remove(temp_output_file);
+    remove(temp_output_file);
 
     // Check if the captured output matches the expected output
     STRCMP_EQUAL("Hello\n", output);

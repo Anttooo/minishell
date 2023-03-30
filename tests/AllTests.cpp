@@ -6,8 +6,6 @@ extern "C" {
 }
 
 int main(int argc, char** argv)
-{
-		init_struct();
-		
+{		
 		return CommandLineTestRunner::RunAllTests(argc, argv);
 }
