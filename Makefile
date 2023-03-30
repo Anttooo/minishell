@@ -3,7 +3,7 @@ CC = gcc
 CXX = g++
 CFLAGS = -Iinclude -Itesting_framework/cpputest-3.8/include/CppUTest -Wall
 CXXFLAGS = $(CFLAGS)
-LDFLAGS = -Ltesting_framework/cpputest-3.8/cpputest_build/lib -lCppUTest -lCppUTestExt -L/Users/oanttoor/.brew/opt/readline/lib -lreadline -L libft -lft
+LDFLAGS = -Ltesting_framework/cpputest-3.8/cpputest_build/lib -lCppUTest -lCppUTestExt -L/opt/homebrew/opt/readline/lib -lreadline -L libft -lft
 
 SRC_FILES = $(wildcard src/*.c)
 OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
@@ -23,6 +23,7 @@ run: $(NAME)
 
 .PHONY: clean
 clean:
+	make fclean -C libft
 	rm -f obj/* bin/*
 
 obj/%.o: src/%.c
