@@ -18,7 +18,10 @@ int main(void)
 {
     char    *input;
 
-		init_struct();
+		if (init_struct() == 1)
+		{
+			perror("init_struct");
+		}
     while (42) 
 		{
 			input = readline("sHeL>> ");

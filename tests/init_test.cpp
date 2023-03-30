@@ -34,6 +34,18 @@ TEST(InitialisationTestGroup, StartDirectoryCorrectlySet)
 	
 	// Check that g_data.dir.start contains "/minishell" after initialisation
 	STRCMP_CONTAINS("/minishell", g_data.dir.start);
+	clean_exit();
+}
+
+TEST(InitialisationTestGroup, CurrentDirectoryEqualsHomeAfterInit)
+{
+	CHECK_EQUAL(NULL, g_data.dir.current);
+	
+	init_struct();
+	
+	// Check that g_data.dir.current equals getenv("HOME") after init
+	STRCMP_EQUAL(getenv("HOME"), g_data.dir.current);
+	clean_exit();
 }
 
 IMPORT_TEST_GROUP(InitialisationTestGroup);

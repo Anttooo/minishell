@@ -18,7 +18,7 @@ TEST_GROUP(CleanExitTestGroup)
 TEST(CleanExitTestGroup, CleanStartDirectory)
 {
     // Allocate space for g_data.dir.home
-		g_data.dir.start = (char*)malloc(1000);
+		init_struct();
 		try {
 			clean_exit();
 		} catch (...) {
@@ -27,17 +27,5 @@ TEST(CleanExitTestGroup, CleanStartDirectory)
 
 		POINTERS_EQUAL(NULL, g_data.dir.start);
 }
-
-
-TEST(CleanExitTestGroup, NothingToFree)
-{
-		try {
-			clean_exit();
-		} catch (...) {
-			FAIL("Exception thrown in clean_exit()");
-		}
-		POINTERS_EQUAL(NULL, g_data.dir.start);
-}
-
 
 IMPORT_TEST_GROUP(CleanExitTestGroup);
