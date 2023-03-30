@@ -12,12 +12,13 @@
 
 #include "../include/minishell.h"
 
-t_data	data;
+extern t_data	g_data;
 
 int main(void)
 {
     char    *input;
 
+		init_struct();
     while (42) 
 		{
 			input = readline("sHeL>> ");
@@ -32,9 +33,4 @@ int main(void)
 			}
     }
     return (0);
-}
-
-void	init_struct(void)
-{
-	
 }

@@ -6,6 +6,7 @@
 
 extern "C" {
 #include "execute.h"
+#include "debug.h"
 }
 
 TEST_GROUP(ExecuteCommandTestGroup)
@@ -14,7 +15,7 @@ TEST_GROUP(ExecuteCommandTestGroup)
 
 TEST(ExecuteCommandTestGroup, EchoHelloTest)
 {
-    int original_stdout = dup(STDOUT_FILENO);
+		int original_stdout = dup(STDOUT_FILENO);
     const char *temp_output_file = "temp_output.txt";
     int temp_fd = open(temp_output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
@@ -39,7 +40,6 @@ TEST(ExecuteCommandTestGroup, EchoHelloTest)
     char output[32];
     fgets(output, sizeof(output), file);
     fclose(file);
-
     // Remove the temporary file
     // remove(temp_output_file);
 

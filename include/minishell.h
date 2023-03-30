@@ -13,14 +13,12 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-
 // struct for directory-related variables
 typedef	struct	s_dir
 {
 	char	*dir_current;
   char	*dir_home;
 }								t_dir;
-
 
 // struct for environment-related variables
 typedef struct	s_env
@@ -33,7 +31,7 @@ typedef	struct	s_data
 {
   t_dir	dir;
   t_env	env;
-}					t_data;
+}								t_data;
 
 # include "debug.h"
 
@@ -42,11 +40,12 @@ typedef	struct	s_data
 # include "input.h"
 # include "execute.h"
 # include "command.h"
+# include	"init.h"
 # include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
 
-// add functions here 
+// add functions here
 
 #endif

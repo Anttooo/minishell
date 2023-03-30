@@ -11,33 +11,21 @@
 /* ************************************************************************** */
 
 #include "../include/command.h"
+#include "../include/minishell.h"
 #include "../include/debug.h"
 
-char	**get_paths(void)
-{
-	char	*env_vars;
-	char	**paths;
-
-	env_vars = getenv("PATH");
-	if (!env_vars)
-		return (NULL);
-	paths = ft_split(env_vars, ':');
-	// debug_print_list(paths, __func__);
-	return (paths);
-}
+extern t_data	g_data;
 
 char *get_command_path(char *token)
 {
-	char	**paths;
 	int		i;
 	char	*cmd_path;
 	char	*path_with_slash;
 
 	i = 0;
-	paths = get_paths(); // TODO: replace with paths saved in struct
-	while (paths[i])
+	while (g_data.env.paths[i])
 	{
-		path_with_slash = ft_strjoin(paths[i], "/");
+		path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
 		cmd_path = ft_strjoin(path_with_slash, token);
 		if(access(cmd_path, X_OK) == 0) {
 			// printf("Command is an environment command, can be executed\n");
@@ -51,6 +39,8 @@ char *get_command_path(char *token)
 	return(NULL);
 }
 
+
+// TODO: this function currently does more than just parsing input
 int	parse_input(char *input)
 {
 	char	**tokens;
@@ -62,8 +52,9 @@ int	parse_input(char *input)
 	// print out tokens to see if they are separated correctly using a loop
 	// Find the command path
 	command_path = get_command_path(tokens[0]);
-	execute_command(command_path, NULL, tokens);
+	// if the command can't be found, command_path is null and nothing should be done.
 	if (!command_path)
 		return (-1);
-	return (1);
+	execute_command(command_path, NULL, tokens);
+	return (0);
 }
