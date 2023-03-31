@@ -16,5 +16,9 @@ void	clean_exit(void)
 		free (g_data.dir.start);
 		g_data.dir.start = NULL;
 	}
-
+	if (g_data.dir.builtins)
+	{
+		free (g_data.dir.builtins);
+		g_data.dir.start = NULL;
+	}
 }

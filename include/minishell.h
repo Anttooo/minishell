@@ -19,6 +19,7 @@ typedef	struct	s_dir
 	char	*current;
 	char	*home;
 	char	*start;
+	char	*builtins;
 }								t_dir;
 
 // struct for environment-related variables
