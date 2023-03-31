@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 20:17:43 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/03/31 08:23:15 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/03/31 12:39:27 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,12 @@ all: $(NAME)
 
 $(NAME): $(SRC_O)
 	cc -c $(SRC)
-	cc $(FLAGS) $(SRC_O) -o $(NAME)
+	cc $(FLAGS) $(SRC_O) -o $(BUILTINS_OUT)/$(NAME)
 
 clean:
 	rm -f $(SRC_O)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(BUILTINS_OUT)/$(NAME)
 
 re: fclean all

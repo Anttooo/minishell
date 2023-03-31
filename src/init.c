@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/03/31 12:04:43 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/03/31 12:36:01 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ extern t_data	g_data;
 
 char	**get_env_vars(char **envp)
 {
+	char	**vars;
 	int		idx;
-	char	**env_vars;
 
 	idx = -1;
 	while (envp[++idx] != NULL)
 		;
-	env_vars = (char *)malloc(sizeof(char *) * idx);
-	if (!env_vars)
+	vars = (char *)malloc(sizeof(char *) * idx);
+	if (!vars)
 		return (NULL);
 	idx = -1;
 	while (envp[++idx] != NULL)
-		env_vars[idx] = ft_strdup(envp[idx]);
-	env_vars[idx] = NULL;
-	return (env_vars);
+		vars[idx] = ft_strdup(envp[idx]);
+	vars[idx] = NULL;
+	return (vars);
 }
 
 char	**get_paths(void)
@@ -50,7 +50,7 @@ int	init_struct(char **envp)
 {
 	g_data.dir.start = (char *)malloc(1024);
 	g_data.env.paths = get_paths();
-	g_data.env.env_vars = get_env_vars(envp);
+	g_data.env.vars = get_env_vars(envp);
 	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
 	g_data.dir.home = getenv("HOME");
 	// TODO: Add error handling in case HOME directory can't for some reason be found from env.

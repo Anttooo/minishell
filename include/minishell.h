@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/31 10:55:11 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/03/31 12:35:37 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef	struct	s_dir
 // struct for environment-related variables
 typedef struct	s_env
 {
-	char	**env_vars;
+	char	**vars;
 	char	**paths;
 }								t_env;
 

@@ -15,8 +15,9 @@
 [ ] create a function to free struct variables in the end
 [ ] paths
 <!-- https://stackoverflow.com/questions/2085302/printing-all-environment-variables-in-c-c -->
-[ ] function to retrieve and save a list of all env variables
+[x] function to retrieve and save a list of all env variables
 [ ] env variables "echo $HOME" should output -> "/Users/{current_user}"
+[ ] function to check what env variable it is and what its value is.
 
 
 ## Known bugs
