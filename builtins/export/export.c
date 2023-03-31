@@ -12,22 +12,20 @@
 
 #include "export.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
-	printf("Using builtin function. \n");
+	// printf("Using builtin function. \n");
 	
-	int i;
+	// export should print out the list of environment variables.
+	// During the initialisation of the program, all existing environment variables are added to g_data.env.vars
+	// and then that list is updated while the shell is running. Therefore, it should be enough to just print out 
+	// the list in g_data.env.vars for export. That list is given through argv I suppose.
+	int	i;
 
-	i = 0;
-	while (envp[i]) 
+	i = 1; 
+	while(argv[i] != NULL)
 	{
-		printf("%s\n", envp[i]);
+		printf("%s\n", argv[i]);
 		i++;
 	}
-	if (argc == 2)
-	{
-		printf("%s\n", argv[1]);
-		return (1);
-	}
-	return (-1);
 }

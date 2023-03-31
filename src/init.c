@@ -43,4 +43,5 @@ int	init_struct(void)
 		return (1);
 	}
 	g_data.dir.current = g_data.dir.home;
+	return (0);
 }

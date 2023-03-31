@@ -12,9 +12,6 @@ extern t_data g_data;
 
 TEST_GROUP(InitialisationTestGroup)
 {
-	void teardown() {
-		clean_exit();
-	}
 };
 
 TEST(InitialisationTestGroup, GetPathsNotNull)
