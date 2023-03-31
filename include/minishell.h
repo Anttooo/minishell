@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/30 10:43:46 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/03/30 22:17:19 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 typedef	struct	s_dir
 {
 	char	*current;
-  char	*home;
+	char	*home;
 	char	*start;
 }								t_dir;
 

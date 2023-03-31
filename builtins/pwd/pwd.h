@@ -6,13 +6,13 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:22:05 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/30 10:37:31 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/03/30 11:45:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PWD_H
 # define PWD_H
 
-# include "../../libft/libft.h"
+#include <stdio.h>
 
 #endif

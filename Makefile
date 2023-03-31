@@ -11,11 +11,16 @@ OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
 TEST_SRC_FILES = $(wildcard tests/*.cpp) tests/AllTests.cpp
 TEST_OBJ_FILES = $(patsubst tests/%.cpp, obj/%.o, $(TEST_SRC_FILES))
 
+BUILTINS_MAKE = make -C builtins/pwd
+
+BUILTINS_CLEAN = make fclean -C builtins/pwd
+
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(filter-out obj/AllTests.o, $(OBJ_FILES))
 	make -C libft
+	$(BUILTINS_MAKE)
 	$(CC) $(LDFLAGS) $^ -o bin/$@ -lreadline
 
 run: $(NAME)
@@ -24,6 +29,7 @@ run: $(NAME)
 .PHONY: clean
 clean:
 	make fclean -C libft
+	$(BUILTINS_CLEAN)
 	rm -f obj/* bin/*
 
 obj/%.o: src/%.c
