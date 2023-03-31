@@ -28,7 +28,7 @@ run: $(NAME)
 
 .PHONY: clean
 clean:
-	make fclean -C libft
+	make fclean -C libft	
 	$(BUILTINS_CLEAN)
 	rm -f obj/* bin/*
 
