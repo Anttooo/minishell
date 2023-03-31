@@ -22,8 +22,7 @@ all: $(NAME)
 
 $(NAME): $(filter-out obj/AllTests.o, $(OBJ_FILES))
 	make -C libft
-	make -C builtins/pwd
-	make -C builtins/echo
+	$(BUILTINS_MAKE)
 	$(CC) $(LDFLAGS) $^ -o bin/$@ -lreadline
 
 run: $(NAME)
@@ -32,8 +31,7 @@ run: $(NAME)
 .PHONY: clean
 clean:
 	make fclean -C libft	
-	make fclean -C builtins/pwd
-	make fclean -C builtins/echo
+	$(BUILTINS_CLEAN)
 	rm -f obj/* bin/*
 
 obj/%.o: src/%.c
