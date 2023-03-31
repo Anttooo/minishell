@@ -15,7 +15,7 @@ TEST_GROUP(ExecuteCommandTestGroup)
 
 TEST(ExecuteCommandTestGroup, EchoHelloTest)
 {
-		int original_stdout = dup(STDOUT_FILENO);
+	int original_stdout = dup(STDOUT_FILENO);
     const char *temp_output_file = "temp_output.txt";
     int temp_fd = open(temp_output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
