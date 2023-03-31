@@ -6,17 +6,17 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 20:17:43 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/03/31 12:39:14 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/03/31 07:24:55 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pwd
+NAME = export
 
-SRC = pwd.c
+SRC = export.c
 
 SRC_O = $(SRC:.c=.o)
 
-INCLUDES = pwd.h
+INCLUDES = export.h
 
 FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
 
@@ -33,9 +33,5 @@ clean:
 
 fclean: clean
 	rm -f $(BUILTINS_OUT)/$(NAME)
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> origin/builtin_pwd
 re: fclean all
