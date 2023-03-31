@@ -21,7 +21,7 @@ TEST_GROUP(CommandTestGroup)
 
 TEST(CommandTestGroup, ValidCommand)
 {
-		char *valid_command = "ls";
+	char *valid_command = "ls";
     char *command_path = get_command_path(valid_command);
     CHECK(command_path != NULL);
     free(command_path);

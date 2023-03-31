@@ -5,6 +5,6 @@
 # include <fcntl.h>
 
 char	**get_paths(void);
-int	init_struct(void);
+int		init_struct(void);
 
 #endif

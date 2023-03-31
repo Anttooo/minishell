@@ -6,17 +6,19 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 20:17:43 by joonasmykka       #+#    #+#              #
-#    Updated: 2023/03/29 20:21:47 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/03/31 07:24:55 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pwd
 
-SRC = $(wildcard src/*.c)
+SRC = pwd.c
 
-SRC_O = SRC_O = $(SRC:.c=.o)
+SRC_O = $(SRC:.c=.o)
 
 INCLUDES = pwd.h
+
+FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
 
 .PHONY: all clean fclean re
 

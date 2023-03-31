@@ -1,5 +1,5 @@
-.gitignore
 testing_framework
+.gitignore
 .vscode
-obj
+obj/
 bin
