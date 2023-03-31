@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pwd
+NAME = export
 
-SRC = pwd.c
+SRC = export.c
 
 SRC_O = $(SRC:.c=.o)
 
-INCLUDES = pwd.h
+INCLUDES = export.h
 
 FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
 

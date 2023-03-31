@@ -11,6 +11,12 @@ OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
 TEST_SRC_FILES = $(wildcard tests/*.cpp) tests/AllTests.cpp
 TEST_OBJ_FILES = $(patsubst tests/%.cpp, obj/%.o, $(TEST_SRC_FILES))
 
+BUILTINS_MAKE = make -C builtins/export BUILTINS_OUT=../executables ; \
+	make -C builtins/pwd BUILTINS_OUT=../executables
+
+BUILTINS_CLEAN = make fclean -C builtins/export BUILTINS_OUT=../executables ; \
+		make fclean -C builtins/pwd BUILTINS_OUT=../executables
+
 .PHONY: all
 all: $(NAME)
 

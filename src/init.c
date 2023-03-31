@@ -53,6 +53,7 @@ int	init_struct(char **envp)
 	g_data.env.env_vars = get_env_vars(envp);
 	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
 	g_data.dir.home = getenv("HOME");
+	g_data.dir.builtins = ft_strjoin(g_data.dir.start, "/builtins/executables/");
 	// TODO: Add error handling in case HOME directory can't for some reason be found from env.
 	if (chdir(g_data.dir.home) == -1) 
 	{
