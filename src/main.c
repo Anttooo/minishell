@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/03/30 22:18:20 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/03/31 11:16:21 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 extern t_data	g_data;
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
     char    *input;
 
-	if (init_struct() == 1)
+	if (init_struct(envp) == 1)
 	{
 		perror("init_struct");
 	}

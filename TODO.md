@@ -13,7 +13,11 @@
 [x] get env variables when shell starts and save them.
 [x] create struct that has everything needed. Paths, inputs etc...
 [ ] create a function to free struct variables in the end
-	[ ] paths
+[ ] paths
+<!-- https://stackoverflow.com/questions/2085302/printing-all-environment-variables-in-c-c -->
+[ ] function to retrieve and save a list of all env variables
+[ ] env variables "echo $HOME" should output -> "/Users/{current_user}"
+
 
 ## Known bugs
 [ ] Sometimes the shell requires typing quit two times before it quits
