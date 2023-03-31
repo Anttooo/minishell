@@ -22,12 +22,25 @@ char *get_command_path(char *token)
 	char	*cmd_path;
 	char	*path_with_slash;
 
+	// check whether the function is found from the builtins path
+	cmd_path = ft_strjoin(g_data.dir.builtins, token);
+	if(access(cmd_path, F_OK) == 0)
+	{
+		printf("Command is a builtin\n");
+		return(cmd_path);
+	}
+	else
+	{
+		perror:("Error");
+	}
+	free(cmd_path);
 	i = 0;
 	while (g_data.env.paths[i])
 	{
 		path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
 		cmd_path = ft_strjoin(path_with_slash, token);
-		if(access(cmd_path, X_OK) == 0) {
+		if(access(cmd_path, X_OK) == 0) 
+		{
 			// printf("Command is an environment command, can be executed\n");
 			return (cmd_path);
 		}

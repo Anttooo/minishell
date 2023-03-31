@@ -10,13 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pwd.h"
+#include "export.h"
 
-// TODO: Figure out why it takes more than this, it cant be this easy
-// pwd program only takes in current_dir variable from main program and prints it out.
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	printf("Using builtin function. \n");
+	
+	int i;
+
+	i = 0;
+	while (envp[i]) 
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
 	if (argc == 2)
 	{
 		printf("%s\n", argv[1]);
