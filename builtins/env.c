@@ -6,11 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:47:13 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/02 07:49:06 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/02 07:54:26 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/builtins.h"
 
 void	env(char **env_vars)
 {
