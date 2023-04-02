@@ -6,28 +6,31 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/02 07:30:31 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/02 07:44:21 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	export(int argc, char **argv, char **envp)
+char	**export(char	**env_vars, char *str)
 {
-	printf("Using builtin function. \n");
+	char	**append;
+	int		idx;
 	
-	int i;
-
-	i = 0;
-	while (envp[i]) 
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-	if (argc == 2)
-	{
-		printf("%s\n", argv[1]);
-		return (1);
-	}
-	return (-1);
+	printf("Using builtin function. \n");
+	idx = -1;
+	while (env_vars[++idx] != NULL)
+		;
+	idx++;
+	append = (char *)malloc(sizeof(char *) * idx);
+	if (!append)
+		return (NULL);
+	idx = -1;
+	while (env_vars[++idx] != NULL)
+		append[idx] = ft_strdup(env_vars[idx]);
+	append[idx] = ft_strdup(str);
+	append[++idx] = NULL;
+	free_arr(env_vars);
+	free(str);
+	return (append);
 }
