@@ -1,6 +1,9 @@
 
 #include "../include/input.h"
 #include "../include/command.h"
+#include "../include/minishell.h"
+
+extern t_data g_data;
 
 // Returns 1 if input is handled, executed and saved
 // otherwise returns -1
@@ -14,7 +17,7 @@ int	handle_input(char *input)
 	// If input is not "quit", pass input to command parsing
 	else
 	{
-		parse_input(input);
+    g_data.cur.raw = ft_strdup(input);
 	}
-	return (1);
+	return (0);
 }

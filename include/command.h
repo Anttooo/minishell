@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
-int		parse_input(char *input);
+int		parse_input(void);
 char 	*get_command_path(char *token);
 
 #endif

@@ -29,6 +29,7 @@ typedef struct	s_env
 	char	**paths;
 }								t_env;
 
+// struct which contains details for one command
 typedef struct  s_command
 {
 	char	*path;
@@ -42,16 +43,18 @@ typedef struct  s_current
 {
 	// something something here to hold tokens for current task
 	// will execute from idx 0 -->
+  int   cmd_count;
 	t_cmd **cmd_list;
  	int   output_fd;
 	int   input_fd;
+  char  *raw;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
 typedef	struct s_history
 {
 	char	**history;
-	int		size;
+	int		count;
 }								t_his;
 
 // main struct holding other structs

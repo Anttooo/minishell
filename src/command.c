@@ -52,14 +52,48 @@ char *get_command_path(char *token)
 	return(NULL);
 }
 
-
-// TODO: this function currently does more than just parsing input
-int	parse_input(char *input)
+int count_commands(void)
 {
-	char	**tokens;
+  // start from the beginning of the command, go character by character looking for pipes
+  int i;
+  int count;
+  char  skip_char;
+
+  i = 0;
+  count = 1;
+  while(g_data.cur.raw[i] != '\0')
+  {
+    if(g_data.cur.raw[i] == '|')
+    {
+      count++;
+    }
+    // if there is a single or double quote, skip until the same character is seen again
+    if(g_data.cur.raw[i] == '\"' || g_data.cur.raw[i] == '\'')
+    {
+      skip_char = g_data.cur.raw[i];
+      i++;
+      while(g_data.cur.raw[i] != skip_char && g_data.cur.raw[i] != '\0')
+        i++;
+    }
+    i++;
+  } 
+}
+
+int	parse_input(void)
+{
+  count_commands();
+  // check the number of commands
+  // malloc space for each command in g_data.cur.cmd_list
+  // check if the input or output fd should be changed
+  // go through each command and store the things related to them in the struct
+    // store the command
+    // get path for command -> if fails, quit
+    // check for options
+    // check for arguments
+  char	**tokens;
 	char	*command_path;
-	// Separate the command from the argument to the command using split
-	tokens = ft_split(input, ' ');
+	// This can only handle a single command
+	tokens = ft_split(g_data.cur.raw, ' ');
 	if (!tokens)
 		return (-1);
 	// print out tokens to see if they are separated correctly using a loop
@@ -68,6 +102,5 @@ int	parse_input(char *input)
 	// if the command can't be found, command_path is null and nothing should be done.
 	if (!command_path)
 		return (-1);
-	execute_command(command_path, NULL, tokens);
 	return (0);
 }
