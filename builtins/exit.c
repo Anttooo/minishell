@@ -6,14 +6,14 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/04 08:36:14 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/04 08:36:58 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
 
-void	builtin_exit()
+void	builtin_exit(void)
 {
 	clean_exit();
-	exit();
+	exit(1);
 }
