@@ -18,7 +18,8 @@
 [x] function to retrieve and save a list of all env variables
 [ ] env variables "echo $HOME" should output -> "/Users/{current_user}"
 [ ] function to check what env variable it is and what its value is.
-
+[ ] parse input into structs
+[ ] make pipex work the way we need it to
 
 ## Known bugs
 [ ] Sometimes the shell requires typing quit two times before it quits
