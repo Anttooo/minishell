@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.h                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 20:22:05 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/31 08:26:15 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/02 07:53:58 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ECHO_H
-# define ECHO_H
+#include "../include/builtins.h"
 
-# include <stdio.h>
-
-#endif
+// TODO:
+// Input will be options(maybe) and arguments to print
+// needs to scan for $wildcard character to possibly print from variable
+// this is probalby easist to be done if args are printed one by one and if stumble upon wildcard
+// enter a loop to print that, and then return to main loop printing args one by one.
+void	echo(void)
+{
+	return ;
+}

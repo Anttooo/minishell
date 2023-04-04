@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.h                                              :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 20:22:05 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/31 08:26:18 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/04/02 07:53:01 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/02 07:53:47 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PWD_H
-# define PWD_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-# include <stdio.h>
+# include "minishell.h"
 
 #endif

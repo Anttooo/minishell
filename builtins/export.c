@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/31 10:26:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/04 08:35:47 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "echo.h"
+#include "../include/builtins.h"
 
-// TODO:
-// Input will be options(maybe) and arguments to print
-// needs to scan for $wildcard character to possibly print from variable
-// this is probalby easist to be done if args are printed one by one and if stumble upon wildcard
-// enter a loop to print that, and then return to main loop printing args one by one.
-void	echo(int argc, char	**argv)
+char	**export(char	**env_vars, char *str)
 {
+	char	**append;
+	int		idx;
 	
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc > 1)
-		echo(argc, argv);
-	return (0);
+	printf("Using builtin function. \n");
+	idx = -1;
+	while (env_vars[++idx] != NULL)
+		;
+	idx++;
+	append = (char **)malloc(sizeof(char *) * idx);
+	if (!append)
+		return (NULL);
+	idx = -1;
+	while (env_vars[++idx] != NULL)
+		append[idx] = ft_strdup(env_vars[idx]);
+	append[idx] = ft_strdup(str);
+	append[++idx] = NULL;
+	free_arr(env_vars);
+	free(str);
+	return (append);
 }

@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_exit.h                                       :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 07:53:13 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/02 07:53:16 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/04 08:35:53 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLEAN_EXIT_H
-# define CLEAN_EXIT_H
+#include "../include/builtins.h"
 
-void	clean_exit(void);
-void	free_arr(char **arr);
-
-#endif
+void	pwd(char *str)
+{
+	printf("Using builtin function. \n");
+	if (!str)
+		printf("%s \n", str);
+}

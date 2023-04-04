@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/03/31 07:24:42 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/04/02 07:47:13 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/03 08:27:29 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pwd.h"
+#include "../include/builtins.h"
 
-// TODO: Figure out why it takes more than this, it cant be this easy
-// pwd program only takes in current_dir variable from main program and prints it out.
-int	main(int argc, char **argv)
+void	env(char **env_vars)
 {
-	printf("Using builtin function. \n");
-	if (argc == 2)
+	int	idx;
+
+	idx = -1;
+	if (env_vars)
 	{
-		printf("%s\n", argv[1]);
-		return (1);
+		while (env_vars[++idx] != NULL)
+			printf("%s \n", env_vars[idx]);
 	}
-	return (-1);
 }

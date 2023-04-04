@@ -5,24 +5,18 @@ CFLAGS = -Iinclude -Itesting_framework/cpputest-3.8/include/CppUTest -Wall
 CXXFLAGS = $(CFLAGS)
 LDFLAGS = -Ltesting_framework/cpputest-3.8/cpputest_build/lib -lCppUTest -lCppUTestExt -L/opt/homebrew/opt/readline/lib -lreadline -L libft -lft
 
-SRC_FILES = $(wildcard src/*.c)
-OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES))
+SRC_FILES = $(wildcard src/*.c) $(wildcard builtins/*.c)
+OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(SRC_FILES)) \
+$(patsubst builtins/%.c, obj/%.o, $(SRC_FILBUILTIN_SRCES))
 
 TEST_SRC_FILES = $(wildcard tests/*.cpp) tests/AllTests.cpp
 TEST_OBJ_FILES = $(patsubst tests/%.cpp, obj/%.o, $(TEST_SRC_FILES))
-
-BUILTINS_MAKE = make -C builtins/export BUILTINS_OUT=../executables ; \
-	make -C builtins/pwd BUILTINS_OUT=../executables
-
-BUILTINS_CLEAN = make fclean -C builtins/export BUILTINS_OUT=../executables ; \
-		make fclean -C builtins/pwd BUILTINS_OUT=../executables
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(filter-out obj/AllTests.o, $(OBJ_FILES))
 	make -C libft
-	$(BUILTINS_MAKE)
 	$(CC) $(LDFLAGS) $^ -o bin/$@ -lreadline
 
 run: $(NAME)
@@ -31,7 +25,6 @@ run: $(NAME)
 .PHONY: clean
 clean:
 	make fclean -C libft	
-	$(BUILTINS_CLEAN)
 	rm -f obj/* bin/*
 
 obj/%.o: src/%.c

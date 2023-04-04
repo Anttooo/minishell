@@ -2,6 +2,16 @@
 
 extern t_data g_data;
 
+void	free_arr(char **arr)
+{
+	int	idx;
+	
+	idx = -1;
+	while (arr[++idx] != NULL)
+		free(arr[idx]);
+	free(arr);
+}
+
 void	clean_exit(void)
 {
 	if (g_data.dir.current != g_data.dir.start && g_data.dir.start)
