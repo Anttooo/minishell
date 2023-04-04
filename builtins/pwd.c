@@ -6,15 +6,15 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/04 08:35:53 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/04 10:02:02 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
 
-void	pwd(char *str)
+extern t_data g_data;
+
+void	pwd(void)
 {
-	printf("Using builtin function. \n");
-	if (!str)
-		printf("%s \n", str);
+	printf("%d\n", g_data.dir.current);
 }
