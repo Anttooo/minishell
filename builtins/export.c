@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/02 07:54:32 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/04 08:35:47 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**export(char	**env_vars, char *str)
 	while (env_vars[++idx] != NULL)
 		;
 	idx++;
-	append = (char *)malloc(sizeof(char *) * idx);
+	append = (char **)malloc(sizeof(char *) * idx);
 	if (!append)
 		return (NULL);
 	idx = -1;
