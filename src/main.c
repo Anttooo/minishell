@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 10:37:53 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:58:51 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-      		// store the input in struct + TODO: add in history
+      		// TODO: add a function to set defaults of g_data.cur
+				// g_data.cur.input = null
+				// g_data.cur.output = null
+			// store the input in struct + TODO: add in history
 			handle_input(input);
      		// parse_input(void) -> gets data from struct
 			parse_input();
@@ -43,6 +46,7 @@ int main(int argc, char **argv, char **envp)
 				// g_data.cur.cmd_list
 				// g_data.cur.cmd_list[i]
 				// g_data.cur.cmd_list[i].path, cmd, args, options
+				// g_data.cur.input & output
 			free(g_data.cur.raw);
 		}
     }

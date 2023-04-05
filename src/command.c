@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 10:48:37 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:02:16 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ char *get_command_path(char *token)
 		i++;	
 	}
 	printf("command not found\n");
-	ft_printf("test 1\n");
 	return(NULL);
 }
 
-int count_commands(void)
+int get_cmd_count(void)
 {
   // start from the beginning of the command, go character by character looking for pipes
-  int i;
-  int count;
+  int 	i;
+  int 	count;
   char  skip_char;
 
   i = 0;
@@ -78,25 +77,45 @@ int count_commands(void)
     }
     i++;
   }
+  g_data.cur.cmd_count = count;
+  ft_printf("nr of commands: %d\n", g_data.cur.cmd_count);
+  return (0);
+}
+
+// malloc space for each command in g_data.cur.cmd_list
+int	allocate_cmd_list(void)
+{
+	int	i;
+
+	i = 0;
+	g_data.cur.cmd_list = (t_cmd**)malloc(sizeof(t_cmd*) * g_data.cur.cmd_count);
+	// TODO: replace with code that allocated space for each cmd
+	while (i < g_data.cur.cmd_count)
+	{
+		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof(t_cmd));
+		i++;
+	}
+	ft_printf("cmd list + %d instance(s) of t_cmd allocated\n", g_data.cur.cmd_count);
+}
+
+int	parse_each_command(void)
+{
+	
 }
 
 int	parse_input(void)
 {
   	char	**tokens;
-	// TODO: do all the parsing logic here
+
 	tokens = ft_split(g_data.cur.raw, ' ');
 	if (!tokens)
 		return (-1);
-	// check the number of commands
-	// count_commands();
-	// While the count commands hasn't been built
-	g_data.cur.cmd_count = 1;
 
-	// malloc space for each command in g_data.cur.cmd_list
-	g_data.cur.cmd_list = (t_cmd**)malloc(sizeof(t_cmd*) * g_data.cur.cmd_count);
-	// TODO: replace with code that allocated space for each cmd
-	g_data.cur.cmd_list[0] = (t_cmd*)malloc(sizeof(t_cmd));
+	get_cmd_count();
+	allocate_cmd_list();
 	// check if the input or output fd should be changed
+	// check_in_and_out_fd();
+
 	// go through each command and store the things related to them in the struct
     // store the command
 	g_data.cur.cmd_list[0]->cmd = ft_strdup(tokens[0]);
@@ -104,7 +123,7 @@ int	parse_input(void)
 		if (!g_data.cur.cmd_list[0]->path)
 		return (-1);
 	// if the command can't be found, command_path is null and nothing should be done.
-
+	
 	// TODO: the args should take in an array as that's what execve takes in
 	// TODO: we probably don't need to separate the options here but rather in the builtins which use options
 	g_data.cur.cmd_list[0]->args = ft_strdup(tokens[1]);
@@ -117,9 +136,10 @@ int	parse_input(void)
 /*
 int	parse_input(void)
 {
-	get_cmd_count();
-	allocate_cmd_list();
-	parse_each_commands();
+	get_cmd_count(); - done
+	allocate_cmd_list(); - done
+	check_in_and_out_fd();
+	parse_each_command(); 
 }
 
 */
