@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/04 15:39:55 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/05 11:13:13 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // struct for directory-related variables
 typedef	struct	s_dir
 {
-	char	*builtins[7];
+	char	*builtins;
 	char	*current;
 	char	*start;
 	char	*home;
@@ -29,6 +29,7 @@ typedef struct	s_env
 	char	**paths;
 }								t_env;
 
+// struct which contains details for one command
 typedef struct  s_command
 {
 	char	*path;
@@ -42,16 +43,18 @@ typedef struct  s_current
 {
 	// something something here to hold tokens for current task
 	// will execute from idx 0 -->
+  int   cmd_count;
 	t_cmd **cmd_list;
  	int   output_fd;
 	int   input_fd;
+  char  *raw;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
 typedef	struct s_history
 {
 	char	**history;
-	int		size;
+	int		count;
 }								t_his;
 
 // main struct holding other structs
