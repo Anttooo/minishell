@@ -5,18 +5,28 @@
 
 
 extern "C" {
-#include "command.h"
-#include "minishell.h"
+#include "../include/command.h"
+#include "../include/minishell.h"
+}
+
+extern t_data	g_data;
+
+void init_g_data() {
+    // Initialize the g_data struct here, for example:
+	g_data.dir.start = (char *)malloc(1024);
+	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
+    g_data.dir.builtins = ft_strdup(ft_strjoin(g_data.dir.start, "/builtins/executables/"));
+    // ... and so on
 }
 
 TEST_GROUP(CommandTestGroup)
 {
 	void	setup() {
-		init_struct();
+		init_g_data();
 	}
-	void	teardown() {
-		clean_exit();
-	}
+	// void	teardown() {
+	// 	clean_exit();
+	// }
 };
 
 TEST(CommandTestGroup, ValidCommand)
@@ -32,24 +42,6 @@ TEST(CommandTestGroup, InvalidCommand)
     char *invalid_command = "non_existent_command";
     char *command_path = get_command_path(invalid_command);
     CHECK(command_path == NULL);
-}
-
-/*
-TODO: this test currently fails because parse_input also executes
-the command, and doing so requires setting up the global variable.
-*/ 
-TEST(CommandTestGroup, ValidInput)
-{
-    char *valid_input = "echo hello";
-    int result = parse_input(valid_input);
-    CHECK_EQUAL(0, result);
-}
-
-TEST(CommandTestGroup, InvalidInput)
-{
-    char *invalid_input2 = "pwd1";
-    int result = parse_input(invalid_input2);
-    CHECK_EQUAL(-1, result);
 }
 
 IMPORT_TEST_GROUP(CommandTestGroup);

@@ -17,7 +17,7 @@ int	handle_input(char *input)
 	// If input is not "quit", pass input to command parsing
 	else
 	{
-    g_data.cur.raw = ft_strdup(input);
+    	g_data.cur.raw = ft_strdup(input);
 	}
 	return (0);
 }

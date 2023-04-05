@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/03/31 12:36:01 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/05 09:10:10 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_struct(char **envp)
 	g_data.env.vars = get_env_vars(envp);
 	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
 	g_data.dir.home = getenv("HOME");
-	g_data.dir.builtins = ft_strjoin(g_data.dir.start, "/builtins/executables/");
+	// g_data.dir.builtins = ft_strjoin(g_data.dir.start, "/builtins/executables/"); // TODO: fix this
 	// TODO: Add error handling in case HOME directory can't for some reason be found from env.
 	if (chdir(g_data.dir.home) == -1) 
 	{
