@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/10 18:57:52 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/10 19:32:59 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void	pipes_and_forks(t_pipes *p)
 
 void	pipex(void)
 {
-	pid_t	pid;
+	pid_t	child;
 	t_pipes	p;
 
-	pid = fork();
-	if (pid)
+	child = fork();
+	if (child)
 	{
 		// Init function
 		init(&p);
@@ -120,7 +120,10 @@ void	pipex(void)
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
+		waitpid(child, NULL, 0);
+		// Since child cannot add the last cmd_index++ since it wont return from execve
+		// parent will do it. After this cmd_index sould be == cmd_count
+		// If this is the case, shell can return to input mode for more inputs
 		g_data.cur.cmd_index++;
 	}
 }
