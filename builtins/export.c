@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/05 11:05:17 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:16:59 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 extern t_data g_data;
 
-
-// str should propably take the input data from global struct
-// char	**ft_export(char *str)
+// char	**ft_export(void)
 // {
 // 	char	**append;
 // 	int		idx;
@@ -25,14 +23,15 @@ extern t_data g_data;
 // 	idx = -1;
 // 	while (g_data.env.vars[++idx] != NULL)
 // 		;
-// 	idx++;
-// 	append = (char **)malloc(sizeof(char *) * idx);
+// 	append = (char **)malloc(sizeof(char *) * idx + 1);
 // 	if (!append)
 // 		return (NULL);
 // 	idx = -1;
 // 	while (g_data.env.vars[++idx] != NULL)
 // 		append[idx] = ft_strdup(g_data.env.vars[idx]);
-// 	append[idx] = ft_strdup(str);
+// 	// global struct probably needs also a indexing on
+// 	// what cmd are we executing
+// 	// append[idx] = ft_strdup(g_data.cur.cmd_list[]);
 // 	append[++idx] = NULL;
 // 	free_arr(g_data.env.vars);
 // 	free(str);
