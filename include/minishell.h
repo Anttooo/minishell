@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 11:10:03 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 15:45:23 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ typedef	struct	s_dir
 // struct for environment-related variables
 typedef struct	s_env
 {
+	char	*user;
 	char	**vars;
 	char	**paths;
+	char	*machine;
+	pid_t	shell_pid;
 }								t_env;
 
 // struct which contains details for one command
@@ -75,7 +78,6 @@ typedef	struct s_history
 // main struct holding other structs
 typedef	struct	s_data
 {
-	pid_t	shell_pid;
 	t_dir	dir;
 	t_env	env;
 	t_his	his;

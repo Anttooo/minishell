@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 11:01:45 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 17:18:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ void	ft_echo(void)
 	idx = 0;
 	cmd_idx = g_data.cur.cmd_index;
 	while(g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
-	{
 		printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
-	}
 	printf("\n");
-	// Builtins probably need to exit since they will be called
-	// in child process that needs to die before pipex parent
-	// can move on
-	exit(0);
 }
