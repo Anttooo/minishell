@@ -37,19 +37,26 @@ typedef struct  s_command
 	char 	*cmd;
 }               t_cmd;
 
+typedef struct  s_token
+{
+  char  *token;
+  char  *type;
+}               t_token;
+
 // where we store the parsed input we want to handle atm
 typedef struct  s_current
 {
 	// something something here to hold tokens for current task
 	// will execute from idx 0 -->
  	char   	*output_file;
-	char	*input_file;
+	char    *input_file;
 	t_cmd 	**cmd_list;
 	int   	cmd_count;
 	// added command index so that builtins can know
 	// what element from **cmd_list to access
-	int		cmd_index;
-  	char  	*raw;
+	int		  cmd_index;
+  char  	*raw;
+  t_token **tokens;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given

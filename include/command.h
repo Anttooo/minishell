@@ -21,5 +21,6 @@ char 	*get_command_path(char *token);
 int 	get_cmd_count(void);
 int		allocate_cmd_list(void);
 int		parse_each_command(void);
+int   tokenize_input(void);
 
 #endif

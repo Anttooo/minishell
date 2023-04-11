@@ -105,7 +105,7 @@ int	parse_each_command(void)
 
 int	parse_input(void)
 {
-  	char	**tokens;
+  char	**tokens;
 
 	tokens = ft_split(g_data.cur.raw, ' ');
 	if (!tokens)
@@ -113,9 +113,7 @@ int	parse_input(void)
 
 	get_cmd_count();
 	allocate_cmd_list();
-	// check if the input or output fd should be changed
-	// check_in_and_out_fd();
-
+  
 	// go through each command and store the things related to them in the struct
     // store the command
 	g_data.cur.cmd_list[0]->cmd = ft_strdup(tokens[0]);
