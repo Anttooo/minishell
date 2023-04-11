@@ -6,11 +6,11 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 10:29:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:27:52 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/minishell.h"
 
 extern t_data g_data;
 
@@ -94,7 +94,7 @@ void	pipex(void)
 	t_pipes	p;
 
 	child = fork();
-	if (child)
+	if (child == 0)
 	{
 		// Init function
 		init(&p);
@@ -103,6 +103,7 @@ void	pipex(void)
 			pipes_and_forks(&p);
 		// last command gets executed witout redirections
 		execute_cmd(&p);
+		exit(1);
 	}
 	else
 	{

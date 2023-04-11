@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 12:58:51 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:35:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,20 @@ int main(int argc, char **argv, char **envp)
      		// parse_input(void) -> gets data from struct
 			parse_input();
       		// execute(void) -> gets data from struct
-			execute();
+			pipex();
+			if (g_data.cur.cmd_index == g_data.cur.cmd_count)
+			{
+				// Executing all commands succeeded, reset variables that needs to be
+				// resetted and keep going for more inputs
+				reset_cur();
+			}
+			else
+			{
+				// something went wrong when executing... need to figure out how to handle
+				// that here.
+				printf("Error with executing\n");
+				exit(1);
+			}
 			// the free below could be replaced by a cleaning function
 			free(input);
 			// TODO: add freeing to all things within g_data.cur
