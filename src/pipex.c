@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/10 19:32:59 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 10:29:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 extern t_data g_data;
 
-void	choose_input(t_pipes *p)
+// Choosing input and output to be file or stdin / stdout
+// also redirecting those depending on chooses.
+void	init(t_pipes *p)
 {
+	p->idx = -1;
 	if (g_data.cur.input_file == NULL)
-	{
 		p->fdin = STDOUT;
-	}
 	else
 	{
 		p->fdin = open(g_data.cur.input_file, O_RDONLY);
@@ -30,14 +31,8 @@ void	choose_input(t_pipes *p)
 			exit(1);
 		}
 	}
-}
-
-void	choose_output(t_pipes *p)
-{
 	if (g_data.cur.output_file == NULL)
-	{
 		p->fdout = STDOUT;
-	}
 	else
 	{
 		p->fdout = open(g_data.cur.output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -48,15 +43,6 @@ void	choose_output(t_pipes *p)
 			exit(1);
 		}
 	}
-}
-
-// Choosing input and output to be file or stdin / stdout
-// also redirecting those depending on chooses.
-void	init(t_pipes *p)
-{
-	p->idx = -1;
-	choose_input(p);
-	choose_output(p);
 	dup2(p->fdin, STDIN);
 	dup2(p->fdout, STDOUT);
 }
