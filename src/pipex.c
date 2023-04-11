@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 10:29:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:03:59 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	pipex(void)
 {
 	pid_t	child;
 	t_pipes	p;
+
+	char	*args[] = {g_data.cur.cmd_list[0]->cmd, g_data.cur.cmd_list[0]->args};
 
 	child = fork();
 	if (child)

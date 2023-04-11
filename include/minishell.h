@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 10:41:45 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:04:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ typedef	struct	s_data
 
 # include "debug.h"
 
-# include "input.h"
-# include <stdio.h>
+# include	"input.h"
+# include	"pipex.h"
+# include	<stdio.h>
 # include	"init.h"
-# include <unistd.h>
-# include "execute.h"
-# include "execute.h"
-# include "command.h"
-# include "clean_exit.h"
-# include "../libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+# include	<unistd.h>
+# include	"command.h"
+# include	"clean_exit.h"
+# include	"../libft/libft.h"
+# include	<readline/history.h>
+# include	<readline/readline.h>
 
 // add functions here
 

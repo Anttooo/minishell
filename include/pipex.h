@@ -6,22 +6,20 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 10:29:44 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:01:19 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <stdio.h>
 # include <fcntl.h>
-# include <unistd.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/uio.h>
-# include "minishell.h"
 # include <sys/types.h>
+# include "minishell.h"
 
 # define WRITE_END 1
 # define READ_END 0

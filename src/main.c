@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 12:58:51 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:04:15 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **envp)
      		// parse_input(void) -> gets data from struct
 			parse_input();
       		// execute(void) -> gets data from struct
-			execute();
+			pipex();
 			// the free below could be replaced by a cleaning function
 			free(input);
 			// TODO: add freeing to all things within g_data.cur
