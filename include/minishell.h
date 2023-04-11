@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/05 11:13:13 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:38:10 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ typedef	struct	s_dir
 {
 	char	*builtins;
 	char	*current;
-	char	*start;
 	char	*home;
+	char	*start;
 }								t_dir;
 
 // struct for environment-related variables
@@ -32,10 +32,9 @@ typedef struct	s_env
 // struct which contains details for one command
 typedef struct  s_command
 {
+	char 	**args;
 	char	*path;
 	char 	*cmd;
-	char 	*args;
-	char 	*options;
 }               t_cmd;
 
 // where we store the parsed input we want to handle atm
@@ -43,11 +42,14 @@ typedef struct  s_current
 {
 	// something something here to hold tokens for current task
 	// will execute from idx 0 -->
-  int   cmd_count;
-	t_cmd **cmd_list;
- 	int   output_fd;
-	int   input_fd;
-  char  *raw;
+ 	char   	*output_file;
+	char	*input_file;
+	t_cmd 	**cmd_list;
+	int   	cmd_count;
+	// added command index so that builtins can know
+	// what element from **cmd_list to access
+	int		cmd_index;
+  	char  	*raw;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
