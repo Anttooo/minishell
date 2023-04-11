@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:04:15 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:29:34 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ int main(int argc, char **argv, char **envp)
 			parse_input();
       		// execute(void) -> gets data from struct
 			pipex();
+			if (g_data.cur.cmd_index == g_data.cur.cmd_count)
+			{
+				// Executing all commands succeeded, reset variables that needs to be
+				// resetted and keep going for more inputs
+				init_for_new_input();
+			}
+			else
+			{
+				// something went wrong when executing... need to figure out how to handle
+				// that here.
+				printf("Error with executing\n");
+				exit(1);
+			}
 			// the free below could be replaced by a cleaning function
 			free(input);
 			// TODO: add freeing to all things within g_data.cur

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 10:48:15 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:10:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 extern t_data g_data;
 
-char	**ft_export(void)
-{
+// char	**ft_export(void)
+// {
 	// char	**append;
 	// int		cmd_idx;
 	// int		idx;
@@ -39,4 +39,4 @@ char	**ft_export(void)
 	// append[++idx] = NULL;
 	// free_arr(g_data.env.vars);
 	// return (append);
-}
+// }

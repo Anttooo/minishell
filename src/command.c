@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 13:02:16 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:09:03 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	parse_input(void)
 	
 	// TODO: the args should take in an array as that's what execve takes in
 	// TODO: we probably don't need to separate the options here but rather in the builtins which use options
-	g_data.cur.cmd_list[0]->args = ft_strdup(tokens[1]);
+	g_data.cur.cmd_list[0]->args = ft_split(g_data.cur.raw, ' ');
     // get path for command -> if fails, quit
     // check for options
     // check for arguments

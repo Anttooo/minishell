@@ -6,12 +6,25 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 11:04:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:10:03 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "debug.h"
+# include	"input.h"
+# include	"pipex.h"
+# include	<stdio.h>
+# include	"init.h"
+# include	<unistd.h>
+# include	"command.h"
+# include 	<sys/_types.h>
+# include	"clean_exit.h"
+# include	"../libft/libft.h"
+# include	<readline/history.h>
+# include	<readline/readline.h>
 
 // struct for directory-related variables
 typedef	struct	s_dir
@@ -68,19 +81,6 @@ typedef	struct	s_data
 	t_his	his;
 	t_cur	cur;
 }							  t_data;
-
-# include "debug.h"
-
-# include	"input.h"
-# include	"pipex.h"
-# include	<stdio.h>
-# include	"init.h"
-# include	<unistd.h>
-# include	"command.h"
-# include	"clean_exit.h"
-# include	"../libft/libft.h"
-# include	<readline/history.h>
-# include	<readline/readline.h>
 
 // add functions here
 
