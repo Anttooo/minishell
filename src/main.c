@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:29:34 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:35:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv, char **envp)
 			{
 				// Executing all commands succeeded, reset variables that needs to be
 				// resetted and keep going for more inputs
-				init_for_new_input();
+				reset_cur();
 			}
 			else
 			{

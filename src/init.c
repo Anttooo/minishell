@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:31:49 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 11:35:14 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	init_struct(char **envp)
   return (0);
 }
 
-void	init_for_new_input(void)
+void	reset_cur(void)
 {
 	// Might need more stuff here in future
 	// This is bare minimum to make it work
