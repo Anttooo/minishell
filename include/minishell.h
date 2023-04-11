@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/10 14:38:10 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 10:41:45 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ typedef	struct s_history
 // main struct holding other structs
 typedef	struct	s_data
 {
-  t_dir	dir;
-  t_env	env;
-  t_his his;
-  t_cur cur;
+	pid_t	shell_pid;
+	t_dir	dir;
+	t_env	env;
+	t_his	his;
+	t_cur	cur;
 }							  t_data;
 
 # include "debug.h"

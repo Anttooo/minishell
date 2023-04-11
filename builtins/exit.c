@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/10 15:17:06 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 10:43:07 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 extern t_data g_data;
 
-// void	builtin_exit(void)
-// {
-// 	clean_exit();
-// }
+void	ft_exit(void)
+{
+	clean_exit();
+	kill(g_data.shell_pid, SIGTERM);
+	exit(0);
+}

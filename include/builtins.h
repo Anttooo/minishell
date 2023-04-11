@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:53:01 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/05 11:01:46 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:33:13 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "minishell.h"
 # include <unistd.h>
 
-void	pwd(void);
-void	env(void);
-void	echo(void);
-void	builtin_exit(void);
+void	ft_pwd(void);
+void	ft_env(void);
+void	ft_echo(void)
+void	ft_exit(void);
 char	**ft_export(char *str);
 
 #endif
