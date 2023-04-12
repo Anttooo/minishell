@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/10 14:38:10 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/12 15:24:09 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ typedef struct  s_current
 	// added command index so that builtins can know
 	// what element from **cmd_list to access
 	int		  cmd_index;
-  char  	*raw;
-  t_token **tokens;
+	char  	*raw;
+	t_token **tokens;
+	t_vec		vec_tokens;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
@@ -76,7 +77,6 @@ typedef	struct	s_data
 }							  t_data;
 
 # include "debug.h"
-
 # include "input.h"
 # include <stdio.h>
 # include	"init.h"
@@ -86,6 +86,7 @@ typedef	struct	s_data
 # include "command.h"
 # include "clean_exit.h"
 # include "../libft/libft.h"
+# include "../libft/vec.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 

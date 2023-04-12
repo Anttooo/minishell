@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/10 15:16:59 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/12 15:24:56 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
 
-extern t_data g_data;
+// extern t_data g_data;
 
 // char	**ft_export(void)
 // {

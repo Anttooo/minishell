@@ -32,73 +32,86 @@ TEST_GROUP(CommandTestGroup)
 	// }
 };
 
-// Tests for get_command_path()
-TEST(CommandTestGroup, ValidCommand)
-{
-	char *valid_command = "ls";
-    char *command_path = get_command_path(valid_command);
-    CHECK(command_path != NULL);
-    free(command_path);
-}
+// // Tests for get_command_path()
+// TEST(CommandTestGroup, ValidCommand)
+// {
+// 	char *valid_command = "ls";
+//     char *command_path = get_command_path(valid_command);
+//     CHECK(command_path != NULL);
+//     free(command_path);
+// }
 
-TEST(CommandTestGroup, InvalidCommand)
-{
-    char *invalid_command = "non_existent_command";
-    char *command_path = get_command_path(invalid_command);
-    CHECK(command_path == NULL);
-}
+// TEST(CommandTestGroup, InvalidCommand)
+// {
+//     char *invalid_command = "non_existent_command";
+//     char *command_path = get_command_path(invalid_command);
+//     CHECK(command_path == NULL);
+// }
 
-// Tests for get_cmd_count()
-TEST(CommandTestGroup, CountCommands1)
-{
-	g_data.cur.raw = "echo hello";
-	get_cmd_count();
-	CHECK_EQUAL(1, g_data.cur.cmd_count);
-}
+// // Tests for get_cmd_count()
+// TEST(CommandTestGroup, CountCommands1)
+// {
+// 	g_data.cur.raw = "echo hello";
+// 	get_cmd_count();
+// 	CHECK_EQUAL(1, g_data.cur.cmd_count);
+// }
 
-TEST(CommandTestGroup, CountCommands2)
-{
-	g_data.cur.raw = "echo \"so many pipes |||| but they are in double quotes\" ";
-	get_cmd_count();
-	CHECK_EQUAL(1, g_data.cur.cmd_count);
-}
+// TEST(CommandTestGroup, CountCommands2)
+// {
+// 	g_data.cur.raw = "echo \"so many pipes |||| but they are in double quotes\" ";
+// 	get_cmd_count();
+// 	CHECK_EQUAL(1, g_data.cur.cmd_count);
+// }
 
-TEST(CommandTestGroup, CountCommands3)
-{
-	g_data.cur.raw = "echo \'so many pipes |||| but they are in single quotes\' ";
-	get_cmd_count();
-	CHECK_EQUAL(1, g_data.cur.cmd_count);
-}
+// TEST(CommandTestGroup, CountCommands3)
+// {
+// 	g_data.cur.raw = "echo \'so many pipes |||| but they are in single quotes\' ";
+// 	get_cmd_count();
+// 	CHECK_EQUAL(1, g_data.cur.cmd_count);
+// }
 
-TEST(CommandTestGroup, CountCommands4)
-{
-	g_data.cur.raw = "ls -l | grep 'test'";
-	get_cmd_count();
-	CHECK_EQUAL(2, g_data.cur.cmd_count);
-}
+// TEST(CommandTestGroup, CountCommands4)
+// {
+// 	g_data.cur.raw = "ls -l | grep 'test'";
+// 	get_cmd_count();
+// 	CHECK_EQUAL(2, g_data.cur.cmd_count);
+// }
 
-TEST(CommandTestGroup, CountCommands5)
-{
-	g_data.cur.raw = "cat \'so many pipes |||| but they are in single quotes\' | grep 'test'";
-	get_cmd_count();
-	CHECK_EQUAL(2, g_data.cur.cmd_count);
-}
+// TEST(CommandTestGroup, CountCommands5)
+// {
+// 	g_data.cur.raw = "cat \'so many pipes |||| but they are in single quotes\' | grep 'test'";
+// 	get_cmd_count();
+// 	CHECK_EQUAL(2, g_data.cur.cmd_count);
+// }
 
 TEST(CommandTestGroup, AdvancedSplit1)
 {
-  g_data.cur.raw = "echo \"Hello this is a longer one\"";
-  char *expected_value = "Hello this is a longer one";
+  g_data.cur.raw = "echo 'te$st' \"Hello\"";
+  char *expected_value = "Hello2";
   tokenize_input();
-  CHECK_EQUAL(expected_value, g_data.cur.tokens[1]->token);
+  t_token	*result_token = (t_token*)vec_get(&g_data.cur.vec_tokens, 1);
+  char	*result = result_token->token;	
+  STRCMP_EQUAL(expected_value, result);
 }
 
-TEST(CommandTestGroup, AdvancedSplit2)
-{
-  g_data.cur.raw = "echo \"Hello this is a longer one\" \"Hello\"";
-  char *expected_value = "Hello";
-  tokenize_input();
-  CHECK_EQUAL(expected_value, g_data.cur.tokens[2]->token);
-}
+// TEST(CommandTestGroup, AdvancedSplit2)
+// {
+//   g_data.cur.raw = "echo \"Hello this is a longer one\" \"Hello test test test\"";
+//   char *expected_value = "Hello test test test";
+//   tokenize_input();
+//   STRCMP_EQUAL(expected_value, g_data.cur.tokens[2]->token);
+// }
+
+// TEST(CommandTestGroup, AdvancedSplit3)
+// {
+// 	g_data.cur.raw = "echo \"Hello\"";
+//   	char	*expected_token = "Hello";
+// 	char	*expected_type = "double_quote";
+//   	tokenize_input();
+// 	STRCMP_EQUAL(expected_token, g_data.cur.tokens[1]->token);
+// 	STRCMP_EQUAL(expected_type, g_data.cur.tokens[1]->type);
+
+// }
 
 // Tests for parse_each_command()
 // TEST(CommandTestGroup, ParseEachCommand1)

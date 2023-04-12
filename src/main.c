@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 12:58:51 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:03:49 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **envp)
 	}
     while (42)
 	{
-		input = readline("sHeL>> ");
+		input = readline("\033[32msHeL>> \033[34m");
 		if (!input)
 		{
 				printf("\n");
