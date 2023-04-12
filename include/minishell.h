@@ -6,25 +6,35 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 15:45:23 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/12 17:17:05 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "debug.h"
-# include	"input.h"
-# include	"pipex.h"
-# include	<stdio.h>
 # include	"init.h"
+# include	"debug.h"
+# include	"input.h"
+# include	<stdio.h>
+# include	"colors.h"
 # include	<unistd.h>
 # include	"command.h"
-# include 	<sys/_types.h>
+# include	"execute.h"
 # include	"clean_exit.h"
+# include 	<sys/_types.h>
+# include	"signal_manager.h"
 # include	"../libft/libft.h"
 # include	<readline/history.h>
 # include	<readline/readline.h>
+
+typedef struct	s_sig
+{
+	pid_t	exec_pid;
+	pid_t	shell_pid;
+	pid_t	child_pid;
+
+}								t_sig;
 
 // struct for directory-related variables
 typedef	struct	s_dir
@@ -41,8 +51,8 @@ typedef struct	s_env
 	char	*user;
 	char	**vars;
 	char	**paths;
+	char	*prompt;
 	char	*machine;
-	pid_t	shell_pid;
 }								t_env;
 
 // struct which contains details for one command
@@ -82,6 +92,7 @@ typedef	struct	s_data
 	t_env	env;
 	t_his	his;
 	t_cur	cur;
+	t_sig	sig;
 }							  t_data;
 
 // add functions here

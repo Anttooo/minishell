@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   signal_manager.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 07:53:01 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/12 15:28:04 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/04/12 11:08:06 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/12 14:50:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef SIGNAL_MANAGER_H
+# define SIGNAL_MANAGER_H
 
-# include "minishell.h"
+# include <signal.h>
 
-void	ft_pwd(void);
-void	ft_env(void);
-void	ft_echo(void);
-void	ft_exit(void);
-char	**ft_export(char *str);
+void	signal_manager(void);
 
 #endif

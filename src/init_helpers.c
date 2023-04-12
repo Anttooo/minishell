@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:13:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 16:05:26 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/12 14:17:19 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "../include/init.h"
 
 extern t_data	g_data;
+
+void	reset_cur(void)
+{
+	g_data.cur.cmd_index = 0;
+	g_data.cur.cmd_count = 0;
+}
 
 char	*find_env_var(char *str)
 {

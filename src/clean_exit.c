@@ -36,4 +36,9 @@ void	clean_exit(void)
 		free (g_data.env.user);
 		g_data.env.user = NULL;
 	}
+	if (g_data.env.prompt)
+	{
+		free(g_data.env.prompt);
+		g_data.env.prompt = NULL;
+	}
 }
