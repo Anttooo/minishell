@@ -13,6 +13,20 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "debug.h"
+# include "input.h"
+# include <stdio.h>
+# include	"init.h"
+# include <unistd.h>
+# include "execute.h"
+# include "execute.h"
+# include "command.h"
+# include "clean_exit.h"
+# include "../libft/libft.h"
+# include "../libft/vec.h"
+# include <readline/history.h>
+# include <readline/readline.h>
+
 // struct for directory-related variables
 typedef	struct	s_dir
 {
@@ -58,6 +72,7 @@ typedef struct  s_current
 	char  	*raw;
 	t_token **tokens;
 	t_vec		vec_tokens;
+  t_vec   token_buffer;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
@@ -75,20 +90,6 @@ typedef	struct	s_data
   t_his his;
   t_cur cur;
 }							  t_data;
-
-# include "debug.h"
-# include "input.h"
-# include <stdio.h>
-# include	"init.h"
-# include <unistd.h>
-# include "execute.h"
-# include "execute.h"
-# include "command.h"
-# include "clean_exit.h"
-# include "../libft/libft.h"
-# include "../libft/vec.h"
-# include <readline/history.h>
-# include <readline/readline.h>
 
 // add functions here
 

@@ -15,17 +15,62 @@
 
 extern t_data g_data;
 
-int	evaluate_char(char	c, int *mode);
+// wrapper for vec_push to buffer
+void  add_char_to_buffer(char *c)
+{
+  vec_push(&g_data.cur.token_buffer, (void *)c);
+}
+
+void  store_current_token(void)
+{
+  char  *buffer;
+  t_token *token;
+
+  buffer = (char *)vec_get(&g_data.cur.token_buffer, 0);
+  token->token = ft_strdup(buffer);
+  vec_push(&g_data.cur.vec_tokens, token);
+}
+
+void  empty_and_init_buffer(void)
+{
+  vec_free(&g_data.cur.token_buffer);
+  vec_new(&g_data.cur.token_buffer, 0 , sizeof(char));
+}
+
+void  store_token(void)
+{
+  store_current_token();
+  empty_and_init_buffer();
+  // init new buffer
+}
+
+int	evaluate_char(char	c, int *mode, int i);
 
 /*
-Modes:
-1 - default
-2 - double quotes
-3 - single quotes
+  TOKENIZATION MODES
+
+  1 - default
+  2 - double quotes
+  3 - single quotes
+
+  BUFFER IMPLEMENTATION
+  
+  ** Option 1 **
+  The buffer is just a constant size string where I store the characters, then empty it and continue using it.
+
+  ** Option 2**
+  Using a t_vec. It makes some things harder but could work nicely in general.
+  I could have the t_vec in g_data.cur.token_buffer.
+
+  ** Option 3** 
+  Not having a buffer at all but storing the index of the first char that should be in the token and then the last index.
 */
 int	tokenize_input(void)
 {
 	vec_new(&g_data.cur.vec_tokens, 0, sizeof(t_token*));
+  // buffer vec
+  vec_new(&g_data.cur.token_buffer, 0, sizeof(char));
+  // error handling is needed here
 	int	i;
 	int	mode;
 
@@ -34,37 +79,20 @@ int	tokenize_input(void)
 	// If the char is whitespace, skip until there's something else
 	if (g_data.cur.raw[i] == ' ' || g_data.cur.raw[i] == '	')
 		i++;
-	// while there are characters to look at
+  // before starting to evaluate the characters, a buffer should be created
+    // Create a buffer
+	// while there are characters to look at, go through each of them one by one
 	while(g_data.cur.raw[i] != '\0')
 	{
 		printf("Char is: %c\n", g_data.cur.raw[i]);
-		// Otherwise, evaluate the character
-		evaluate_char(g_data.cur.raw[i], &mode);
+		evaluate_char(g_data.cur.raw[i], &mode, i);
 			// somehow act based on the evaluation of the char, also depending on the mode we're in
 		// If the token is terminated, store the buffer
 			// store token from buffer
 		// After we've evaluated the character, move to next one
 		i++;
 	}
-
-	t_token	*token;
-	t_token	*token2;
-
-
-	token = (t_token*)malloc(sizeof(t_token));
-	token->token = (char *)malloc(100 * sizeof(char));
-	token->token = "Hello";
-	token->type = (char *)malloc(50 * sizeof(char));
-	token->type = "type";
-
-	vec_push(&g_data.cur.vec_tokens, token);
-
-	token2 = (t_token*)malloc(sizeof(t_token));
-	token2->token = (char *)malloc(50 * sizeof(char));
-	token2->token = "Hello2";
-	token2->type = (char *)malloc(50 * sizeof(char));
-	token2->type = "type2";
-	vec_push(&g_data.cur.vec_tokens, token2);
+  store_token();
 	return (0);
 }
 
@@ -72,9 +100,10 @@ int	is_terminating_char(char c, int *mode)
 {
 	if (*mode == 1)
 	{
-		if (c == ' ' || c == '	' || c == '<' || c == '>' || c == '|' || c == '\'' || c == '\"' || c == '$')
+		if (c == ' ' || c == '	' || c == '<' || c == '>' || c == '|' || c == '\'' || c == '\"' || c == '$' || c == '\n')
 		{
 			printf("In mode %d this character terminates a token.\n", *mode);
+      store_token();
 			return (1);
 		}
 	}
@@ -144,26 +173,45 @@ int	is_trigger_char(char c, int	*mode)
 	return (0);
 }
 
-int	evaluate_char(char	c, int *mode)
+int is_stored_char(char c, int *mode)
 {
-	int	add_to_buffer;
+  if (*mode == 1)
+  {
+    if (c == ' ' || c == '  ' || c == '\n')
+    {
+      printf("In mode %d this character is not stored in buffer\n", *mode);
+      return (0);
+    }
+  }
+  return (1);
+}
 
-	add_to_buffer = 1;
+int	evaluate_char(char	c, int *mode, int i)
+{
 	if (is_terminating_char(c, mode) == 1)
 	{
 		printf("The previous token is terminated here.\n");
-		add_to_buffer = 0;
+    // Buffer needs to be able to be terminated from here.
+      // add_token_from_buffer();
+      // Store what is in current buffer in the next token, empty the buffer, and make the buffer ready to take in new stuff
 	}
 	if (is_mode_changing_char(c, mode) != 0)
 	{
 		printf("It's now: %d\n", *mode);
-		add_to_buffer = 0;
 	}
 	if (is_trigger_char(c, mode) == 1)
 	{
 		printf("some action should be triggered\n");
-		add_to_buffer = 0;
 	}
+  if (is_stored_char(c, mode) == 1)
+  {
+    printf("The char should be stored to buffer\n");
+    add_char_to_buffer(&g_data.cur.raw[i]);
+  }
+  else
+  {
+    printf("The char should not be stored to buffer\n");
+  }
 	return (1);
 }
 
