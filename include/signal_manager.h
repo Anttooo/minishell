@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   signal_manager.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 17:18:24 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/04/12 11:08:06 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/12 14:50:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/builtins.h"
+#ifndef SIGNAL_MANAGER_H
+# define SIGNAL_MANAGER_H
 
-extern t_data g_data;
+# include <signal.h>
 
-void	ft_echo(void)
-{
-	int	idx;
-	int	cmd_idx;
+void	signal_manager(void);
 
-	idx = 0;
-	cmd_idx = g_data.cur.cmd_index;
-	while(g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
-		printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
-	printf("\n");
-}
+#endif

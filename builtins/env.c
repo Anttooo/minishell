@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:47:13 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 10:40:30 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/11 17:17:29 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ void	ft_env(void)
 	{
 		while (g_data.env.vars[++idx] != NULL)
 			printf("%s \n", g_data.env.vars[idx]);
-		exit(0);
 	}
 	else
 	{
 		perror("problem with env");
 		// Do clean exit here
-		exit(1);
 	}
 }

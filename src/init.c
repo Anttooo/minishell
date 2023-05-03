@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:35:14 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/03 10:39:32 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**get_env_vars(char **envp)
 	idx = -1;
 	while (envp[++idx] != NULL)
 		;
-	vars = (char *)malloc(sizeof(char *) * idx);
+	vars = malloc(sizeof(char *) * idx);
 	if (!vars)
 		return (NULL);
 	idx = -1;
@@ -48,10 +48,12 @@ char	**get_paths(void)
 
 int	init_struct(char **envp)
 {
-	g_data.shell_pid = getpid();
+	g_data.sig.shell_pid = getpid();
 	g_data.dir.start = (char *)malloc(1024);
 	g_data.env.paths = get_paths();
 	g_data.env.vars = get_env_vars(envp);
+	g_data.env.user = find_env_var("USER");
+	g_data.env.prompt = ft_strjoin(g_data.env.user, " --> ");
 	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
 	g_data.dir.home = getenv("HOME");
 	// g_data.dir.builtins = ft_strjoin(g_data.dir.start, "/builtins/executables/"); // TODO: fix this
@@ -63,12 +65,4 @@ int	init_struct(char **envp)
 	}
 	g_data.dir.current = g_data.dir.home;
   return (0);
-}
-
-void	reset_cur(void)
-{
-	// Might need more stuff here in future
-	// This is bare minimum to make it work
-	g_data.cur.cmd_index = 0;
-	g_data.cur.cmd_count = 0;
 }

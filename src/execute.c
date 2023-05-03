@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/11 11:27:52 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/04/12 17:17:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	execute_cmd(t_pipes *p)
 	int		idx;
 
 	idx = g_data.cur.cmd_index;
-	path = ft_strdup(g_data.cur.cmd_list[idx]->path);
+	path = g_data.cur.cmd_list[idx]->path;
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	perror("error executin");
 	// do clean exit here
@@ -88,13 +88,12 @@ void	pipes_and_forks(t_pipes *p)
 	}
 }
 
-void	pipex(void)
+void	execute(void)
 {
-	pid_t	child;
 	t_pipes	p;
 
-	child = fork();
-	if (child == 0)
+	g_data.sig.exec_pid = fork();
+	if (g_data.sig.exec_pid == 0)
 	{
 		// Init function
 		init(&p);
@@ -107,7 +106,7 @@ void	pipex(void)
 	}
 	else
 	{
-		waitpid(child, NULL, 0);
+		waitpid(g_data.sig.exec_pid, NULL, 0);
 		// Since child cannot add the last cmd_index++ since it wont return from execve
 		// parent will do it. After this cmd_index sould be == cmd_count
 		// If this is the case, shell can return to input mode for more inputs
