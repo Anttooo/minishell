@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:09 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:23:36 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "../libft/vec.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdbool.h>
 
 // struct for directory-related variables
 typedef	struct	s_dir
@@ -68,11 +69,10 @@ typedef struct  s_current
 	int   	cmd_count;
 	// added command index so that builtins can know
 	// what element from **cmd_list to access
-	int		  cmd_index;
+	int		cmd_index;
 	char  	*raw;
-	t_token **tokens;
-	t_vec		vec_tokens;
-  t_vec   token_buffer;
+	t_vec	vec_tokens;
+  	t_vec   token_buffer;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
