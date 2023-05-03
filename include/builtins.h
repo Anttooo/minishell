@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:53:01 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:33 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:19:05 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #ifndef BUILTINS_H
-// # define BUILTINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-// # include "minishell.h"
-// # include <unistd.h>
+# include "minishell.h"
+# include <unistd.h>
 
-// void	pwd(void);
-// void	env(void);
-// void	echo(void);
-// void	builtin_exit(void);
-// char	**ft_export(char *str);
+char	**ft_export(char *str);
 
-// #endif
+#endif

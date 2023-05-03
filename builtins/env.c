@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:47:13 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:51 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:19:49 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // extern t_data g_data;
 
-// void	env(void)
+// void	ft_env(void)
 // {
 // 	int	idx;
 

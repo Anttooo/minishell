@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:34 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/03 10:27:53 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:35:07 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ extern t_data g_data;
 void  add_char_to_buffer(char c)
 {
   vec_push(&g_data.cur.token_buffer, (void *)&c);
+	// If the char pushed to buffer is a character that should always be "alone", store current token
+	if (c == '|')
+		store_token();
 }
 
 void  empty_and_init_buffer(void)
@@ -39,9 +42,9 @@ void  store_current_token(void)
 	add_char_to_buffer(null_char);
 	token = (t_token *)malloc(sizeof(t_token));
 	buffer = (char *)vec_get(&g_data.cur.token_buffer, 0);
-	// token->token = ft_strdup(buffer);
-	token->type = ft_strdup(buffer);
-	printf("in store current token: token->type: %s\n", token->type);
+	token->token = ft_strdup(buffer);
+	// token->type = ft_strdup(buffer);
+	// printf("in store current token: token->type: %s\n", token->type);
 	vec_push(&g_data.cur.vec_tokens, token);
 }
 
@@ -53,8 +56,6 @@ void  store_token(void)
   	empty_and_init_buffer();
   }
 }
-
-int	evaluate_char(char	c, int *mode, int i);
 
 /*
   TOKENIZATION MODES
@@ -89,6 +90,15 @@ int	tokenize_input(void)
 		// If the token is terminated, store the buffer
 			// store token from buffer
 		// After we've evaluated the character, move to next one
+		if (mode == EXPANSION_MODE) 
+		{
+			// get the rest of the search term after $
+			// Update i so that the search term is skipped after the expansion
+			// Pass that to get_env function (return char *)
+			// Get the value back from get_env
+			// Throw that value in buffer using a loop
+			// Turn off expansion mode and continue evaluating chars as usual
+		}
 		i++;
 	}
   store_token();
@@ -164,11 +174,12 @@ int	is_mode_changing_char(char c, int *mode)
 
 int	is_trigger_char(char c, int	*mode)
 {
-	if (*mode == DEFAULT_MODE)
+	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE
 	{
 		if (c == '$')
 		{
 			printf("In mode %d this character triggers expansion.\n", *mode);
+			// The action cuold be triggered here but not sure how that will happen
 			return (true);
 		}
 	}
@@ -179,7 +190,7 @@ int is_stored_char(char c, int *mode)
 {
   if (*mode == DEFAULT_MODE)
   {
-    if (c == ' ' || c == '\t' || c == '\n')
+    if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c=='\"')
     {
       printf("In mode %d this character is not stored in buffer\n", *mode);
       return (false);
@@ -195,6 +206,11 @@ int	evaluate_char(char	c, int *mode, int i)
 		printf("-> Terminate the previous token\n");
 		store_token();
 	}
+  if (is_stored_char(c, mode) == true)
+  {
+    // printf("-> store to buffer\n");
+    add_char_to_buffer(g_data.cur.raw[i]);
+  }
 	if (is_mode_changing_char(c, mode) != false)
 	{
 		printf("It's now: %d\n", *mode);
@@ -203,11 +219,6 @@ int	evaluate_char(char	c, int *mode, int i)
 	{
 		printf("some action should be triggered\n");
 	}
-  if (is_stored_char(c, mode) == true)
-  {
-    printf("-> store to buffer\n");
-    add_char_to_buffer(g_data.cur.raw[i]);
-  }
   else
   {
     printf("-> Skip the char\n");

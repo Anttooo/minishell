@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 10:23:36 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:40:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include "execute.h"
 # include "execute.h"
 # include "command.h"
+# include <stdbool.h>
 # include "clean_exit.h"
 # include "../libft/libft.h"
 # include "../libft/vec.h"
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdbool.h>
 
 // struct for directory-related variables
 typedef	struct	s_dir
