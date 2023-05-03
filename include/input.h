@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:56:37 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 12:31:28 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/03 14:30:10 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define DEFAULT_MODE 1
 # define DOUBLE_QUOTES_MODE 2
 # define SINGLE_QUOTES_MODE 3
-# define EXPANSION_MODE 4
+# define EXPANSION_MODE_DEFAULT 11
+# define EXPANSION_MODE_DOUBLE_Q 12
 
 int		handle_input(char *input);
 int	tokenize_input(void);
