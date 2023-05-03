@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 12:19:43 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/03 12:53:15 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,27 @@ extern t_data g_data;
 
 // char	**ft_export(void)
 // {
-// 	char	**append;
-// 	int		idx;
+	// char	**append;
+	// int		cmd_idx;
+	// int		idx;
 	
-// 	printf("Using builtin function. \n");
-// 	idx = -1;
-// 	while (g_data.env.vars[++idx] != NULL)
-// 		;
-// 	append = (char **)malloc(sizeof(char *) * idx + 1);
-// 	if (!append)
-// 		return (NULL);
-// 	idx = -1;
-// 	while (g_data.env.vars[++idx] != NULL)
-// 		append[idx] = ft_strdup(g_data.env.vars[idx]);
-// 	// global struct probably needs also a indexing on
-// 	// what cmd are we executing
-// 	// append[idx] = ft_strdup(g_data.cur.cmd_list[]);
-// 	append[++idx] = NULL;
-// 	free_arr(g_data.env.vars);
-// 	free(str);
-// 	return (append);
+	// idx = -1;
+	// cmd_idx = g_data.cur.cmd_index;
+	// while (g_data.env.vars[++idx] != NULL)
+	// 	;
+	// append = (char **)malloc(sizeof(char *) * idx + 1);
+	// if (!append)
+	// {
+	// 	// free garbage here
+	// 	return (NULL);
+	// }
+	// idx = -1;
+	// while (g_data.env.vars[++idx] != NULL)
+	// 	append[idx] = ft_strdup(g_data.env.vars[idx]);
+	// // Will need to check wherter args[1] is proper format, depends on
+	// // the way we will tokenize input
+	// append[idx] = ft_strdup(g_data.cur.cmd_list[cmd_idx]->args[1]);
+	// append[++idx] = NULL;
+	// free_arr(g_data.env.vars);
+	// return (append);
 // }

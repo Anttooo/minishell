@@ -5,17 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 07:53:01 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 12:19:05 by joonasmykka      ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/05/03 12:54:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
 # include "minishell.h"
-# include <unistd.h>
 
+void	ft_pwd(void);
+void	ft_env(void);
+void	ft_echo(void);
+void	ft_exit(void);
 char	**ft_export(char *str);
 
 #endif

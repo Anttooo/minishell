@@ -3,16 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/12 14:03:49 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:55:07 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern t_data	g_data;
+
+static void	exec_check(void)
+{
+	if (g_data.cur.cmd_index == g_data.cur.cmd_count)
+	{
+		// Executing all commands succeeded, reset variables that needs to be
+		// resetted and keep going for more inputs
+		reset_cur();
+	}
+	else
+	{
+		// something went wrong when executing... need to figure out how to handle
+		// that here.
+		printf("cmd_idx: %d and cmd count: %d \n", g_data.cur.cmd_index, g_data.cur.cmd_count);
+		printf("Error with executing\n");
+		exit(1);
+	}
+}
 
 int main(int argc, char **argv, char **envp)
 {
@@ -22,9 +40,11 @@ int main(int argc, char **argv, char **envp)
 	{
 		perror("init_struct");
 	}
+	// handles signals for example ctrl + C
+	signal_manager();
     while (42)
 	{
-		input = readline("\033[32msHeL>> \033[34m");
+		input = readline(g_data.env.prompt);
 		if (!input)
 		{
 				printf("\n");
@@ -40,6 +60,7 @@ int main(int argc, char **argv, char **envp)
 			parse_input();
       		// execute(void) -> gets data from struct
 			execute();
+			exec_check();
 			// the free below could be replaced by a cleaning function
 			free(input);
 			// TODO: add freeing to all things within g_data.cur

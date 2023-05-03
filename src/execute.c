@@ -3,42 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 11:47:54 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/05 10:17:44 by oanttoor         ###   ########.fr       */
+/*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/12 17:17:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
-// #include "../include/minishell.h"
-#include "../include/debug.h"
+#include "../include/minishell.h"
 
-extern t_data	g_data;
+extern t_data g_data;
 
-int execute(void)
+// Choosing input and output to be file or stdin / stdout
+// also redirecting those depending on chooses.
+void	init(t_pipes *p)
 {
-	pid_t	pid;
-	char	*env[] = {NULL};
-	char	*args[] = {g_data.cur.cmd_list[0]->cmd, g_data.cur.cmd_list[0]->args};
-	// debug_print_list(args, __func__);
-
-	pid = fork();
-	if (pid < 0)
+	p->idx = -1;
+	if (g_data.cur.input_file == NULL)
+		p->fdin = STDOUT;
+	else
 	{
-		printf("Forking failed\n");
-		//TODO: gracefully go back here
-		return (1);
+		p->fdin = open(g_data.cur.input_file, O_RDONLY);
+		if (p->fdin < 0)
+		{
+			perror("input file");
+			// Do clean exit here
+			exit(1);
+		}
 	}
-	else if (pid == 0)
+	if (g_data.cur.output_file == NULL)
+		p->fdout = STDOUT;
+	else
 	{
-		// we are in the child process when pid == 0
-		execve(g_data.cur.cmd_list[0]->path, args, env);
+		p->fdout = open(g_data.cur.output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (p->fdout < 0)
+		{
+			perror("output file");
+			// Do clean exit here
+			exit(1);
+		}
+	}
+	dup2(p->fdin, STDIN);
+	dup2(p->fdout, STDOUT);
+}
+
+// only executes command and prints error if it fails
+void	execute_cmd(t_pipes *p)
+{
+	char	*path;
+	int		idx;
+
+	idx = g_data.cur.cmd_index;
+	path = g_data.cur.cmd_list[idx]->path;
+	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
+	perror("error executin");
+	// do clean exit here
+	exit(1);
+}
+
+void	pipes_and_forks(t_pipes *p)
+{
+	pipe(p->pipe);
+	p->pid = fork();
+	// Child process
+	// will close read end since it is not needed here
+	// redirects OUTPUT to pipes write end so that parent
+	// can read it from there, will exit after execute
+	if (p->pid == 0)
+	{
+		close(p->pipe[READ_END]);
+		dup2(p->pipe[WRITE_END], STDOUT);
+		execute_cmd(p);
+	}
+	// parent process
+	// will close write end since it will only read from childs input
+	// this is done by redirecting STDIN to pipes read end
+	// Will wait for child prodcess to be done
+	else
+	{
+		close(p->pipe[WRITE_END]);
+		dup2(p->pipe[READ_END], STDIN);
+		waitpid(p->pid, NULL, 0);
+		g_data.cur.cmd_index++;
+	}
+}
+
+void	execute(void)
+{
+	t_pipes	p;
+
+	g_data.sig.exec_pid = fork();
+	if (g_data.sig.exec_pid == 0)
+	{
+		// Init function
+		init(&p);
+		// Main loop will go trough all but one command
+		while (++p.idx < g_data.cur.cmd_count - 1 && g_data.cur.cmd_count > 1)
+			pipes_and_forks(&p);
+		// last command gets executed witout redirections
+		execute_cmd(&p);
+		exit(1);
 	}
 	else
 	{
-		// main process continues here
-		wait(NULL);
-		return (0);
+		waitpid(g_data.sig.exec_pid, NULL, 0);
+		// Since child cannot add the last cmd_index++ since it wont return from execve
+		// parent will do it. After this cmd_index sould be == cmd_count
+		// If this is the case, shell can return to input mode for more inputs
+		g_data.cur.cmd_index++;
 	}
 }

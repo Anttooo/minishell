@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:53 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:52:22 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
+#include <signal.h>
 
 // extern t_data g_data;
 
-// void	builtin_exit(void)
-// {
-// 	clean_exit();
-// }
+void	ft_exit(void)
+{
+	clean_exit();
+	kill(g_data.sig.shell_pid, SIGTERM);
+}

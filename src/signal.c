@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 09:44:43 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:02:32 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/03 10:47:34 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#include "../include/minishell.h"
 
-# include "../libft/libft.h"
-# include <fcntl.h>
+extern t_data	g_data;
 
-int		parse_input(void);
-char 	*get_command_path(char *token);
-int 	get_cmd_count(void);
-int		allocate_cmd_list(void);
-int		parse_each_command(void);
-int   tokenize_input(void);
+void	parent(void)
+{
 
-#endif
+}
+
+void	child(void)
+{
+	struct sigaction action;
+
+	sigemptyset(&action.sa_mask);
+}
+
+void	signal_manager(void)
+{
+	if (g_data.sig.child_pid = fork())
+		parent();
+	else
+		child();
+}

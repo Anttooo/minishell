@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   signal_manager.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 09:44:43 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:02:32 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/04/12 11:08:06 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/04/12 14:50:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#ifndef SIGNAL_MANAGER_H
+# define SIGNAL_MANAGER_H
 
-# include "../libft/libft.h"
-# include <fcntl.h>
+# include <signal.h>
 
-int		parse_input(void);
-char 	*get_command_path(char *token);
-int 	get_cmd_count(void);
-int		allocate_cmd_list(void);
-int		parse_each_command(void);
-int   tokenize_input(void);
+void	signal_manager(void);
 
 #endif

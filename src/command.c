@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/05 13:02:16 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:44:22 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int get_cmd_count(void)
     i++;
   }
   g_data.cur.cmd_count = count;
-  ft_printf("nr of commands: %d\n", g_data.cur.cmd_count);
+//   ft_printf("nr of commands: %d\n", g_data.cur.cmd_count);
   return (0);
 }
 
@@ -95,7 +95,7 @@ int	allocate_cmd_list(void)
 		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof(t_cmd));
 		i++;
 	}
-	ft_printf("cmd list + %d instance(s) of t_cmd allocated\n", g_data.cur.cmd_count);
+	// ft_printf("cmd list + %d instance(s) of t_cmd allocated\n", g_data.cur.cmd_count);
 }
 
 int	parse_each_command(void)
@@ -108,7 +108,7 @@ int	parse_input(void)
   char	**tokens;
 
 	tokens = ft_split(g_data.cur.raw, ' ');
-	if (!tokens)
+	if (!tokens || tokens == NULL)
 		return (-1);
 
 	get_cmd_count();
@@ -124,7 +124,7 @@ int	parse_input(void)
 	
 	// TODO: the args should take in an array as that's what execve takes in
 	// TODO: we probably don't need to separate the options here but rather in the builtins which use options
-	g_data.cur.cmd_list[0]->args = ft_strdup(tokens[1]);
+	g_data.cur.cmd_list[0]->args = ft_split(g_data.cur.raw, ' ');
     // get path for command -> if fails, quit
     // check for options
     // check for arguments
