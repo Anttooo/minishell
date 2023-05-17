@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:34 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/03 15:28:19 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/17 16:56:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ void clear_and_init_buffer() {
 void store_current_token() {
 	char null_char = '\0';
 	add_char_to_buffer(null_char);
-
+	
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	char *buffer = (char *)vec_get(&g_data.cur.token_buffer, 0);
+	// At this point check if the buffer includes only "|" or any redirections (<, >, >>)
 	token->token = ft_strdup(buffer);
 	vec_push(&g_data.cur.vec_tokens, token);
 }
@@ -108,8 +109,9 @@ int tokenize_input() {
 			handle_expansion_mode(&mode, &i);
 		i++;
 	}
-
-	store_token();
+	store_token(); // stores the last token once the input string ends
+	// Add types to tokens
+	
 	return 0;
 }
 

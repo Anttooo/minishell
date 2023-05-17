@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 12:51:47 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/17 16:08:47 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include	"colors.h"
 # include	<unistd.h>
 # include	"command.h"
+# include 	<stdbool.h>
 # include	"execute.h"
 # include	"clean_exit.h"
 # include 	<sys/_types.h>
@@ -39,7 +40,7 @@ typedef struct	s_sig
 // struct for directory-related variables
 typedef	struct	s_dir
 {
-	char	*builtins;
+	char	*builtins[7];
 	char	*current;
 	char	*home;
 	char	*start;
@@ -56,8 +57,12 @@ typedef struct	s_env
 }								t_env;
 
 // struct which contains details for one command
+// If path = "builtin" 
 typedef struct  s_command
 {
+	char   	*output;
+	char    *input;
+	int		output_mode; // 1 tai 2
 	char 	**args;
 	char	*path;
 	char 	*cmd;
@@ -66,7 +71,6 @@ typedef struct  s_command
 typedef struct  s_token
 {
   char  *token;
-  char  *type;
 }               t_token;
 
 // where we store the parsed input we want to handle atm
@@ -74,16 +78,16 @@ typedef struct  s_current
 {
 	// something something here to hold tokens for current task
 	// will execute from idx 0 -->
- 	char   	*output_file;
-	char    *input_file;
 	t_cmd 	**cmd_list;
 	int   	cmd_count;
+	char   	*output;
+	char    *input;
 	// added command index so that builtins can know
 	// what element from **cmd_list to access
 	int		cmd_index;
 	char  	*raw;
 	t_vec	vec_tokens;
-  	t_vec   token_buffer;
+	t_vec   token_buffer;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given

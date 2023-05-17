@@ -6,13 +6,58 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/03 12:55:07 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/17 17:06:46 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern t_data	g_data;
+
+static void	exec_check(void);
+
+int main(int argc, char **argv, char **envp)
+{
+  char    *input;
+
+	if (init_struct(envp) == 1)
+	{
+		perror("init_struct");
+	}
+	// handles signals for example ctrl + C
+	signal_manager();
+	while (42)
+	{
+		input = readline(g_data.env.prompt);
+		if (!input)
+		{
+				printf("\n");
+		}
+		else
+		{
+			// TODO: add a function to set defaults of g_data.cur
+			// g_data.cur.input = null
+			// g_data.cur.output = null
+			// store the input in struct + TODO: add in history
+			handle_input(input);
+			tokenize_input();
+			parse_commands();
+			// Set redirections
+			execute();
+			exec_check();
+			// the free below could be replaced by a cleaning function
+			free(input);
+			// TODO: add freeing to all things within g_data.cur
+				// g_data.cur.cmd_list
+				// g_data.cur.cmd_list[i]
+				// g_data.cur.cmd_list[i].path, cmd, args, options
+				// g_data.cur.input & output
+			free(g_data.cur.raw);
+		}
+    }
+	clean_exit(); // This function cleans all the data when the shell is closed
+    return (0);
+}
 
 static void	exec_check(void)
 {
@@ -30,47 +75,4 @@ static void	exec_check(void)
 		printf("Error with executing\n");
 		exit(1);
 	}
-}
-
-int main(int argc, char **argv, char **envp)
-{
-  char    *input;
-
-	if (init_struct(envp) == 1)
-	{
-		perror("init_struct");
-	}
-	// handles signals for example ctrl + C
-	signal_manager();
-    while (42)
-	{
-		input = readline(g_data.env.prompt);
-		if (!input)
-		{
-				printf("\n");
-		}
-		else
-		{
-      		// TODO: add a function to set defaults of g_data.cur
-				// g_data.cur.input = null
-				// g_data.cur.output = null
-			// store the input in struct + TODO: add in history
-			handle_input(input);
-     		// parse_input(void) -> gets data from struct
-			parse_input();
-      		// execute(void) -> gets data from struct
-			execute();
-			exec_check();
-			// the free below could be replaced by a cleaning function
-			free(input);
-			// TODO: add freeing to all things within g_data.cur
-				// g_data.cur.cmd_list
-				// g_data.cur.cmd_list[i]
-				// g_data.cur.cmd_list[i].path, cmd, args, options
-				// g_data.cur.input & output
-			free(g_data.cur.raw);
-		}
-    }
-	clean_exit(); // This function cleans all the data when the shell is closed
-    return (0);
 }

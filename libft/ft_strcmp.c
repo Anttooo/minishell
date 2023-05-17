@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 10:13:38 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/05/17 16:34:44 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/17 16:39:22 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-extern t_data	g_data;
-
-void	parent(void)
+int strcmp(const char *s1, const char *s2)
 {
-
-}
-
-void	child(void)
-{
-	struct sigaction action;
-
-	sigemptyset(&action.sa_mask);
-}
-
-void	signal_manager(void)
-{
-	// if (g_data.sig.child_pid = fork())
-	// 	parent();
-	// else
-	// 	child();
+    if (s1 == NULL || s2 == NULL)
+	{
+        return -1;
+    }
+    while (*s1 && (*s1 == *s2))
+	{
+        s1++;
+        s2++;
+    }
+    return *(const unsigned char *)s1 - *(const unsigned char*)s2;
 }

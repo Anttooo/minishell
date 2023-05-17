@@ -5,8 +5,7 @@
 
 extern t_data g_data;
 
-// Returns 1 if input is handled, executed and saved
-// otherwise returns -1
+// TODO: add error handling 
 int	handle_input(char *input)
 {
 	if (strcmp(input, "quit") == 0)

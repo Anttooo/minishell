@@ -4,6 +4,7 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
+void	set_builtins(void);
 void	reset_cur(void);
 char	**get_paths(void);
 int		init_struct(char **envp);
