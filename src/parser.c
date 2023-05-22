@@ -112,6 +112,27 @@ int	is_delim_token(int i)
 // 	}
 // }
 
+int  check_mode(char* token, int cmd_idx)
+{
+  // strncmp against '<', '>', '>>'
+  if (ft_strncmp("<", token, ft_strlen(token)) == 0)
+  {
+    ft_printf("mode changed to input redir\n");
+    return (INPUT_REDIR);
+  }
+  if (ft_strncmp(">", token, ft_strlen(token)) == 0)
+  {
+    g_data.cur.cmd_list[cmd_idx]->output_mode = OVERWRITE_MODE;
+    return (OUTPUT_REDIR);
+  }
+  if (ft_strncmp(">>", token, ft_strlen(token)) == 0)
+  {
+    g_data.cur.cmd_list[cmd_idx]->output_mode = APPEND_MODE;
+    return (OUTPUT_REDIR);
+  }
+  return (DEFAULT_MODE);
+}
+
 void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the cmd were handling
 {
 	char	*token;
@@ -125,9 +146,17 @@ void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the 
 	while (*token_idx < g_data.cur.vec_tokens.len && is_delim_token(*token_idx) == 0)
 	{
 		token = get_token(*token_idx);
-		debug_print_string(token, __func__);
-		// check token for mode changes
-		if (g_data.cur.cmd_list[cmd_idx]->cmd == NULL) // If cmd has not been defined for this cmd struct
+    debug_print_string(token, __func__);
+    mode = check_mode(token, cmd_idx);
+    if (mode != DEFAULT_MODE) // if the token changes mode, we need the next token before going forward
+		{
+			free(token);
+			*token_idx = *token_idx + 1;
+			if (*token_idx < g_data.cur.vec_tokens.len) {
+				token = get_token(*token_idx);
+			}
+		}
+		if (g_data.cur.cmd_list[cmd_idx]->cmd == NULL && mode == DEFAULT_MODE) // If cmd has not been defined for this cmd struct
 		{
 			g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
 			g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100*sizeof(char *));
@@ -136,7 +165,7 @@ void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the 
 		}
 		else if (mode == DEFAULT_MODE) // fill args
 		{
-			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
+      g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
 		}
 		else if (mode == INPUT_REDIR)
 		{
@@ -147,19 +176,16 @@ void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the 
 		else if (mode == OUTPUT_REDIR)
 		{
 			g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(token);
-			if (ft_strncmp("<", token, ft_strlen(token)))
-				g_data.cur.cmd_list[cmd_idx]->output_mode = OVERWRITE_MODE;
-			else 
-				g_data.cur.cmd_list[cmd_idx]->output_mode = APPEND_MODE;
 			mode = DEFAULT_MODE;
 		}
 		*token_idx = *token_idx + 1;
 		free(token);
 	}
-	// printf("command %s\n", g_data.cur.cmd_list[0]->cmd);
-	// printf("args %s\n", g_data.cur.cmd_list[0]->args[0]);
-	// printf("path %s\n", g_data.cur.cmd_list[0]->path);
-	// printf("input %s\n", g_data.cur.cmd_list[0]->input);
-	// printf("output %s\n", g_data.cur.cmd_list[0]->output);
-	// printf("path %d\n", g_data.cur.cmd_list[0]->output_mode);	
+	printf("command %s\n", g_data.cur.cmd_list[0]->cmd);
+	printf("args %s\n", g_data.cur.cmd_list[0]->args[0]);
+	printf("args %s\n", g_data.cur.cmd_list[0]->args[1]);
+	printf("path %s\n", g_data.cur.cmd_list[0]->path);
+	printf("input %s\n", g_data.cur.cmd_list[0]->input);
+	printf("output %s\n", g_data.cur.cmd_list[0]->output);
+	printf("path %d\n", g_data.cur.cmd_list[0]->output_mode);
 }

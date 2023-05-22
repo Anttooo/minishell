@@ -16,8 +16,8 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
-# define INPUT_REDIR 	1
-# define OUTPUT_REDIR	2
+# define INPUT_REDIR 	2
+# define OUTPUT_REDIR	3
 # define APPEND_MODE 	1
 # define OVERWRITE_MODE 2
 

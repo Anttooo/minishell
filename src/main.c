@@ -41,7 +41,10 @@ int main(int argc, char **argv, char **envp)
 			// store the input in struct + TODO: add in history
 			handle_input(input);
 			tokenize_input();
+      // print output from tokenize
+      debug_print_tokens();
 			parse_commands();
+      debug_print_commands();
 			// Set redirections
 			execute();
 			exec_check();

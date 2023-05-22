@@ -24,7 +24,8 @@ int	is_builtin(char *cmd)
 	{
 		if (ft_strncmp(g_data.dir.builtins[i], cmd, 10) == 0)
 		{
-			return (1);
+			// return (1); // Commented out while builtins are not implemented.
+      return (0);
 		}
 		i++;
 	}
@@ -87,7 +88,7 @@ char *get_command_path(char *token)
 	char	*path_with_slash;
 
 	// TODO: restructure this code to check from an array of possible builtins, this code is invalid
-	if(is_builtin(token) == 0)
+	if(is_builtin(token) == 1) // 1 = true
 	{
 		printf("Command is a builtin\n");
 		return("builtin");

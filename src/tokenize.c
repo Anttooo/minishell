@@ -57,8 +57,8 @@ void store_current_token() {
 	
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	char *buffer = (char *)vec_get(&g_data.cur.token_buffer, 0);
-	// At this point check if the buffer includes only "|" or any redirections (<, >, >>)
 	token->token = ft_strdup(buffer);
+  debug_print_string(token->token, __func__); // TODO: remove
 	vec_push(&g_data.cur.vec_tokens, token);
 }
 
@@ -117,7 +117,7 @@ int tokenize_input() {
 
 // Checks if character terminates a token
 int is_terminating_char(char c, int *mode) {
-	printf("checking terminating character \n");
+	// printf("checking terminating character \n");
 	if (*mode > 10)
 	{
 		if (c == ' ' || c == '\t' || c == '<' || c == '>' || c == '|' || c == '\"' || c == '$' || c == '\n' || c == '\0')
@@ -211,11 +211,11 @@ int is_trigger_char(char c, int	*mode) {
 // Checks if character should be stored
 int is_stored_char(char c, int *mode) 
 {
-	if (*mode == DEFAULT_MODE)
+  if (*mode == DEFAULT_MODE)
   {
-    if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
+    if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$' )
     {
-      printf("In mode %d this character is not stored in buffer\n", *mode);
+      printf("In mode %d this character |%c| is not stored in buffer\n", *mode, c);
       return (false);
     }
   }
@@ -235,11 +235,12 @@ int evaluate_char(char	c, int *mode, int i) {
 	if (is_terminating_char(c, mode))
 		store_token();
   
+	if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
+		return 1;
+
 	if (is_stored_char(c, mode))
 		add_char_to_buffer(g_data.cur.raw[i]);
   
-	if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
-		return 1;
   
 	return 0;
 }
