@@ -20,23 +20,6 @@ extern t_data	g_data;
 // Parse input takes in a perfect list of tokens and creates perfect command structs that can be passed to execute
 int	parse_commands(void)
 {
-	// this is not needed after tokinzer is compele, it will pass on token list.
-	// ***** Delete starts here ******
-	// char	**tokens;
-	// tokens = ft_split(g_data.cur.raw, ' '); // TODO: replace this will tokenize.c tokenizing
-	// if (!tokens || tokens == NULL) // TODO: move this somewhere where it makes more sense to notice that there are no tokens
-	// 	return (-1);
-	
-	/*
-		g_data.cur.vec_tokens
-			vec_tokens[0].token = cat
-			vec_tokens[1].token = file1
-			vec_tokens[2].token = |
-			vec_tokens[3].token = sort
-	*/
-
-	// ****** Delete ends here ********
-
 	int cmd_idx;
 	int token_idx;
 
@@ -50,20 +33,6 @@ int	parse_commands(void)
     token_idx++;
 		cmd_idx++;
 	}
-
-	// // ******* THIS PART IS REPLACED WITH PARSE EACH COMMAND ******
-	// // go through each command and store the things related to them in the struct
-  //   // store the command
-	// // This is kinda what the parse_each_command should be doing but in a loop for each command
-	// g_data.cur.cmd_list[0]->cmd = ft_strdup(tokens[0]);
-	// g_data.cur.cmd_list[0]->path = ft_strdup(get_command_path(tokens[0]));
-	// 	if (!g_data.cur.cmd_list[0]->path)
-	// 	return (-1);
-	// // TODO: if the command can't be found, command_path is null and error should be given
-	
-	// g_data.cur.cmd_list[0]->args = ft_split(g_data.cur.raw, ' ');
-
-	// // ****** REPLACED PART ENDS *******
 	return (0);
 }
 

@@ -14,7 +14,8 @@
 
 extern t_data	g_data;
 
-static void	exec_check(void);
+// static void	exec_check(void);
+void  clean_cur_struct(void);
 
 int main(int argc, char **argv, char **envp)
 {
@@ -38,7 +39,9 @@ int main(int argc, char **argv, char **envp)
 			// TODO: add a function to set defaults of g_data.cur
 			// g_data.cur.input = null
 			// g_data.cur.output = null
-			// store the input in struct + TODO: add in history
+			// store the input in struct
+      if (input && *input)
+        add_history(input);
 			handle_input(input);
 			tokenize_input();
       // print output from tokenize
@@ -47,35 +50,55 @@ int main(int argc, char **argv, char **envp)
       debug_print_commands();
 			// Set redirections
 			execute();
-			exec_check();
-			// the free below could be replaced by a cleaning function
+			// exec_check(); // TODO: come up with a better way to check if all commands were executed
 			free(input);
-			// TODO: add freeing to all things within g_data.cur
-				// g_data.cur.cmd_list
-				// g_data.cur.cmd_list[i]
-				// g_data.cur.cmd_list[i].path, cmd, args, options
-				// g_data.cur.input & output
-			free(g_data.cur.raw);
+			
+			clean_cur_struct();
 		}
     }
 	clean_exit(); // This function cleans all the data when the shell is closed
     return (0);
 }
 
-static void	exec_check(void)
+void  clean_cur_struct(void)
 {
-	if (g_data.cur.cmd_index == g_data.cur.cmd_count)
-	{
-		// Executing all commands succeeded, reset variables that needs to be
-		// resetted and keep going for more inputs
-		reset_cur();
-	}
-	else
-	{
-		// something went wrong when executing... need to figure out how to handle
-		// that here.
-		printf("cmd_idx: %d and cmd count: %d \n", g_data.cur.cmd_index, g_data.cur.cmd_count);
-		printf("Error with executing\n");
-		exit(1);
-	}
+  int i;
+  free(g_data.cur.raw);
+  free(g_data.cur.input);
+  free(g_data.cur.output);
+  vec_free(&g_data.cur.token_buffer);
+  vec_free(&g_data.cur.vec_tokens);
+  while (i < g_data.cur.cmd_count)
+  {
+    free(g_data.cur.cmd_list[i]->cmd);
+    free(g_data.cur.cmd_list[i]->path);
+    free(g_data.cur.cmd_list[i]->input);
+    free(g_data.cur.cmd_list[i]->output);
+    g_data.cur.cmd_list[i]->output_mode = NULL;
+    free_arr(g_data.cur.cmd_list[i]->args);
+    free(g_data.cur.cmd_list[i]);
+    i++;
+  }
+  free(g_data.cur.cmd_list);
+  g_data.cur.cmd_count = 0;
+  g_data.cur.cmd_index = 0;
 }
+
+// This function does not work as the cmd_index can not be incremented from the child process, so it's value is always 1
+// static void	exec_check(void)
+// {
+// 	if (g_data.cur.cmd_index == g_data.cur.cmd_count)
+// 	{
+// 		// Executing all commands succeeded, reset variables that needs to be
+// 		// resetted and keep going for more inputs
+// 		reset_cur();
+// 	}
+// 	else
+// 	{
+// 		// something went wrong when executing... need to figure out how to handle
+// 		// that here.
+// 		printf("cmd_idx: %d and cmd count: %d \n", g_data.cur.cmd_index, g_data.cur.cmd_count);
+// 		printf("Error with executing\n");
+// 		exit(1);
+// 	}
+// }
