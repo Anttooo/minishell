@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/03 10:39:32 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/17 17:27:53 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,21 @@ char	**get_paths(void)
 	return (paths);
 }
 
+void	set_builtins(void)
+{
+	g_data.dir.builtins[0] = "echo";
+	g_data.dir.builtins[1] = "cd";
+	g_data.dir.builtins[2] = "pwd";
+	g_data.dir.builtins[3] = "export";
+	g_data.dir.builtins[4] = "unset";
+	g_data.dir.builtins[5] = "env";
+	g_data.dir.builtins[6] = "exit";
+}
+
 int	init_struct(char **envp)
 {
+	// init all args to null to start with
+	set_builtins();
 	g_data.sig.shell_pid = getpid();
 	g_data.dir.start = (char *)malloc(1024);
 	g_data.env.paths = get_paths();

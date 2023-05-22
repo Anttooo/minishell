@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:43 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/11 11:02:32 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/17 16:30:35 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
-int		parse_input(void);
-char 	*get_command_path(char *token);
+# define INPUT_REDIR 	1
+# define OUTPUT_REDIR	2
+# define APPEND_MODE 	1
+# define OVERWRITE_MODE 2
+
 int 	get_cmd_count(void);
+int		parse_commands(void);
+int   	tokenize_input(void);
 int		allocate_cmd_list(void);
-int		parse_each_command(void);
+void		parse_single_cmd(int cmd_idx, int *token_idx);
+int		is_delim_token(int i);
+char 	*get_command_path(char *token);
 
 #endif

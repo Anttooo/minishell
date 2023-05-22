@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 12:59:03 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/05/17 16:34:44 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/17 16:39:22 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/builtins.h"
-#include <signal.h>
+#include "libft.h"
 
-// extern t_data g_data;
-
-// void	ft_exit(void)
-// {
-// 	clean_exit();
-// 	kill(g_data.sig.shell_pid, SIGTERM);
-// }
+int strcmp(const char *s1, const char *s2)
+{
+    if (s1 == NULL || s2 == NULL)
+	{
+        return -1;
+    }
+    while (*s1 && (*s1 == *s2))
+	{
+        s1++;
+        s2++;
+    }
+    return *(const unsigned char *)s1 - *(const unsigned char*)s2;
+}

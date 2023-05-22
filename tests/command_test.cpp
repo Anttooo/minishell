@@ -32,57 +32,76 @@
 // 	// }
 // };
 
-// // Tests for get_command_path()
-// TEST(CommandTestGroup, ValidCommand)
-// {
-// 	char *valid_command = "ls";
-//     char *command_path = get_command_path(valid_command);
-//     CHECK(command_path != NULL);
-//     free(command_path);
-// }
+// // // Tests for get_command_path()
+// // TEST(CommandTestGroup, ValidCommand)
+// // {
+// // 	char *valid_command = "ls";
+// //     char *command_path = get_command_path(valid_command);
+// //     CHECK(command_path != NULL);
+// //     free(command_path);
+// // }
 
-// TEST(CommandTestGroup, InvalidCommand)
-// {
-//     char *invalid_command = "non_existent_command";
-//     char *command_path = get_command_path(invalid_command);
-//     CHECK(command_path == NULL);
-// }
+// // TEST(CommandTestGroup, InvalidCommand)
+// // {
+// //     char *invalid_command = "non_existent_command";
+// //     char *command_path = get_command_path(invalid_command);
+// //     CHECK(command_path == NULL);
+// // }
 
-// // Tests for get_cmd_count()
-// TEST(CommandTestGroup, CountCommands1)
-// {
-// 	g_data.cur.raw = "echo hello";
-// 	get_cmd_count();
-// 	CHECK_EQUAL(1, g_data.cur.cmd_count);
-// }
+// // // Tests for get_cmd_count()
+// // TEST(CommandTestGroup, CountCommands1)
+// // {
+// // 	g_data.cur.raw = "echo hello";
+// // 	get_cmd_count();
+// // 	CHECK_EQUAL(1, g_data.cur.cmd_count);
+// // }
 
-// TEST(CommandTestGroup, CountCommands2)
-// {
-// 	g_data.cur.raw = "echo \"so many pipes |||| but they are in double quotes\" ";
-// 	get_cmd_count();
-// 	CHECK_EQUAL(1, g_data.cur.cmd_count);
-// }
+// // TEST(CommandTestGroup, CountCommands2)
+// // {
+// // 	g_data.cur.raw = "echo \"so many pipes |||| but they are in double quotes\" ";
+// // 	get_cmd_count();
+// // 	CHECK_EQUAL(1, g_data.cur.cmd_count);
+// // }
 
-// TEST(CommandTestGroup, CountCommands3)
-// {
-// 	g_data.cur.raw = "echo \'so many pipes |||| but they are in single quotes\' ";
-// 	get_cmd_count();
-// 	CHECK_EQUAL(1, g_data.cur.cmd_count);
-// }
+// // TEST(CommandTestGroup, CountCommands3)
+// // {
+// // 	g_data.cur.raw = "echo \'so many pipes |||| but they are in single quotes\' ";
+// // 	get_cmd_count();
+// // 	CHECK_EQUAL(1, g_data.cur.cmd_count);
+// // }
 
-// TEST(CommandTestGroup, CountCommands4)
-// {
-// 	g_data.cur.raw = "ls -l | grep 'test'";
-// 	get_cmd_count();
-// 	CHECK_EQUAL(2, g_data.cur.cmd_count);
-// }
+// // TEST(CommandTestGroup, CountCommands4)
+// // {
+// // 	g_data.cur.raw = "ls -l | grep 'test'";
+// // 	get_cmd_count();
+// // 	CHECK_EQUAL(2, g_data.cur.cmd_count);
+// // }
 
-// TEST(CommandTestGroup, CountCommands5)
-// {
-// 	g_data.cur.raw = "cat \'so many pipes |||| but they are in single quotes\' | grep 'test'";
-// 	get_cmd_count();
-// 	CHECK_EQUAL(2, g_data.cur.cmd_count);
-// }
+// // TEST(CommandTestGroup, CountCommands5)
+// // {
+// // 	g_data.cur.raw = "cat \'so many pipes |||| but they are in single quotes\' | grep 'test'";
+// // 	get_cmd_count();
+// // 	CHECK_EQUAL(2, g_data.cur.cmd_count);
+// // }
+
+// // TEST(CommandTestGroup, AdvancedSplit2)
+// // {
+// //   g_data.cur.raw = "echo \"Hello this is a longer one\" \"Hello test test test\"";
+// //   char *expected_value = "Hello test test test";
+// //   tokenize_input();
+// //   STRCMP_EQUAL(expected_value, g_data.cur.tokens[2]->token);
+// // }
+
+// // TEST(CommandTestGroup, AdvancedSplit3)
+// // {
+// // 	g_data.cur.raw = "echo \"Hello\"";
+// //   	char	*expected_token = "Hello";
+// // 	char	*expected_type = "double_quote";
+// //   	tokenize_input();
+// // 	STRCMP_EQUAL(expected_token, g_data.cur.tokens[1]->token);
+// // 	STRCMP_EQUAL(expected_type, g_data.cur.tokens[1]->type);
+
+// // }
 
 // // Tests for parse_each_command()
 // // TEST(CommandTestGroup, ParseEachCommand1)
@@ -96,15 +115,15 @@
 // // 	CHECK_EQUAL("grep", g_data.cur.cmd_list[1]->cmd);
 // // }
 
-// TEST(CommandTestGroup, ParseEachCommand2)
-// {
-// 	// initialisation
-// 	g_data.cur.raw = "cat \'so many pipes |||| but they are in single quotes\'";
-// 	get_cmd_count();
-// 	allocate_cmd_list();
-// 	parse_each_command();
-// 	CHECK_EQUAL("cat", g_data.cur.cmd_list[0]->cmd);
-// }
+// // TEST(CommandTestGroup, ParseEachCommand2)
+// // {
+// // 	// initialisation
+// // 	g_data.cur.raw = "cat \'so many pipes |||| but they are in single quotes\'";
+// // 	get_cmd_count();
+// // 	allocate_cmd_list();
+// // 	parse_each_command();
+// // 	CHECK_EQUAL("cat", g_data.cur.cmd_list[0]->cmd);
+// // }
 
 
 // IMPORT_TEST_GROUP(CommandTestGroup);

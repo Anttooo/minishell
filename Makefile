@@ -36,6 +36,6 @@ obj/%.o: tests/%.cpp
 bin/tests_run: $(filter-out obj/main.o, $(OBJ_FILES)) $(TEST_OBJ_FILES)
 	$(CXX) $^ $(LDFLAGS) -o $@
 
-.PHONY: tests_run
-tests_run: bin/tests_run
+.PHONY: test
+test: bin/tests_run
 	./bin/tests_run

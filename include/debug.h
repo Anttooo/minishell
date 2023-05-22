@@ -7,5 +7,6 @@
 // add functions here 
 void	debug_print_list(char	**list, const char *func_name);
 void	debug_print_string(char *string, const char *func_name);
+void	debug_print_tokens(const char *func_name);
 
 #endif

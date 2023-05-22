@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 10:47:34 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/17 10:13:38 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	child(void)
 
 void	signal_manager(void)
 {
-	if (g_data.sig.child_pid = fork())
-		parent();
-	else
-		child();
+	// if (g_data.sig.child_pid = fork())
+	// 	parent();
+	// else
+	// 	child();
 }
