@@ -60,7 +60,7 @@ int get_cmd_count(void)
     i++;
   }
   g_data.cur.cmd_count = count;
-//   ft_printf("nr of commands: %d\n", g_data.cur.cmd_count);
+  ft_printf("nr of commands: %d\n", g_data.cur.cmd_count);
   return (0);
 }
 
@@ -75,9 +75,15 @@ int	allocate_cmd_list(void)
 	while (i < g_data.cur.cmd_count)
 	{
 		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof(t_cmd));
+    g_data.cur.cmd_list[i]->args = NULL;
+    g_data.cur.cmd_list[i]->path = NULL;
+    g_data.cur.cmd_list[i]->cmd = NULL;
+    g_data.cur.cmd_list[i]->input = NULL;
+    g_data.cur.cmd_list[i]->output = NULL; 
+    g_data.cur.cmd_list[i]->output_mode = NULL;
 		i++;
 	}
-	// ft_printf("cmd list + %d instance(s) of t_cmd allocated\n", g_data.cur.cmd_count);
+	ft_printf("cmd list + %d instance(s) of t_cmd allocated\n", g_data.cur.cmd_count);
 	return (0);
 }
 

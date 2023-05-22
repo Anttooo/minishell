@@ -62,9 +62,15 @@ void  debug_print_commands()
       ft_printf("no arguments\n");
     }
     ft_printf(" Path: %s\n", cmd->path);
-    ft_printf(" Input: %s\n", cmd->input);
-    ft_printf(" Output: %s\n", cmd->output);
-    ft_printf(" Output mode: %s\n", cmd->output_mode);
+    if (cmd->input) {
+      ft_printf(" Input: %s\n", cmd->input);
+    }
+    if (cmd->output) {
+      ft_printf(" Output: %s\n", cmd->output);
+    }
+    if (cmd->output_mode) {
+      ft_printf(" Output mode: %d\n", cmd->output_mode);
+    }
   }
   ft_printf("\n----- END OF PARSER OUTPUT -----\n\n");
 }

@@ -42,11 +42,12 @@ int	parse_commands(void)
 
 	cmd_idx = 0;
 	token_idx = 0;
-	get_cmd_count(); // 2 commands
-	allocate_cmd_list(); // array with 2 t_cmd instances
+	get_cmd_count();
+	allocate_cmd_list();
 	while (cmd_idx < g_data.cur.cmd_count) {
-		// printf("Going into round %d\n", cmd_idx);
+		printf("Going into round %d\n", cmd_idx);
 		parse_single_cmd(cmd_idx, &token_idx);
+    token_idx++;
 		cmd_idx++;
 	}
 
@@ -85,7 +86,7 @@ int	is_delim_token(int i)
 	// strcmp token against the chars
 	if (ft_strncmp("|", token, ft_strlen(token)) == 0)
 	{
-		// printf("")
+		printf("Seeing a delim token here\n");
 		return (1);
 	}
 		
@@ -117,7 +118,6 @@ int  check_mode(char* token, int cmd_idx)
   // strncmp against '<', '>', '>>'
   if (ft_strncmp("<", token, ft_strlen(token)) == 0)
   {
-    ft_printf("mode changed to input redir\n");
     return (INPUT_REDIR);
   }
   if (ft_strncmp(">", token, ft_strlen(token)) == 0)
@@ -145,8 +145,8 @@ void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the 
 	// printf("token_idx: %d, vec_tokens.len: %d\n", *token_idx, g_data.cur.vec_tokens.len);
 	while (*token_idx < g_data.cur.vec_tokens.len && is_delim_token(*token_idx) == 0)
 	{
-		token = get_token(*token_idx);
-    debug_print_string(token, __func__);
+    token = get_token(*token_idx);
+		printf("cmd index: %d, token: %s\n", cmd_idx, token);
     mode = check_mode(token, cmd_idx);
     if (mode != DEFAULT_MODE) // if the token changes mode, we need the next token before going forward
 		{
@@ -156,36 +156,36 @@ void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the 
 				token = get_token(*token_idx);
 			}
 		}
+    ft_printf("string value: %s\n", g_data.cur.cmd_list[cmd_idx]->cmd);
+    ft_printf("mode: %d\n", mode);
 		if (g_data.cur.cmd_list[cmd_idx]->cmd == NULL && mode == DEFAULT_MODE) // If cmd has not been defined for this cmd struct
 		{
-			g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
+			ft_printf("test 1\n");
+      g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
 			g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100*sizeof(char *));
 			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
 			g_data.cur.cmd_list[cmd_idx]->path = get_command_path(token);
 		}
 		else if (mode == DEFAULT_MODE) // fill args
 		{
+      ft_printf("test 2\n");
       g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
 		}
 		else if (mode == INPUT_REDIR)
 		{
-			// TODO: validate that the token is valid (e.g. < > | are not valid)
+			ft_printf("test 3\n");
+      // TODO: validate that the token is valid (e.g. < > | are not valid)
 			g_data.cur.cmd_list[cmd_idx]->input = ft_strdup(token);
 			mode = DEFAULT_MODE;
 		}
 		else if (mode == OUTPUT_REDIR)
 		{
-			g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(token);
+			ft_printf("test 4\n");
+      g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(token);
 			mode = DEFAULT_MODE;
 		}
+    ft_printf("test 5\n");
 		*token_idx = *token_idx + 1;
 		free(token);
 	}
-	printf("command %s\n", g_data.cur.cmd_list[0]->cmd);
-	printf("args %s\n", g_data.cur.cmd_list[0]->args[0]);
-	printf("args %s\n", g_data.cur.cmd_list[0]->args[1]);
-	printf("path %s\n", g_data.cur.cmd_list[0]->path);
-	printf("input %s\n", g_data.cur.cmd_list[0]->input);
-	printf("output %s\n", g_data.cur.cmd_list[0]->output);
-	printf("path %d\n", g_data.cur.cmd_list[0]->output_mode);
 }

@@ -39,6 +39,7 @@ char *fetch_env_var(char *str) {
 
 // Add a character to the buffer and store the token if necessary
 void add_char_to_buffer(char c) {
+  printf("Adding character to buffer: %c\n", c);
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
 	if (c == '|')
 		store_token();
@@ -58,7 +59,7 @@ void store_current_token() {
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	char *buffer = (char *)vec_get(&g_data.cur.token_buffer, 0);
 	token->token = ft_strdup(buffer);
-  debug_print_string(token->token, __func__); // TODO: remove
+  // debug_print_string(token->token, __func__); // TODO: remove
 	vec_push(&g_data.cur.vec_tokens, token);
 }
 
@@ -122,7 +123,7 @@ int is_terminating_char(char c, int *mode) {
 	{
 		if (c == ' ' || c == '\t' || c == '<' || c == '>' || c == '|' || c == '\"' || c == '$' || c == '\n' || c == '\0')
 		{
-			printf("In mode %d this character terminates a token.\n", *mode);
+			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
 		}	
 	}
@@ -138,7 +139,7 @@ int is_terminating_char(char c, int *mode) {
 	{
 		if (c == '\"')
 		{
-			printf("In mode %d this character terminates a token.\n", *mode);
+			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
 		}
 	}
@@ -146,7 +147,7 @@ int is_terminating_char(char c, int *mode) {
 	{
 		if (c == '\'')
 		{
-			printf("In mode %d this character terminates a token.\n", *mode);
+			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
 		}
 	}
@@ -160,13 +161,13 @@ int is_mode_changing_char(char c, int *mode)
 	{
 		if (c == '\'')
 		{
-			printf("Mode changed to single quotes.\n");
+			// printf("Mode changed to single quotes.\n");
 			*mode = SINGLE_QUOTES_MODE;
 			return (true);
 		}
 		if (c == '\"')
 		{
-			printf("Mode changed to double quotes.\n");
+			// printf("Mode changed to double quotes.\n");
 			*mode = DOUBLE_QUOTES_MODE;
 			return (true);
 		}
@@ -175,7 +176,7 @@ int is_mode_changing_char(char c, int *mode)
 	{
 		if (c == '\"')
 		{
-			printf("Mode changed to default.\n");
+			// printf("Mode changed to default.\n");
 			*mode = DEFAULT_MODE;
 			return (true);
 		}
@@ -184,7 +185,7 @@ int is_mode_changing_char(char c, int *mode)
 	{
 		if (c == '\'')
 		{
-			printf("Mode changed to default.\n");
+			// printf("Mode changed to default.\n");
 			*mode = DEFAULT_MODE;
 			return (true);
 		}
@@ -199,7 +200,7 @@ int is_trigger_char(char c, int	*mode) {
 	{
 		if (c == '$')
 		{
-			printf("In mode %d this character triggers expansion.\n", *mode);
+			// printf("In mode %d this character triggers expansion.\n", *mode);
 			*mode += 10;
 			// The action cuold be triggered here but not sure how that will happen
 			return (true);
@@ -215,7 +216,7 @@ int is_stored_char(char c, int *mode)
   {
     if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$' )
     {
-      printf("In mode %d this character |%c| is not stored in buffer\n", *mode, c);
+      // printf("In mode %d this character |%c| is not stored in buffer\n", *mode, c);
       return (false);
     }
   }
@@ -223,7 +224,7 @@ int is_stored_char(char c, int *mode)
   {
     if (c == '$')
     {
-      printf("In mode %d this character is not stored in buffer\n", *mode);
+      // printf("In mode %d this character is not stored in buffer\n", *mode);
       return (false);
     }
   }
@@ -232,6 +233,7 @@ int is_stored_char(char c, int *mode)
 
 // Evaluates character
 int evaluate_char(char	c, int *mode, int i) {
+  printf("Evaluating character: %c\n", c);
 	if (is_terminating_char(c, mode))
 		store_token();
   
