@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/17 17:06:46 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 17:09:03 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int main(int argc, char **argv, char **envp)
 void  clean_cur_struct(void)
 {
   int i;
+
+  i = 0;
   free(g_data.cur.raw);
   free(g_data.cur.input);
   free(g_data.cur.output);
@@ -70,8 +72,10 @@ void  clean_cur_struct(void)
   vec_free(&g_data.cur.vec_tokens);
   while (i < g_data.cur.cmd_count)
   {
-    free(g_data.cur.cmd_list[i]->cmd);
-    free(g_data.cur.cmd_list[i]->path);
+	free(g_data.cur.cmd_list[i]->cmd);
+	// alla oleva aiheuttaa crashin ainakin
+	// builtin runneissa
+    // free(g_data.cur.cmd_list[i]->path);
     free(g_data.cur.cmd_list[i]->input);
     free(g_data.cur.cmd_list[i]->output);
     g_data.cur.cmd_list[i]->output_mode = NULL;

@@ -6,13 +6,13 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:34:44 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 16:39:22 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 16:46:46 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int strcmp(const char *s1, const char *s2)
+int ft_strcmp(const char *s1, const char *s2)
 {
     if (s1 == NULL || s2 == NULL)
 	{

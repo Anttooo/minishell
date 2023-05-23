@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/17 17:26:17 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 11:00:44 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parse_commands(void)
 	while (cmd_idx < g_data.cur.cmd_count) {
 		printf("Going into round %d\n", cmd_idx);
 		parse_single_cmd(cmd_idx, &token_idx);
-    token_idx++;
+    	token_idx++;
 		cmd_idx++;
 	}
 	return (0);
@@ -130,7 +130,7 @@ void	parse_single_cmd(int cmd_idx, int *token_idx) // takes in the index of the 
 		if (g_data.cur.cmd_list[cmd_idx]->cmd == NULL && mode == DEFAULT_MODE) // If cmd has not been defined for this cmd struct
 		{
 			ft_printf("test 1\n");
-      g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
+      		g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
 			g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100*sizeof(char *));
 			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
 			g_data.cur.cmd_list[cmd_idx]->path = get_command_path(token);

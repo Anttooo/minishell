@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 16:55:19 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 11:02:31 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	is_builtin(char *cmd)
 	while (i < 7)
 	{
 		if (ft_strncmp(g_data.dir.builtins[i], cmd, 10) == 0)
-		{
-			// return (1); // Commented out while builtins are not implemented.
-      return (0);
-		}
+			return (1);
 		i++;
 	}
 	return (0);
@@ -96,9 +93,11 @@ char *get_command_path(char *token)
 	// TODO: restructure this code to check from an array of possible builtins, this code is invalid
 	if(is_builtin(token) == 1) // 1 = true
 	{
+		g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 1;
 		printf("Command is a builtin\n");
 		return("builtin");
 	}
+	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
 	i = 0;
 	while (g_data.env.paths[i])
 	{
