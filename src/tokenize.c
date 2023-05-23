@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:34 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/17 16:56:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 09:41:45 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char *fetch_env_var(char *str) {
 
 // Add a character to the buffer and store the token if necessary
 void add_char_to_buffer(char c) {
-  printf("Adding character to buffer: %d\n", c);
+  // printf("Adding character to buffer: %d\n", c);
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
 	if (c == '|')
 		store_token();
@@ -233,7 +233,7 @@ int is_stored_char(char c, int *mode)
 
 // Evaluates character
 int evaluate_char(char	c, int *mode, int i) {
-  printf("Evaluating character: %c\n", c);
+  // printf("Evaluating character: %c\n", c);
 	if (is_terminating_char(c, mode))
 		store_token();
   

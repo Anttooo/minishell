@@ -26,7 +26,6 @@ void	execute(void)
 		// Main loop will go trough all but one command
 		while (++p.idx < g_data.cur.cmd_count - 1 && g_data.cur.cmd_count > 1)
 			pipes_and_forks(&p);
-    ft_printf("int value after pipes and forks: %d\n", g_data.cur.cmd_index);
 		// last command gets executed witout redirections
 		execute_cmd(&p);
 		exit(1);

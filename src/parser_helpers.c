@@ -24,7 +24,7 @@ int	is_builtin(char *cmd)
 	{
 		if (ft_strncmp(g_data.dir.builtins[i], cmd, 10) == 0)
 		{
-			// return (1); // Commented out while builtins are not implemented.
+			// return (1); // Commented out while builtins are not implemented. TODO: add working implementation of builtins
       return (0);
 		}
 		i++;
@@ -33,10 +33,11 @@ int	is_builtin(char *cmd)
 }
 
 
-
+// start from the beginning of the command, go character by character looking for pipes
+// if there is a single or double quote, skips until the same character is seen again
 int get_cmd_count(void)
 {
-  // start from the beginning of the command, go character by character looking for pipes
+
   int 	i;
   int 	count;
   char  skip_char;
@@ -49,7 +50,6 @@ int get_cmd_count(void)
     {
       count++;
     }
-    // if there is a single or double quote, skip until the same character is seen again
     if(g_data.cur.raw[i] == '\"' || g_data.cur.raw[i] == '\'')
     {
       skip_char = g_data.cur.raw[i];

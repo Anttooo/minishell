@@ -85,6 +85,7 @@ void  clean_cur_struct(void)
 }
 
 // This function does not work as the cmd_index can not be incremented from the child process, so it's value is always 1
+
 // static void	exec_check(void)
 // {
 // 	if (g_data.cur.cmd_index == g_data.cur.cmd_count)
