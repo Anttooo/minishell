@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/05/03 12:54:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 09:53:30 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "minishell.h"
 
+void	ft_cd(void);
 void	ft_pwd(void);
 void	ft_env(void);
 void	ft_echo(void);
