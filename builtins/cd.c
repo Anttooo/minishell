@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/05/23 09:53:30 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/05/23 09:53:00 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/23 09:54:01 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/builtins.h"
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
-
-# include "minishell.h"
-
-void	ft_cd(void);
-void	ft_pwd(void);
-void	ft_env(void);
-void	ft_echo(void);
-void	ft_exit(void);
-char	**ft_export(char *str);
-
-#endif
+void	ft_cd(void)
+{
+	
+}
