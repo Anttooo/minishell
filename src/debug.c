@@ -49,28 +49,38 @@ void debug_print_tokens()
 
 void  debug_print_commands()
 {
-  ft_printf("\n\n----- PARSER OUTPUT SUMMARY -----\n\n");
-  ft_printf("number of commands: %d\n",g_data.cur.cmd_count);
-  for (int i = 0; i < g_data.cur.cmd_count; i++) {
-    t_cmd *cmd = g_data.cur.cmd_list[i];
-    ft_printf("\nCommand %d: \n Cmd: %s\n", i, cmd->cmd);
-    ft_printf(" Args: ");
-    if (cmd->args) {
-      print_list(cmd->args);
-      ft_printf("\n");
-    } else {
-      ft_printf("no arguments\n");
-    }
-    ft_printf(" Path: %s\n", cmd->path);
-    if (cmd->input) {
-      ft_printf(" Input: %s\n", cmd->input);
-    }
-    if (cmd->output) {
-      ft_printf(" Output: %s\n", cmd->output);
-    }
-    if (cmd->output_mode) {
-      ft_printf(" Output mode: %d\n", cmd->output_mode);
-    }
-  }
-  ft_printf("\n----- END OF PARSER OUTPUT -----\n\n");
+	ft_printf("\n\n----- PARSER OUTPUT SUMMARY -----\n\n");
+	ft_printf("number of commands: %d\n",g_data.cur.cmd_count);
+	if (g_data.cur.output)
+		ft_printf("Output: %s\n", g_data.cur.output);
+	else
+		ft_printf("Output: stdout\n");
+	ft_printf("Output mode: %d\n", g_data.cur.output_mode);
+	if (g_data.cur.input)
+		ft_printf("Input: %s\n", g_data.cur.input);
+	else
+		ft_printf("Input: stdin\n");
+
+	for (int i = 0; i < g_data.cur.cmd_count; i++) {
+	t_cmd *cmd = g_data.cur.cmd_list[i];
+	ft_printf("\nCommand %d: \n Cmd: %s\n", i, cmd->cmd);
+	ft_printf(" Args: ");
+	if (cmd->args) {
+		print_list(cmd->args);
+		ft_printf("\n");
+	} else {
+		ft_printf("no arguments\n");
+	}
+	ft_printf(" Path: %s\n", cmd->path);
+	if (cmd->input) {
+		ft_printf(" Input: %s\n", cmd->input);
+	}
+	if (cmd->output) {
+		ft_printf(" Output: %s\n", cmd->output);
+	}
+	if (cmd->output_mode) {
+		ft_printf(" Output mode: %d\n", cmd->output_mode);
+	}
+	}
+	ft_printf("\n----- END OF PARSER OUTPUT -----\n\n");
 }

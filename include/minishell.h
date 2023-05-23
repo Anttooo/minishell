@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 16:08:47 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 11:13:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct  s_current
 	t_cmd 	**cmd_list;
 	int   	cmd_count;
 	char   	*output;
+	int		output_mode;
 	char    *input;
 	// added command index so that builtins can know
 	// what element from **cmd_list to access

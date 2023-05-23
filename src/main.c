@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/17 17:06:46 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 12:25:47 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,43 @@ int main(int argc, char **argv, char **envp)
 
 void  clean_cur_struct(void)
 {
-  int i;
-  free(g_data.cur.raw);
-  free(g_data.cur.input);
-  free(g_data.cur.output);
-  vec_free(&g_data.cur.token_buffer);
-  vec_free(&g_data.cur.vec_tokens);
-  while (i < g_data.cur.cmd_count)
-  {
-    free(g_data.cur.cmd_list[i]->cmd);
-    free(g_data.cur.cmd_list[i]->path);
-    free(g_data.cur.cmd_list[i]->input);
-    free(g_data.cur.cmd_list[i]->output);
-    g_data.cur.cmd_list[i]->output_mode = NULL;
-    free_arr(g_data.cur.cmd_list[i]->args);
-    free(g_data.cur.cmd_list[i]);
-    i++;
-  }
-  free(g_data.cur.cmd_list);
-  g_data.cur.cmd_count = 0;
-  g_data.cur.cmd_index = 0;
+	int i;
+	free(g_data.cur.raw);
+	if (g_data.cur.input)
+	{
+		free(g_data.cur.input);
+		g_data.cur.input = NULL;
+	}
+	if (g_data.cur.output)
+	{
+		free(g_data.cur.output);
+		g_data.cur.output = NULL;
+	}
+	if (g_data.cur.output_mode)
+	{
+		g_data.cur.output_mode = NULL;
+	}
+	vec_free(&g_data.cur.token_buffer);
+	vec_free(&g_data.cur.vec_tokens);
+	while (i < g_data.cur.cmd_count)
+	{
+		if (g_data.cur.cmd_list[i]->cmd)
+			free(g_data.cur.cmd_list[i]->cmd);
+		if (g_data.cur.cmd_list[i]->path)
+			free(g_data.cur.cmd_list[i]->path);
+		if (g_data.cur.cmd_list[i]->input)
+			free(g_data.cur.cmd_list[i]->input);
+		if (g_data.cur.cmd_list[i]->output)
+			free(g_data.cur.cmd_list[i]->output);
+		g_data.cur.cmd_list[i]->output_mode = NULL;
+		if (g_data.cur.cmd_list[i]->args)
+			free_arr(g_data.cur.cmd_list[i]->args);
+		free(g_data.cur.cmd_list[i]);
+		i++;
+	}
+	free(g_data.cur.cmd_list);
+	g_data.cur.cmd_count = 0;
+	g_data.cur.cmd_index = 0;
 }
 
 // This function does not work as the cmd_index can not be incremented from the child process, so it's value is always 1

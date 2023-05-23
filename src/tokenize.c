@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:34 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/23 09:41:45 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 12:30:15 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int is_terminating_char(char c, int *mode) {
 	// printf("checking terminating character \n");
 	if (*mode > 10)
 	{
-		if (c == ' ' || c == '\t' || c == '<' || c == '>' || c == '|' || c == '\"' || c == '$' || c == '\n' || c == '\0')
+		if (c == ' ' || c == '\t' || c == '|' || c == '\"' || c == '$' || c == '\n' || c == '\0')
 		{
 			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
@@ -129,9 +129,9 @@ int is_terminating_char(char c, int *mode) {
 	}
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '<' || c == '>' || c == '|' || c == '\'' || c == '\"' || c == '$' || c == '\n')
+		if (c == ' ' || c == '\t' || c == '|' || c == '\'' || c == '\"' || c == '$' || c == '\n')
 		{
-			printf("In mode %d this character terminates a token.\n", *mode);
+			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
 		}
 	}

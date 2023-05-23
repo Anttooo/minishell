@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 14:37:52 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 11:12:52 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,17 @@ void	init(t_pipes *p)
 		p->fdout = STDOUT;
 	else
 	{
-		p->fdout = open(g_data.cur.output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (g_data.cur.output_mode == APPEND_MODE)
+			p->fdout = open(g_data.cur.output, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else if (g_data.cur.output_mode == OVERWRITE_MODE)
+			p->fdout = open(g_data.cur.output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else
+		{
+			printf("invalid output mode\n");
+			// do clean exit here
+			exit(1);
+		}
+		
 		if (p->fdout < 0)
 		{
 			perror("output file");

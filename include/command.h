@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:43 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/17 16:30:35 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 11:14:03 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <fcntl.h>
 
 # define INPUT_REDIR 	2
-# define OUTPUT_REDIR	3
+# define OUTPUT_REDIR_OVERWRITE	3
+# define OUTPUT_REDIR_APPEND	4
 # define APPEND_MODE 	1
 # define OVERWRITE_MODE 2
 
