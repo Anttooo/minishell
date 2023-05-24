@@ -13,6 +13,9 @@ int	handle_input(char *input)
 		free(input);
 		exit(0);
 	}
+	// If input includes <<, capture delim (next argument until delim) and start heredoc
+	// Get delim
+	// Start Heredoc(delim)
 	// If input is not "quit", pass input to command parsing
 	else
 	{
@@ -20,3 +23,8 @@ int	handle_input(char *input)
 	}
 	return (0);
 }
+
+// heredoc (char delim)
+// create buffer
+// readline
+// 
