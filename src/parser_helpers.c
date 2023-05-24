@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 10:33:32 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 10:41:37 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char *get_command_path(char *token)
 	{
 		g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 1;
 		printf("Command is a builtin\n");
-		return("builtin");
+		cmd_path = (ft_strdup("builtin"));
+		return(cmd_path);
 	}
 	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
 	i = 0;
@@ -103,7 +104,7 @@ char *get_command_path(char *token)
 	{
 		path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
 		cmd_path = ft_strjoin(path_with_slash, token);
-    free(path_with_slash);
+    	free(path_with_slash);
 		if(access(cmd_path, X_OK) == 0) 
 		{
 			// printf("Command is an environment command, can be executed\n");

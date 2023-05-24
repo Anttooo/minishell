@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 10:32:49 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 10:42:59 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void  clean_cur_struct(void)
 	{
 		if (g_data.cur.cmd_list[i]->cmd)
 			free(g_data.cur.cmd_list[i]->cmd);
-		if (g_data.cur.cmd_list[i]->path)
-			free(g_data.cur.cmd_list[i]->path);
+		// if (g_data.cur.cmd_list[i]->path)
+		// 	free(g_data.cur.cmd_list[i]->path);
 		if (g_data.cur.cmd_list[i]->input)
 			free(g_data.cur.cmd_list[i]->input);
 		if (g_data.cur.cmd_list[i]->output)
