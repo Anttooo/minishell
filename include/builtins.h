@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/05/23 09:53:30 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/24 10:30:27 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include <signal.h>
+# include <dirent.h>
 # include "minishell.h"
 
 void	ft_cd(void);
@@ -21,6 +23,7 @@ void	ft_pwd(void);
 void	ft_env(void);
 void	ft_echo(void);
 void	ft_exit(void);
-char	**ft_export(char *str);
+void	ft_unset(void);
+void	ft_export(void);
 
 #endif

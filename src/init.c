@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/23 09:37:47 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/24 10:31:39 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,25 @@ char	**get_paths(void)
 
 void	set_builtins(void)
 {
-	g_data.dir.builtins[0] = "echo";
+	g_data.dir.builtins[0] = "xxecho";
 	g_data.dir.builtins[1] = "cd";
-	g_data.dir.builtins[2] = "pwd";
-	g_data.dir.builtins[3] = "export";
-	g_data.dir.builtins[4] = "unset";
-	g_data.dir.builtins[5] = "env";
-	g_data.dir.builtins[6] = "exit";
+	g_data.dir.builtins[2] = "xxpwd";
+	g_data.dir.builtins[3] = "xxexport";
+	g_data.dir.builtins[4] = "xxunset";
+	g_data.dir.builtins[5] = "xxenv";
+	g_data.dir.builtins[6] = "xxexit";
+}
+
+// TODO Remember to add checks if opendir etc.. fails or not
+void	init_directories(void)
+{
+	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
+	g_data.dir.ptr_current = opendir(g_data.dir.start);
+	chdir(g_data.dir.ptr_current);
+	g_data.dir.home = getenv("HOME");
+	// g_data.dir.builtins = ft_strjoin(g_data.dir.start, "/builtins/executables/"); // TODO: fix this
+	// TODO: Add error handling in case HOME directory can't for some reason be found from env.
+	g_data.dir.current = ft_strdup(g_data.dir.start);
 }
 
 int	init_struct(char **envp)
@@ -67,18 +79,6 @@ int	init_struct(char **envp)
 	g_data.env.vars = get_env_vars(envp);
 	g_data.env.user = find_env_var("USER");
 	g_data.env.prompt = ft_strjoin(g_data.env.user, " --> ");
-	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
-  debug_print_string(g_data.dir.start, __func__);
-	g_data.dir.home = getenv("HOME");
-  debug_print_string(g_data.dir.home, __func__);
-	// g_data.dir.builtins = ft_strjoin(g_data.dir.start, "/builtins/executables/"); // TODO: fix this
-	// TODO: Add error handling in case HOME directory can't for some reason be found from env.
-	if (chdir(g_data.dir.home) == -1) 
-	{
-		perror("chdir error in init_struct");
-		return (1);
-	}
-	g_data.dir.current = ft_strdup(g_data.dir.start);
-  debug_print_string(g_data.dir.current, __func__);
+	init_directories();
   return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/23 11:13:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 10:30:37 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include	"command.h"
 # include 	<stdbool.h>
 # include	"execute.h"
+# include	"builtins.h"
 # include	"clean_exit.h"
 # include 	<sys/_types.h>
 # include	"signal_manager.h"
@@ -34,7 +35,6 @@ typedef struct	s_sig
 	pid_t	exec_pid;
 	pid_t	shell_pid;
 	pid_t	child_pid;
-
 }								t_sig;
 
 // struct for directory-related variables
@@ -44,6 +44,10 @@ typedef	struct	s_dir
 	char	*current;
 	char	*home;
 	char	*start;
+
+	DIR		*ptr_home;
+	DIR		*ptr_start;
+	DIR		*ptr_current;
 }								t_dir;
 
 // struct for environment-related variables
@@ -63,6 +67,7 @@ typedef struct  s_command
 	char   	*output;
 	char    *input;
 	int		output_mode; // 1 tai 2
+	int		builtin;
 	char 	**args;
 	char	*path;
 	char 	*cmd;
