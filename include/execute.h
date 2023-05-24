@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/04/12 10:51:41 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/24 14:16:20 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_pipex_data
 
 void	execute(void);
 void	init(t_pipes *p);
+void	execute_builtin(void);
 void	execute_cmd(t_pipes *p);
 void	pipes_and_forks(t_pipes *p);
 

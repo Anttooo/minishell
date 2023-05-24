@@ -6,15 +6,13 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 10:29:47 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:52:10 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
 extern t_data g_data;
-
-void	execute_builtin(void);
 
 void	execute(void)
 {

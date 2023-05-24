@@ -5,267 +5,102 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 16:09:34 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/23 12:30:15 by oanttoor         ###   ########.fr       */
+/*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/24 13:55:56 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/command.h"
 #include "../include/minishell.h"
 
-extern t_data g_data;
-
-// Fetch environment variable
-char *fetch_env_var(char *str) {
-	int idx = 0;
-	int len = ft_strlen(str);
-
-	while(g_data.env.vars[idx] != NULL) {
-		if (ft_strncmp(g_data.env.vars[idx], str, len) == 0)
-			break;
-		idx++;
-	}
-
-	int word_len = ft_strlen(g_data.env.vars[idx]) - len - 1;
-	char *var = malloc((word_len + 1) * sizeof(char));
-
-	if (!var)
-		return NULL;
-
-	ft_memcpy(var, &g_data.env.vars[idx][len + 1], word_len);
-	var[word_len] = '\0';
-	return var;
-}
-
-// Add a character to the buffer and store the token if necessary
-void add_char_to_buffer(char c) {
-  // printf("Adding character to buffer: %d\n", c);
-	vec_push(&g_data.cur.token_buffer, (void *)&c);
-	if (c == '|')
-		store_token();
-}
-
-// Clear and initialize the buffer
-void clear_and_init_buffer() {
-	vec_free(&g_data.cur.token_buffer);
-	vec_new(&g_data.cur.token_buffer, 0 , sizeof(char));
-}
-
-// Store the current token
-void store_current_token() {
-	t_token *token;
-  
-	add_char_to_buffer('\0');
-  token = (t_token *)malloc(sizeof(t_token));
-	token->token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
-	vec_push(&g_data.cur.vec_tokens, token);
-}
-
-// Store token if buffer is not empty
-void store_token() {
-	if (g_data.cur.token_buffer.len != 0) {
-		store_current_token();
-		clear_and_init_buffer();
-	}
-}
-
-// Handles the expansion mode
-void handle_expansion_mode(int *mode, int *i) {
-	int j = *i + 1;
-	// Continue until the character terminates a token
-	while (!is_terminating_char(g_data.cur.raw[j], g_data.cur.raw[j + 1], mode))
-		j++;
-
-	char *env_var = ft_substr(g_data.cur.raw, (*i + 1), (j - 1) - *i);
-	*i = j - 1;
-
-	char *expanded_value = fetch_env_var(env_var);
-	if (expanded_value)
-	{
-		j = 0;
-		while (expanded_value[j] != '\0')
-		{
-			add_char_to_buffer(expanded_value[j]);
-			j++;
-		}
-	}
-
-	// Turn off expansion mode and continue evaluating chars as usual
-	*mode -= 10;
-}
+extern t_data	g_data;
 
 // Tokenize input
-int tokenize_input() {
-	vec_new(&g_data.cur.vec_tokens, 0, sizeof(t_token*));
+// stores the last token once the input string ends
+int	tokenize_input(void)
+{
+	int	i;
+	int	mode;
+
+	i = 0;
+	mode = DEFAULT_MODE;
+	vec_new(&g_data.cur.vec_tokens, 0, sizeof(t_token *));
 	vec_new(&g_data.cur.token_buffer, 0, sizeof(char));
-
-	int i = 0;
-	int mode = DEFAULT_MODE;
-
-	while(g_data.cur.raw[i] != '\0') {
+	while (g_data.cur.raw[i] != '\0')
+	{
 		evaluate_char(g_data.cur.raw[i], &mode, &i);
-		if (mode > 10) 
+		if (mode > 10)
 			handle_expansion_mode(&mode, &i);
 		i++;
 	}
-	store_token(); // stores the last token once the input string ends
-	// Add types to tokens
-	
-	return 0;
+	store_token();
+	return (0);
 }
 
-int is_double_greater_than(char c, char next_c) {
-    return (c == '>' && next_c == '>');
-}
-
-// Checks if character terminates a token
-int is_terminating_char(char c, char next_c, int *mode) {
-	// printf("checking terminating character \n");
-  if (is_double_greater_than(c, next_c))
-        return false;
-	if (*mode > 10)
-	{
-		if (c == ' ' || c == '\t' || c == '|' || c == '\"' || c == '<' || c == '>' || c == '$' || c == '\n' || c == '\0')
-		{
-			// printf("In mode %d this character terminates a token.\n", *mode);
-			return (true);
-		}	
-	}
-	if (*mode == DEFAULT_MODE)
-	{
-		if (c == ' ' || c == '\t' || c == '|' || c == '\'' || c == '<' || c == '>' || c == '\"' || c == '$' || c == '\n')
-		{
-			// printf("In mode %d this character terminates a token.\n", *mode);
-			return (true);
-		}
-	}
-	if (*mode == DOUBLE_QUOTES_MODE)
-	{
-		if (c == '\"')
-		{
-			// printf("In mode %d this character terminates a token.\n", *mode);
-			return (true);
-		}
-	}
-	if (*mode == SINGLE_QUOTES_MODE)
-	{
-		if (c == '\'')
-		{
-			// printf("In mode %d this character terminates a token.\n", *mode);
-			return (true);
-		}
-	}
-	return (false);
-}
-
-// Checks if character changes mode
-int is_mode_changing_char(char c, int *mode)
+int	is_edge_case(char c, char next_c, int *mode, int *i)
 {
-	if (*mode == DEFAULT_MODE)
+	if ((*mode == SINGLE_QUOTES_MODE || *mode == DOUBLE_QUOTES_MODE))
 	{
-		if (c == '\'')
+		if (c == '<' && (next_c == '\'' || next_c == '\"'))
 		{
-			// printf("Mode changed to single quotes.\n");
-			*mode = SINGLE_QUOTES_MODE;
-			return (true);
+			add_char_with_quotes(c);
+			return (0);
 		}
-		if (c == '\"')
+		else if (c == '>' && next_c != '>' && (g_data.cur.raw[*i + 1] == '\'' || g_data.cur.raw[*i + 1] == '\"'))
 		{
-			// printf("Mode changed to double quotes.\n");
-			*mode = DOUBLE_QUOTES_MODE;
-			return (true);
+			add_char_with_quotes(c);
+			return (0);
+		}
+		else if (c == '|' && (next_c == '\'' || next_c == '\"'))
+		{
+			add_char_with_quotes(c);
+			return (0);
+		}
+		else if (c == '>' && next_c == '>' && (g_data.cur.raw[*i + 2] == '\'' || g_data.cur.raw[*i + 2] == '\"'))
+		{
+			add_double_greater_than_with_quotes(i);
+			return (0);
 		}
 	}
-	else if (*mode == DOUBLE_QUOTES_MODE)
+	else if (*mode == DEFAULT_MODE && c == '|')
 	{
-		if (c == '\"')
-		{
-			// printf("Mode changed to default.\n");
-			*mode = DEFAULT_MODE;
-			return (true);
-		}
+		add_char_to_buffer(c);
+		store_token();
 	}
-	else if (*mode == SINGLE_QUOTES_MODE)
+	else if (*mode == DEFAULT_MODE && is_double_greater_than(c, next_c))
 	{
-		if (c == '\'')
-		{
-			// printf("Mode changed to default.\n");
-			*mode = DEFAULT_MODE;
-			return (true);
-		}
+		handle_double_greater_than(i);
+		store_token();
 	}
-	return (false);
+	else if (*mode == DEFAULT_MODE && is_greater_than(c) && !is_greater_than(next_c))
+	{
+		add_char_to_buffer(c);
+		store_token();
+	}
+	else if (*mode == DEFAULT_MODE && is_smaller_than(c) && !is_smaller_than(next_c))
+	{
+		add_char_to_buffer(c);
+		store_token();
+	}
+	return (1);
 }
 
-
-// Checks if character triggers expansion
-int is_trigger_char(char c, int	*mode) {
-	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE)
-	{
-		if (c == '$')
-		{
-			// printf("In mode %d this character triggers expansion.\n", *mode);
-			*mode += 10;
-			// The action cuold be triggered here but not sure how that will happen
-			return (true);
-		}
-	}
-	return (false);
-}
-
-// Checks if character should be stored
-int is_stored_char(char c, int *mode) 
+// Evaluates a single character
+int	evaluate_char(char c, int *mode, int *i)
 {
-  if (*mode == DEFAULT_MODE)
-  {
-    if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$' )
-    {
-      // printf("In mode %d this character |%c| is not stored in buffer\n", *mode, c);
-      return (false);
-    }
-  }
-  if (*mode == DOUBLE_QUOTES_MODE)
-  {
-    if (c == '$')
-    {
-      // printf("In mode %d this character is not stored in buffer\n", *mode);
-      return (false);
-    }
-  }
-  return (true);
-}
+	char	next_c;
 
-// Checks if the current character is '>'
-int is_greater_than(char c) {
-    return (c == '>');
-}
-
-// Evaluates character
-int evaluate_char(char	c, int *mode, int *i) {
-  char  next_c;
-
-  next_c = g_data.cur.raw[*i + 1];
-  // printf("Evaluating character: %c\n", c);
-  if (is_terminating_char(c, next_c, mode))
-    store_token();
-
-  // If the current character and the next one form '>>', add them to the buffer as a single token
-  // This could be moved under "is_edge_case"
-  if (is_double_greater_than(c, next_c)) {
-      add_char_to_buffer(c);
-      add_char_to_buffer(next_c);
-      *i = *i + 1; // Skip the next character
-  }
-  else if (is_greater_than(c) && !is_greater_than(next_c)) {
-    add_char_to_buffer(c);
-    store_token();
-  }
-  else {
-    if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
-      return 1;
-
-    if (is_stored_char(c, mode))
-      add_char_to_buffer(g_data.cur.raw[*i]);
-  }
-	return 0;
+	next_c = g_data.cur.raw[*i + 1];
+	if (is_terminating_char(c, next_c, mode))
+		store_token();
+	if (is_edge_case(c, next_c, mode, i) == 0)
+		return (0);
+	else
+	{
+		if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
+			return (1);
+		if (is_stored_char(c, mode))
+			add_char_to_buffer(g_data.cur.raw[*i]);
+	}
+	return (0);
 }

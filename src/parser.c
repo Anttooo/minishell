@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 10:33:16 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:27:07 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,22 @@ int  check_mode(char* token, int cmd_idx)
   return (DEFAULT_MODE);
 }
 
+char	*delete_quotes(char *token)
+{
+	char	*trimmed;
+	int		len;
+
+	if (token[0] == '\'' || token[0] == '\"')
+	{
+		len = ft_strlen(token);
+		trimmed = (char *)malloc(sizeof(char) * len);
+		ft_strlcpy(trimmed, &token[1], len - 1);
+		free(token);
+		return (trimmed);
+	}
+	return (token);
+}
+
 void	parse_single_cmd(int cmd_idx, int *token_idx)
 {
 	char	*token;
@@ -87,6 +103,8 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 	{
 		token = get_token(*token_idx);
 		mode = check_mode(token, cmd_idx);
+		// Delete quotes here lol
+		token = delete_quotes(token);
 		if (mode != DEFAULT_MODE) // if the token changes mode, we need the next token before going forward
 		{
 			free(token);
@@ -98,14 +116,14 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 		if (g_data.cur.cmd_list[cmd_idx]->cmd == NULL && mode == DEFAULT_MODE) // If cmd has not been defined for this cmd struct
 		{
 			ft_printf("test 1\n");
-      g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
+     		g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
 			g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100*sizeof(char *));
 			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
-			g_data.cur.cmd_list[cmd_idx]->path = get_command_path(token);
+			g_data.cur.cmd_list[cmd_idx]->path = ft_strdup(get_command_path(token));
 		}
 		else if (mode == DEFAULT_MODE) // fill args
 		{
-		g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
+			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(token);
 		}
 		else if (mode == INPUT_REDIR)
 		{
