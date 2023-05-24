@@ -42,7 +42,7 @@ void debug_print_tokens()
   ft_printf("number of tokens: %d\n",g_data.cur.vec_tokens.len);
   for (int i = 0; i < g_data.cur.vec_tokens.len; i++) {
     t_token *token = vec_get(&g_data.cur.vec_tokens, i);
-    ft_printf("Token %d: %s\n", i, token->token);
+    ft_printf("Token %d: \n Content: %s\n Type: %d\n", i, token->token, token->type);
   }
   ft_printf("\n----- END OF TOKENIZE OUTPUT -----\n\n");
 }

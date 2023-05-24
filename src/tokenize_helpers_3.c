@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:14:26 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:50:03 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 extern	t_data g_data;
 
 // Store the current token
-void	store_current_token() {
+void	store_current_token(void) {
 	t_token *token;
 	
 	add_char_to_buffer('\0');

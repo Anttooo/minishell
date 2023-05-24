@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:16:06 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:54:15 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	is_edge_case(char c, char next_c, int *mode, int *i)
 {
 	if ((*mode == SINGLE_QUOTES_MODE || *mode == DOUBLE_QUOTES_MODE))
 	{
+		ft_printf("Checking for edge cases\n");
+		ft_printf("Char: %c, next: %c\n", c, next_c);
 		if (c == '<' && (next_c == '\'' || next_c == '\"'))
 		{
 			add_char_within_quotes(c);
@@ -53,6 +55,7 @@ int	is_edge_case(char c, char next_c, int *mode, int *i)
 		}
 		else if (c == '|' && (next_c == '\'' || next_c == '\"'))
 		{
+			ft_printf("Found pipe within quotes\n");
 			add_char_within_quotes(c);
 			return (0);
 		}

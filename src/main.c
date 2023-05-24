@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 10:42:59 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:47:22 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,18 @@ int main(int argc, char **argv, char **envp)
 			// g_data.cur.input = null
 			// g_data.cur.output = null
 			// store the input in struct
-      if (input && *input)
-        add_history(input);
-			handle_input(input);
-			tokenize_input();
-      // print output from tokenize
-      debug_print_tokens();
-			parse_commands();
-      debug_print_commands();
-			// Set redirections
-			execute();
-			// exec_check(); // TODO: come up with a better way to check if all commands were executed
-			free(input);
-			
-			clean_cur_struct();
+      	if (input && *input)
+        	add_history(input);
+		handle_input(input);
+		tokenize_input();
+      	debug_print_tokens();
+		parse_commands();
+      	debug_print_commands();
+		// Set redirections
+		execute();
+		// exec_check(); // TODO: come up with a better way to check if all commands were executed
+		free(input);
+		clean_cur_struct();
 		}
     }
 	clean_exit(); // This function cleans all the data when the shell is closed

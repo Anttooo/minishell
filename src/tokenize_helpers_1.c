@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:20:15 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:38:20 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	add_double_greater_than_within_quotes(int *i)
 
 void	add_char_within_quotes(char c)
 {
+	ft_printf("test 1\n");
 	add_char_to_buffer(c);
 	store_token_within_quotes();
 }
