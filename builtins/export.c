@@ -6,13 +6,18 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/03 12:53:15 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/23 16:42:00 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
 
 extern t_data g_data;
+
+void	ft_export(void)
+{
+	return ;
+}
 
 // char	**ft_export(void)
 // {
