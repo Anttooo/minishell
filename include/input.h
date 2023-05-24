@@ -23,12 +23,12 @@
 
 int		handle_input(char *input);
 int	tokenize_input(void);
-int	is_terminating_char(char c, int *mode);
+int	is_terminating_char(char c, char next_c, int *mode);
 void  store_token(void);
 void 	store_current_token(void);
 void  add_char_to_buffer(char c);
 void  empty_and_init_buffer(void);
-int	evaluate_char(char	c, int *mode, int i);
+int	evaluate_char(char	c, int *mode, int *i);
 int is_stored_char(char c, int *mode);
 int	is_trigger_char(char c, int	*mode);
 int	is_mode_changing_char(char c, int *mode);

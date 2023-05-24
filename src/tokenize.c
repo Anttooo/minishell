@@ -53,13 +53,11 @@ void clear_and_init_buffer() {
 
 // Store the current token
 void store_current_token() {
-	char null_char = '\0';
-	add_char_to_buffer(null_char);
-	
-	t_token *token = (t_token *)malloc(sizeof(t_token));
-	char *buffer = (char *)vec_get(&g_data.cur.token_buffer, 0);
-	token->token = ft_strdup(buffer);
-  // debug_print_string(token->token, __func__); // TODO: remove
+	t_token *token;
+  
+	add_char_to_buffer('\0');
+  token = (t_token *)malloc(sizeof(t_token));
+	token->token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
 	vec_push(&g_data.cur.vec_tokens, token);
 }
 
@@ -75,7 +73,7 @@ void store_token() {
 void handle_expansion_mode(int *mode, int *i) {
 	int j = *i + 1;
 	// Continue until the character terminates a token
-	while (!is_terminating_char(g_data.cur.raw[j], mode))
+	while (!is_terminating_char(g_data.cur.raw[j], g_data.cur.raw[j + 1], mode))
 		j++;
 
 	char *env_var = ft_substr(g_data.cur.raw, (*i + 1), (j - 1) - *i);
@@ -105,7 +103,7 @@ int tokenize_input() {
 	int mode = DEFAULT_MODE;
 
 	while(g_data.cur.raw[i] != '\0') {
-		evaluate_char(g_data.cur.raw[i], &mode, i);
+		evaluate_char(g_data.cur.raw[i], &mode, &i);
 		if (mode > 10) 
 			handle_expansion_mode(&mode, &i);
 		i++;
@@ -116,12 +114,18 @@ int tokenize_input() {
 	return 0;
 }
 
+int is_double_greater_than(char c, char next_c) {
+    return (c == '>' && next_c == '>');
+}
+
 // Checks if character terminates a token
-int is_terminating_char(char c, int *mode) {
+int is_terminating_char(char c, char next_c, int *mode) {
 	// printf("checking terminating character \n");
+  if (is_double_greater_than(c, next_c))
+        return false;
 	if (*mode > 10)
 	{
-		if (c == ' ' || c == '\t' || c == '|' || c == '\"' || c == '$' || c == '\n' || c == '\0')
+		if (c == ' ' || c == '\t' || c == '|' || c == '\"' || c == '<' || c == '>' || c == '$' || c == '\n' || c == '\0')
 		{
 			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
@@ -129,7 +133,7 @@ int is_terminating_char(char c, int *mode) {
 	}
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '|' || c == '\'' || c == '\"' || c == '$' || c == '\n')
+		if (c == ' ' || c == '\t' || c == '|' || c == '\'' || c == '<' || c == '>' || c == '\"' || c == '$' || c == '\n')
 		{
 			// printf("In mode %d this character terminates a token.\n", *mode);
 			return (true);
@@ -231,18 +235,37 @@ int is_stored_char(char c, int *mode)
   return (true);
 }
 
-// Evaluates character
-int evaluate_char(char	c, int *mode, int i) {
-  // printf("Evaluating character: %c\n", c);
-	if (is_terminating_char(c, mode))
-		store_token();
-  
-	if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
-		return 1;
+// Checks if the current character is '>'
+int is_greater_than(char c) {
+    return (c == '>');
+}
 
-	if (is_stored_char(c, mode))
-		add_char_to_buffer(g_data.cur.raw[i]);
-  
-  
+// Evaluates character
+int evaluate_char(char	c, int *mode, int *i) {
+  char  next_c;
+
+  next_c = g_data.cur.raw[*i + 1];
+  // printf("Evaluating character: %c\n", c);
+  if (is_terminating_char(c, next_c, mode))
+    store_token();
+
+  // If the current character and the next one form '>>', add them to the buffer as a single token
+  // This could be moved under "is_edge_case"
+  if (is_double_greater_than(c, next_c)) {
+      add_char_to_buffer(c);
+      add_char_to_buffer(next_c);
+      *i = *i + 1; // Skip the next character
+  }
+  else if (is_greater_than(c) && !is_greater_than(next_c)) {
+    add_char_to_buffer(c);
+    store_token();
+  }
+  else {
+    if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
+      return 1;
+
+    if (is_stored_char(c, mode))
+      add_char_to_buffer(g_data.cur.raw[*i]);
+  }
 	return 0;
 }

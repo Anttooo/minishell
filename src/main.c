@@ -63,6 +63,7 @@ int main(int argc, char **argv, char **envp)
 void  clean_cur_struct(void)
 {
 	int i;
+  i = 0;
 	free(g_data.cur.raw);
 	if (g_data.cur.input)
 	{

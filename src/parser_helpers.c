@@ -104,13 +104,13 @@ char *get_command_path(char *token)
 	{
 		path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
 		cmd_path = ft_strjoin(path_with_slash, token);
+    free(path_with_slash);
 		if(access(cmd_path, X_OK) == 0) 
 		{
 			// printf("Command is an environment command, can be executed\n");
 			return (cmd_path);
 		}
-		free(path_with_slash);
-		free(cmd_path);
+		free(cmd_path); // MEMORY_LEAK: this does not get freed if the command is found
 		i++;	
 	}
 	printf("command not found\n");
