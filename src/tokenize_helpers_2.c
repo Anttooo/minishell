@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 13:46:01 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:19:58 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,46 @@ void	add_char_to_buffer(char c)
 }
 
 // Clear and initialize the buffer
-void	clear_and_init_buffer(void) {
+void	clear_and_init_buffer(void)
+{
 	vec_free(&g_data.cur.token_buffer);
 	vec_new(&g_data.cur.token_buffer, 0 , sizeof(char));
 }
 
 // Store token if buffer is not empty
-void	store_token() {
+void	store_token(void)
+{
 	if (g_data.cur.token_buffer.len != 0) {
 		store_current_token();
 		clear_and_init_buffer();
 	}
 }
 
+// Store token if buffer is not empty
+void	store_token_within_quotes(void)
+{
+	if (g_data.cur.token_buffer.len != 0) {
+		store_current_token_with_type();
+		clear_and_init_buffer();
+	}
+}
+
+// Store the current token
+void	store_current_token_within_quotes(void)
+{
+	t_token *token;
+
+	add_char_to_buffer('\0');
+	token = (t_token *)malloc(sizeof(t_token));
+	token->token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
+	token->type = WITHIN_QUOTES;
+	debug_print_string(token->token, __func__);
+	vec_push(&g_data.cur.vec_tokens, token);
+}
+
 // Checks if character triggers expansion
-int is_trigger_char(char c, int	*mode) {
+int is_trigger_char(char c, int	*mode)
+{
 	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE)
 	{
 		if (c == '$')

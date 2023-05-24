@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 13:53:41 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:14:26 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	store_current_token() {
 	add_char_to_buffer('\0');
 	token = (t_token *)malloc(sizeof(t_token));
 	token->token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
+	token->type = DEFAULT;
 	debug_print_string(token->token, __func__);
 	vec_push(&g_data.cur.vec_tokens, token);
 }

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 13:27:07 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:22:21 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,6 @@ int  check_mode(char* token, int cmd_idx)
   return (DEFAULT_MODE);
 }
 
-char	*delete_quotes(char *token)
-{
-	char	*trimmed;
-	int		len;
-
-	if (token[0] == '\'' || token[0] == '\"')
-	{
-		len = ft_strlen(token);
-		trimmed = (char *)malloc(sizeof(char) * len);
-		ft_strlcpy(trimmed, &token[1], len - 1);
-		free(token);
-		return (trimmed);
-	}
-	return (token);
-}
-
 void	parse_single_cmd(int cmd_idx, int *token_idx)
 {
 	char	*token;
@@ -99,12 +83,10 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 
 	args_index = 0;
 	mode = DEFAULT_MODE;
-	while (*token_idx < g_data.cur.vec_tokens.len && is_delim_token(*token_idx) == 0)
+	while (*token_idx < g_data.cur.vec_tokens.len && is_delim_token(*token_idx) == 0) // token type influences delim_token
 	{
 		token = get_token(*token_idx);
-		mode = check_mode(token, cmd_idx);
-		// Delete quotes here lol
-		token = delete_quotes(token);
+		mode = check_mode(token, cmd_idx); // token type inlfluences this
 		if (mode != DEFAULT_MODE) // if the token changes mode, we need the next token before going forward
 		{
 			free(token);

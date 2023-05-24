@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 13:53:25 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:20:15 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,16 @@
 
 extern	t_data g_data;
 
-void	add_double_greater_than_with_quotes(int *i)
+void	add_double_greater_than_within_quotes(int *i)
 {
-	add_char_to_buffer('\"');
 	handle_double_greater_than(i);
-	add_char_to_buffer('\"');
-	store_token();
+	store_token_within_quotes();
 }
 
-void	add_char_with_quotes(char c)
+void	add_char_within_quotes(char c)
 {
-	add_char_to_buffer('\"');
 	add_char_to_buffer(c);
-	add_char_to_buffer('\"');
-	store_token();
+	store_token_within_quotes();
 }
 
 int is_greater_than(char c)

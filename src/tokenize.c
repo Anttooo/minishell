@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 13:55:56 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:16:06 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ int	is_edge_case(char c, char next_c, int *mode, int *i)
 	{
 		if (c == '<' && (next_c == '\'' || next_c == '\"'))
 		{
-			add_char_with_quotes(c);
+			add_char_within_quotes(c);
 			return (0);
 		}
 		else if (c == '>' && next_c != '>' && (g_data.cur.raw[*i + 1] == '\'' || g_data.cur.raw[*i + 1] == '\"'))
 		{
-			add_char_with_quotes(c);
+			add_char_within_quotes(c);
 			return (0);
 		}
 		else if (c == '|' && (next_c == '\'' || next_c == '\"'))
 		{
-			add_char_with_quotes(c);
+			add_char_within_quotes(c);
 			return (0);
 		}
 		else if (c == '>' && next_c == '>' && (g_data.cur.raw[*i + 2] == '\'' || g_data.cur.raw[*i + 2] == '\"'))
 		{
-			add_double_greater_than_with_quotes(i);
+			add_double_greater_than_within_quotes(i);
 			return (0);
 		}
 	}

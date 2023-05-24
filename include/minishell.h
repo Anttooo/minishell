@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 10:30:37 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:07:58 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct  s_command
 typedef struct  s_token
 {
   char  *token;
+  int	type;
 }               t_token;
 
 // where we store the parsed input we want to handle atm
