@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_helpers_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:38:20 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:38:20 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
