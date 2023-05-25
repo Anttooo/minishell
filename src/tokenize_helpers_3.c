@@ -25,7 +25,6 @@ void	store_current_token(void) {
 	add_char_to_buffer('\0');
 	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
 	vec_push(&g_data.cur.tokens, &token); 
-	char *test = *(char **)vec_get(&g_data.cur.tokens, 0);
 	vec_push(&g_data.cur.types, &type);
 }
 

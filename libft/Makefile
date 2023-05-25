@@ -6,7 +6,7 @@
 #    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 14:22:41 by jmykkane          #+#    #+#              #
-#    Updated: 2023/05/17 16:35:59 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/05/25 13:04:13 by joonasmykka      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC_O = $(SRC:.c=.o)
 
 INCLUDES = libft.h get_next_line.h ft_printf.h vec.h
 
-FLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
+FLAGS = -Wall -Werror -Wextra -g -I $(INCLUDES)
 
 all: $(NAME)
 

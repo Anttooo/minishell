@@ -19,20 +19,20 @@ extern t_data	g_data;
 // stores the last token once the input string ends
 int	tokenize_input(void)
 {
-	int	i;
+	int	idx;
 	int	mode;
 
-	i = 0;
+	idx = 0;
 	mode = DEFAULT_MODE;
 	vec_new(&g_data.cur.tokens, 0, sizeof(char *));
 	vec_new(&g_data.cur.types, 0, sizeof(int));
 	vec_new(&g_data.cur.token_buffer, 0, sizeof(char));
-	while (g_data.cur.raw[i] != '\0')
+	while (g_data.cur.raw[idx] != '\0')
 	{
-		evaluate_char(g_data.cur.raw[i], &mode, &i);
+		evaluate_char(g_data.cur.raw[idx], &mode, &idx);
 		if (mode > 10)
-			handle_expansion_mode(&mode, &i);
-		i++;
+			handle_expansion_mode(&mode, &idx);
+		idx++;
 	}
 	store_token();
 	return (0);
@@ -95,13 +95,13 @@ int	evaluate_char(char c, int *mode, int *i)
 	char	next_c;
 
 	next_c = g_data.cur.raw[*i + 1];
-	// if (is_blanc(c, mode) == true)
-	// {
-	// 	store_token();
-	// 	return (0);
-	// }
 	if (is_terminating_char(c, next_c, mode) == true)
+	{
 		store_token();
+		add_char_to_buffer(c);
+		store_token();
+		return (0);
+	}
 	if (is_edge_case(c, next_c, mode, i) == 0)
 		return (0);
 	else

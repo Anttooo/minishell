@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_helpers_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 10:41:50 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:48:16 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	add_char_to_buffer(char c)
 {
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
 	char *buffer = vec_get(&g_data.cur.token_buffer, 0);
-	debug_print_string(buffer, __func__);
 }
 
 // Clear and initialize the buffer
@@ -42,7 +41,6 @@ void	store_token(void)
 void	store_token_within_quotes(void)
 {
 	if (g_data.cur.token_buffer.len != 0) {
-		ft_printf("test 2\n");
 		store_current_token_within_quotes();
 		clear_and_init_buffer();
 	}
