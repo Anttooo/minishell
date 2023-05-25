@@ -17,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(filter-out obj/AllTests.o, $(OBJ_FILES))
 	make -C libft
-	$(CC) $(LDFLAGS) $^ -o bin/$@ -lreadline
+	$(CC) -g $(LDFLAGS) $^ -o bin/$@ -lreadline
 
 run: $(NAME)
 	./bin/$(NAME)

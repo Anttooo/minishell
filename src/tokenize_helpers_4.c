@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_helpers_4.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 12:39:50 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:44:55 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ extern	t_data g_data;
 
 int	needs_blanc(char c, int *mode)
 {
-	if (*mode == DEFAULT_MODE)
+	if (*mode == DEFAULT_MODE && g_data.cur.token_buffer.len == 0)
 	{
-		printf("Creating planco token \n");
 		if (c == ' ')
 		{
+			printf("stored blanc token \n");
 			add_char_to_buffer(c);
 			store_token();
+			return (true);
 		}
 	}
+	return (false);
 }
 
 // Checks if character terminates a token
@@ -74,7 +76,6 @@ void	handle_expansion_mode(int *mode, int *i)
 		j = 0;
 		while (expanded_value[j] != '\0')
 		{
-			printf("Adding char to buffer: %c\n", expanded_value[j]);
 			add_char_to_buffer(expanded_value[j]);
 			j++;
 		}

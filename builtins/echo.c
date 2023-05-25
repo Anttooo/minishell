@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 12:32:12 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:08:58 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ static int	scan_for_options(int *ptr_idx)
 {
 	char	*arg;
 
-	arg = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1]);
-	if (ft_strnstr(arg, "-n", ft_strlen(arg)) != NULL)
+	if (g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1] != NULL)
 	{
-		*ptr_idx += 1;
-		return (1);
+		arg = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1]);
+		if (ft_strnstr(arg, "-n", ft_strlen(arg)) != NULL)
+		{
+			*ptr_idx += 1;
+			return (1);
+		}
 	}
 	return (0);
 }
