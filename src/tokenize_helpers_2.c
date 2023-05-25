@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 10:41:50 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:09:18 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	add_char_to_buffer(char c)
 {
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
 	char *buffer = vec_get(&g_data.cur.token_buffer, 0);
-	debug_print_string(buffer, __func__);
 }
 
 // Clear and initialize the buffer
@@ -80,7 +79,7 @@ int is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$' )
+		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
 			return (false);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)

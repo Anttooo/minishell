@@ -108,7 +108,6 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
      		g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(t->token);
 			g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100*sizeof(char *));
 			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(t->token);
-			g_data.cur.cmd_list[cmd_idx]->path = ft_strdup(get_command_path(t->token));
 		}
 		else if (mode == DEFAULT_MODE) // fill args
 		{

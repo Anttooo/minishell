@@ -25,7 +25,6 @@ void	store_current_token(void) {
 	add_char_to_buffer('\0');
 	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
 	vec_push(&g_data.cur.tokens, &token); 
-	char *test = *(char **)vec_get(&g_data.cur.tokens, 0);
 	vec_push(&g_data.cur.types, &type);
 }
 
@@ -39,10 +38,8 @@ char	*fetch_env_var(char *str) {
 	idx = 0;
 	needle = ft_strjoin(str, "=");
 	len = ft_strlen(needle);
-	debug_print_string(needle, __func__);
 	free(str);
 	while(g_data.env.vars[idx] != NULL) {
-		debug_print_string(g_data.env.vars[idx], __func__);
 		if (ft_strncmp(g_data.env.vars[idx],  needle, len) == 0)
 			break;
 		idx++;
@@ -53,7 +50,6 @@ char	*fetch_env_var(char *str) {
 		return (NULL);
 	ft_memcpy(var, &g_data.env.vars[idx][len + 1], word_len);
 	var[word_len] = '\0';
-	debug_print_string(var, __func__);
 	return (var);
 }
 

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 12:39:50 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:27:19 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ int	needs_blanc(char c, int *mode)
 // Checks if character terminates a token
 int	is_terminating_char(char c, char next_c, int *mode)
 {
-	if (*mode > 10)
-	{
-		if (c == ' ' || c == '\t' || c == '|' || c == '\"' || c == '<' || c == '>' || c == '$' || c == '\n' || c == '\0')
-			return (true);
-	}
 	if (*mode == DEFAULT_MODE)
 	{
 		if (c == ' ' || c == '\t' || c == '|' || c == '\'' || c == '<' || c == '>' || c == '\"' || c == '$' || c == '\n')
@@ -55,8 +50,25 @@ int	is_terminating_char(char c, char next_c, int *mode)
 	return (false);
 }
 
+// Check if the character is a letter or underscore
+int is_valid_first_character(char c)
+{
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_') 
+        return 1;
+    return 0;
+}
+
+// Check if the character is a letter, digit, or underscore
+int is_valid_subsequent_character(char c)
+{
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
+        return 1;
+    return 0;
+}
+
 // Handles the expansion mode
 // Turn off expansion mode and continue evaluating chars as usual
+// The length of the env_var is checked to handle special case where $ is not followed by anything
 void	handle_expansion_mode(int *mode, int *i)
 {
 	int		j;
@@ -64,21 +76,29 @@ void	handle_expansion_mode(int *mode, int *i)
 	char	*env_var;
 
 	j = *i + 1;
-	while (!is_terminating_char(g_data.cur.raw[j], g_data.cur.raw[j + 1], mode))
+	if (is_valid_first_character(g_data.cur.raw[j]))
+		j++;
+	while (is_valid_subsequent_character(g_data.cur.raw[j]))
 		j++;
 	env_var = ft_substr(g_data.cur.raw, (*i + 1), (j - 1) - *i);
-	*i = j - 1;
-	expanded_value = fetch_env_var(env_var);
-	if (expanded_value)
+	if (ft_strlen(env_var) > 0)
 	{
-		j = 0;
-		while (expanded_value[j] != '\0')
+		*i = j - 1;
+		expanded_value = fetch_env_var(env_var);
+		if (expanded_value)
 		{
-			printf("Adding char to buffer: %c\n", expanded_value[j]);
-			add_char_to_buffer(expanded_value[j]);
-			j++;
+			j = 0;
+			while (expanded_value[j] != '\0')
+			{
+				printf("Adding char to buffer: %c\n", expanded_value[j]);
+				add_char_to_buffer(expanded_value[j]);
+				j++;
+			}
 		}
 	}
+	else
+		add_char_to_buffer('$');
+	free(env_var);
 	*mode -= 10;
 }
 

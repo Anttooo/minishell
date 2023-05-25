@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 12:32:23 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:37:26 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct  s_command
 	int		output_mode; // 1 tai 2
 	int		builtin;
 	char 	**args;
-	char	*path;
 	char 	*cmd;
 }               t_cmd;
 
