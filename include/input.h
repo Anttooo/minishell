@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:56:37 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:19:33 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:41:58 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		handle_input(char *input);
 void	add_char_to_buffer(char c);
 void	empty_and_init_buffer(void);
 void	clear_and_init_buffer(void);
+int		needs_blanc(char c, int *mode);
 void	add_char_within_quotes(char c);
 void	store_token_within_quotes(void);
 int		is_stored_char(char c, int *mode);

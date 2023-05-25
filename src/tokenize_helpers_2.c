@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_helpers_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:44:10 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 10:41:50 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ extern	t_data g_data;
 void	add_char_to_buffer(char c) 
 {
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
+	char *buffer = vec_get(&g_data.cur.token_buffer, 0);
+	debug_print_string(buffer, __func__);
 }
 
 // Clear and initialize the buffer
@@ -49,16 +51,14 @@ void	store_token_within_quotes(void)
 // Store the current token
 void	store_current_token_within_quotes(void)
 {
-	t_token *token;
-
-	ft_printf("test 3\n");
+	char	*token;
+	int		type;
+	
+	type = WITHIN_QUOTES;
 	add_char_to_buffer('\0');
-	token = (t_token *)malloc(sizeof(t_token));
-	token->token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
-	token->type = WITHIN_QUOTES;
-	debug_print_string(token->token, __func__);
-	ft_printf("Type: %d\n", token->type);
-	vec_push(&g_data.cur.vec_tokens, token);
+	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
+	vec_push(&g_data.cur.tokens, token);
+	vec_push(&g_data.cur.types, &type);
 }
 
 // Checks if character triggers expansion

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 13:52:10 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:40:53 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,15 @@ void	execute_cmd(t_pipes *p)
 
 	idx = g_data.cur.cmd_index;
 	path = g_data.cur.cmd_list[idx]->path;
-	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
-	perror("error executin");
+	if (path != NULL)
+	{
+		execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
+		perror("error executin");
+	}
+	else
+	{
+		perror("command not found.");
+	}
 	// do clean exit here
 	exit(1);
 }

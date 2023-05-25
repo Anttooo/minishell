@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:07:58 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:32:23 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ typedef struct  s_current
 	// what element from **cmd_list to access
 	int		cmd_index;
 	char  	*raw;
-	t_vec	vec_tokens;
+	t_vec	types;
+	t_vec	tokens;
 	t_vec   token_buffer;
 }								t_cur;
 

@@ -17,7 +17,7 @@ void	print_list(char	**list)
 {
 	for (int i = 0; list[i] != NULL; i++)
 	{
-		ft_printf("|%s|", list[i]);
+		ft_printf("%s;", list[i]);
 	}
 }
 
@@ -27,22 +27,14 @@ void	debug_print_string(char *string, const char *func_name)
 	printf("string: %s\n", string);
 }
 
-// void	debug_print_tokens(const char *func_name)
-// {
-// 	printf("Debugging string in function %s:\n", func_name);
-// 	for (int i = 0; g_data.cur.vec_tokens[i] != NULL; i++)
-// 	{
-// 		printf("\n----- Token %d -----\nToken: %s\nType: %s	\n", i, g_data.cur.tokens[i]->token, g_data.cur.tokens[i]->type);
-// 	}
-// }
-
 void debug_print_tokens()
 {
   ft_printf("\n\n----- TOKENIZE OUTPUT SUMMARY -----\n\n");
-  ft_printf("number of tokens: %d\n",g_data.cur.vec_tokens.len);
-  for (int i = 0; i < g_data.cur.vec_tokens.len; i++) {
-    t_token *token = vec_get(&g_data.cur.vec_tokens, i);
-    ft_printf("Token %d: \n Content: %s\n Type: %d\n", i, token->token, token->type);
+  ft_printf("number of tokens: %d\n",g_data.cur.tokens.len);
+  for (int i = 0; i < g_data.cur.tokens.len; i++) {
+    char *token = *(char **)vec_get(&g_data.cur.tokens, i);
+    int *type = vec_get(&g_data.cur.types, i);
+    ft_printf("Token %d: \n Content: %s\n Type: %d\n", i, token, *type);
   }
   ft_printf("\n----- END OF TOKENIZE OUTPUT -----\n\n");
 }

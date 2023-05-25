@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 16:47:22 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 12:37:03 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,17 @@ int main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			// TODO: add a function to set defaults of g_data.cur
-			// g_data.cur.input = null
-			// g_data.cur.output = null
-			// store the input in struct
-      	if (input && *input)
-        	add_history(input);
-		handle_input(input);
-		tokenize_input();
-      	debug_print_tokens();
-		parse_commands();
-      	debug_print_commands();
-		// Set redirections
-		execute();
-		// exec_check(); // TODO: come up with a better way to check if all commands were executed
-		free(input);
-		clean_cur_struct();
+			if (input && *input)
+				add_history(input);
+			handle_input(input);
+			tokenize_input();
+			debug_print_tokens(); // for debugging
+			parse_commands();
+			debug_print_commands(); // for debugging
+			execute();
+			// exec_check(); // TODO: come up with a better way to check if all commands were executed
+			free(input);
+			clean_cur_struct();
 		}
     }
 	clean_exit(); // This function cleans all the data when the shell is closed
@@ -78,7 +73,8 @@ void  clean_cur_struct(void)
 		g_data.cur.output_mode = NULL;
 	}
 	vec_free(&g_data.cur.token_buffer);
-	vec_free(&g_data.cur.vec_tokens);
+	vec_free(&g_data.cur.tokens);
+	vec_free(&g_data.cur.types);
 	while (i < g_data.cur.cmd_count)
 	{
 		if (g_data.cur.cmd_list[i]->cmd)

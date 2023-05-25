@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_helpers_4.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 17:16:00 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 12:39:50 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 #include "../include/minishell.h"
 
 extern	t_data g_data;
+
+int	needs_blanc(char c, int *mode)
+{
+	if (*mode == DEFAULT_MODE)
+	{
+		printf("Creating planco token \n");
+		if (c == ' ')
+		{
+			add_char_to_buffer(c);
+			store_token();
+		}
+	}
+}
 
 // Checks if character terminates a token
 int	is_terminating_char(char c, char next_c, int *mode)
@@ -61,6 +74,7 @@ void	handle_expansion_mode(int *mode, int *i)
 		j = 0;
 		while (expanded_value[j] != '\0')
 		{
+			printf("Adding char to buffer: %c\n", expanded_value[j]);
 			add_char_to_buffer(expanded_value[j]);
 			j++;
 		}

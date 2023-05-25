@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:50:03 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:30:030 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ extern	t_data g_data;
 
 // Store the current token
 void	store_current_token(void) {
-	t_token *token;
-	
+	char	*token;
+	int		type;
+
+	type = DEFAULT;
 	add_char_to_buffer('\0');
-	token = (t_token *)malloc(sizeof(t_token));
-	token->token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
-	token->type = DEFAULT;
-	debug_print_string(token->token, __func__);
-	vec_push(&g_data.cur.vec_tokens, token);
+	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
+	vec_push(&g_data.cur.tokens, &token); 
+	char *test = *(char **)vec_get(&g_data.cur.tokens, 0);
+	vec_push(&g_data.cur.types, &type);
 }
 
 
@@ -33,11 +34,16 @@ void	store_current_token(void) {
 char	*fetch_env_var(char *str) {
 	int idx;
 	int len;
+	char *needle;
 	
 	idx = 0;
-	len = ft_strlen(str);
+	needle = ft_strjoin(str, "=");
+	len = ft_strlen(needle);
+	debug_print_string(needle, __func__);
+	free(str);
 	while(g_data.env.vars[idx] != NULL) {
-		if (ft_strncmp(g_data.env.vars[idx], str, len) == 0)
+		debug_print_string(g_data.env.vars[idx], __func__);
+		if (ft_strncmp(g_data.env.vars[idx],  needle, len) == 0)
 			break;
 		idx++;
 	}
@@ -47,6 +53,7 @@ char	*fetch_env_var(char *str) {
 		return (NULL);
 	ft_memcpy(var, &g_data.env.vars[idx][len + 1], word_len);
 	var[word_len] = '\0';
+	debug_print_string(var, __func__);
 	return (var);
 }
 

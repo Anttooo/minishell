@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:54:35 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 10:24:16 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	is_builtin(char *cmd)
 	int	i;
 
 	i = 0;
+	ft_printf("checking if it's a builtin\n");
 	while (i < 7)
 	{
 		if (ft_strncmp(g_data.dir.builtins[i], cmd, 10) == 0)
@@ -98,6 +99,7 @@ char *get_command_path(char *token)
 		cmd_path = (ft_strdup("builtin"));
 		return(cmd_path);
 	}
+	ft_printf("*** NOT A BUILTIN!!!! ***\n");
 	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
 	i = 0;
 	while (g_data.env.paths[i])

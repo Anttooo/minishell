@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 16:46:38 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:28:445 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int	parse_commands(void)
 // get_token should return the entire token
 t_token *get_token(int token_idx)
 {
-	return ((t_token *)vec_get(&g_data.cur.vec_tokens, token_idx));
+	t_token	*t;
+
+	t = (t_token *)malloc(sizeof(t_token));
+	t->token = *(char **)vec_get(&g_data.cur.tokens, token_idx);
+	t->type = (int)vec_get(&g_data.cur.types, token_idx);
+	return (t);
 }
 
 // Checks the token type and if it's within_quotes, does not even compare it
@@ -87,14 +92,14 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 
 	args_index = 0;
 	mode = DEFAULT_MODE;
-	while (*token_idx < g_data.cur.vec_tokens.len && is_delim_token(*token_idx) == 0) // token type influences delim_token
+	while (*token_idx < g_data.cur.tokens.len && is_delim_token(*token_idx) == 0) // token type influences delim_token
 	{
 		t = get_token(*token_idx);
 		mode = check_mode(t, cmd_idx); // token type inlfluences this
 		if (mode != DEFAULT_MODE) // if the token changes mode, we need the next token before going forward
 		{
 			*token_idx = *token_idx + 1;
-			if (*token_idx < g_data.cur.vec_tokens.len) {
+			if (*token_idx < g_data.cur.tokens.len) {
 				t = get_token(*token_idx);
 			}
 		}
@@ -134,5 +139,6 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 			mode = DEFAULT_MODE;
 		}
 		*token_idx = *token_idx + 1;
+		free(t);
 	}
 }

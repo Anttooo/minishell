@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/24 16:54:15 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 09:588:58 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	tokenize_input(void)
 
 	i = 0;
 	mode = DEFAULT_MODE;
-	vec_new(&g_data.cur.vec_tokens, 0, sizeof(t_token *));
+	vec_new(&g_data.cur.tokens, 0, sizeof(char *));
+	vec_new(&g_data.cur.types, 0, sizeof(int));
 	vec_new(&g_data.cur.token_buffer, 0, sizeof(char));
 	while (g_data.cur.raw[i] != '\0')
 	{
@@ -94,7 +95,12 @@ int	evaluate_char(char c, int *mode, int *i)
 	char	next_c;
 
 	next_c = g_data.cur.raw[*i + 1];
-	if (is_terminating_char(c, next_c, mode))
+	// if (is_blanc(c, mode) == true)
+	// {
+	// 	store_token();
+	// 	return (0);
+	// }
+	if (is_terminating_char(c, next_c, mode) == true)
 		store_token();
 	if (is_edge_case(c, next_c, mode, i) == 0)
 		return (0);

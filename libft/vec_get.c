@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:04:53 by jmykkane          #+#    #+#             */
-/*   Updated: 2023/04/12 15:04:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 10:49:50 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
