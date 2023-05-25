@@ -38,10 +38,8 @@ char	*fetch_env_var(char *str) {
 	idx = 0;
 	needle = ft_strjoin(str, "=");
 	len = ft_strlen(needle);
-	debug_print_string(needle, __func__);
 	free(str);
 	while(g_data.env.vars[idx] != NULL) {
-		debug_print_string(g_data.env.vars[idx], __func__);
 		if (ft_strncmp(g_data.env.vars[idx],  needle, len) == 0)
 			break;
 		idx++;
@@ -52,7 +50,6 @@ char	*fetch_env_var(char *str) {
 		return (NULL);
 	ft_memcpy(var, &g_data.env.vars[idx][len + 1], word_len);
 	var[word_len] = '\0';
-	debug_print_string(var, __func__);
 	return (var);
 }
 

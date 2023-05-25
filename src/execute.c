@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 12:40:53 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:39:18 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 extern t_data g_data;
 
+
 void	execute(void)
 {
 	t_pipes	p;
 
-	if (g_data.cur.cmd_count == 1 && g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin == 1)
+	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin();
 	else
 	{
@@ -91,23 +92,57 @@ void	init(t_pipes *p)
 	dup2(p->fdout, STDOUT);
 }
 
+char *get_command_path(char *token)
+{
+	int		i;
+	char	*cmd_path;
+	char	*path_with_slash;
+
+	// TODO: restructure this code to check from an array of possible builtins, this code is invalid
+	if(is_builtin(token) == 1) // 1 = true
+	{
+		g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 1;
+		cmd_path = (ft_strdup("builtin"));
+		return(cmd_path);
+	}
+	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
+	i = 0;
+	if (ft_strncmp(token, "./", 2) == 0) // if token starts with ./
+	{
+		
+	}
+	else
+	{
+		while (g_data.env.paths[i])
+		{
+			path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
+			cmd_path = ft_strjoin(path_with_slash, token);
+			free(path_with_slash);
+			if(access(cmd_path, X_OK) == 0)
+			{
+				// printf("Command is an environment command, can be executed\n");
+				return (cmd_path);
+			}
+			free(cmd_path); // MEMORY_LEAK: this does not get freed if the command is found
+			i++;	
+		}
+		printf("command not found\n");
+	}
+	return("not found");
+}
+
 // only executes command and prints error if it fails
 void	execute_cmd(t_pipes *p)
 {
 	char	*path;
 	int		idx;
+	int		return_value;
 
 	idx = g_data.cur.cmd_index;
-	path = g_data.cur.cmd_list[idx]->path;
-	if (path != NULL)
-	{
-		execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
-		perror("error executin");
-	}
-	else
-	{
-		perror("command not found.");
-	}
+	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars); // if this does not work, get cmd path
+	path = get_command_path(g_data.cur.cmd_list[idx]->cmd); // check if there is an env path for the command
+	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
+	printf("Error: %s\n", strerror(errno));
 	// do clean exit here
 	exit(1);
 }

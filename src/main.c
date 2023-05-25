@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/25 12:37:03 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:02:13 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv, char **envp)
 				add_history(input);
 			handle_input(input);
 			tokenize_input();
-			debug_print_tokens(); // for debugging
+			debug_print_tokens(); // for debugging 
 			parse_commands();
 			debug_print_commands(); // for debugging
 			execute();
@@ -79,8 +79,6 @@ void  clean_cur_struct(void)
 	{
 		if (g_data.cur.cmd_list[i]->cmd)
 			free(g_data.cur.cmd_list[i]->cmd);
-		// if (g_data.cur.cmd_list[i]->path)
-		// 	free(g_data.cur.cmd_list[i]->path);
 		if (g_data.cur.cmd_list[i]->input)
 			free(g_data.cur.cmd_list[i]->input);
 		if (g_data.cur.cmd_list[i]->output)
@@ -95,23 +93,3 @@ void  clean_cur_struct(void)
 	g_data.cur.cmd_count = 0;
 	g_data.cur.cmd_index = 0;
 }
-
-// This function does not work as the cmd_index can not be incremented from the child process, so it's value is always 1
-
-// static void	exec_check(void)
-// {
-// 	if (g_data.cur.cmd_index == g_data.cur.cmd_count)
-// 	{
-// 		// Executing all commands succeeded, reset variables that needs to be
-// 		// resetted and keep going for more inputs
-// 		reset_cur();
-// 	}
-// 	else
-// 	{
-// 		// something went wrong when executing... need to figure out how to handle
-// 		// that here.
-// 		printf("cmd_idx: %d and cmd count: %d \n", g_data.cur.cmd_index, g_data.cur.cmd_count);
-// 		printf("Error with executing\n");
-// 		exit(1);
-// 	}
-// }

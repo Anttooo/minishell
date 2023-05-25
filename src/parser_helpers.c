@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 10:24:16 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:03:52 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_builtin(char *cmd)
 	int	i;
 
 	i = 0;
-	ft_printf("checking if it's a builtin\n");
 	while (i < 7)
 	{
 		if (ft_strncmp(g_data.dir.builtins[i], cmd, 10) == 0)
@@ -58,7 +57,6 @@ int get_cmd_count(void)
     i++;
   }
   g_data.cur.cmd_count = count;
-  ft_printf("nr of commands: %d\n", g_data.cur.cmd_count);
   return (0);
 }
 
@@ -74,47 +72,11 @@ int	allocate_cmd_list(void)
 	{
 		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof(t_cmd));
 		g_data.cur.cmd_list[i]->args = NULL;
-		g_data.cur.cmd_list[i]->path = NULL;
 		g_data.cur.cmd_list[i]->cmd = NULL;
 		g_data.cur.cmd_list[i]->input = NULL;
 		g_data.cur.cmd_list[i]->output = NULL;
 		g_data.cur.cmd_list[i]->output_mode = NULL;
 		i++;
 	}
-	ft_printf("cmd list + %d instance(s) of t_cmd allocated\n", g_data.cur.cmd_count);
 	return (0);
-}
-
-char *get_command_path(char *token)
-{
-	int		i;
-	char	*cmd_path;
-	char	*path_with_slash;
-
-	// TODO: restructure this code to check from an array of possible builtins, this code is invalid
-	if(is_builtin(token) == 1) // 1 = true
-	{
-		g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 1;
-		printf("Command is a builtin\n");
-		cmd_path = (ft_strdup("builtin"));
-		return(cmd_path);
-	}
-	ft_printf("*** NOT A BUILTIN!!!! ***\n");
-	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
-	i = 0;
-	while (g_data.env.paths[i])
-	{
-		path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
-		cmd_path = ft_strjoin(path_with_slash, token);
-    	free(path_with_slash);
-		if(access(cmd_path, X_OK) == 0) 
-		{
-			// printf("Command is an environment command, can be executed\n");
-			return (cmd_path);
-		}
-		free(cmd_path); // MEMORY_LEAK: this does not get freed if the command is found
-		i++;	
-	}
-	printf("command not found\n");
-	return(NULL);
 }

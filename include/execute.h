@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/24 14:16:20 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:38:24 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <string.h>
+# include <errno.h>
 # include <sys/uio.h>
 # include <sys/types.h>
 # include "minishell.h"
@@ -41,5 +42,6 @@ void	init(t_pipes *p);
 void	execute_builtin(void);
 void	execute_cmd(t_pipes *p);
 void	pipes_and_forks(t_pipes *p);
+char	*get_command_path(char *token);
 
 #endif
