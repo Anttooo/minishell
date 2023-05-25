@@ -98,8 +98,11 @@ int	evaluate_char(char c, int *mode, int *i)
 	if (is_terminating_char(c, next_c, mode) == true)
 	{
 		store_token();
-		add_char_to_buffer(c);
-		store_token();
+		if (*mode == DEFAULT)
+		{
+			add_char_to_buffer(c);
+			store_token();
+		}
 		return (0);
 	}
 	if (is_edge_case(c, next_c, mode, i) == 0)
