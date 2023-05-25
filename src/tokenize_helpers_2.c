@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_helpers_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 12:48:16 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/25 15:54:40 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$' )
+		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
 			return (false);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)

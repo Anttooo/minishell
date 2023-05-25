@@ -63,7 +63,6 @@ void  debug_print_commands()
 	} else {
 		ft_printf("no arguments\n");
 	}
-	ft_printf(" Path: %s\n", cmd->path);
 	if (cmd->input) {
 		ft_printf(" Input: %s\n", cmd->input);
 	}
