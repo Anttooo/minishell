@@ -24,9 +24,10 @@
 
 int 	get_cmd_count(void);
 int		parse_commands(void);
-int   	tokenize_input(void);
+int		tokenize_input(void);
 int		allocate_cmd_list(void);
-void		parse_single_cmd(int cmd_idx, int *token_idx);
+void	parse_single_cmd(int cmd_idx, int *token_idx);
 int		is_delim_token(int i);
+int		is_builtin(char *cmd);
 
 #endif
