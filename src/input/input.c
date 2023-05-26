@@ -13,13 +13,13 @@ int	handle_input(char *input)
 		free(input);
 		exit(0);
 	}
-	// If input includes <<, capture delim (next argument until delim) and start heredoc
-	// Get delim
-	// Start Heredoc(delim)
-	// If input is not "quit", pass input to command parsing
 	else
 	{
-    	g_data.cur.raw = ft_strdup(input);
+    	while (is_multiline(input) != 0)
+			{
+				handle_multiline(&input);
+			}
+			g_data.cur.raw = ft_strdup(input);
 	}
 	return (0);
 }

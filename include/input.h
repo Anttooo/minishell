@@ -16,5 +16,7 @@
 # include "../libft/libft.h"
 
 int		handle_input(char *input);
+int		is_multiline(char *input);
+void	handle_multiline(char **input);
 
 #endif

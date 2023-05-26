@@ -47,7 +47,7 @@ int main(int argc, char **argv, char **envp)
 			debug_print_commands();
 			if (g_data.cur.err_flag == 0)
 				execute();
-			free(input);
+			// free(input); // freeing input here causes a double free for some reason
 			clean_cur_struct();
 		}
 	}
