@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/25 12:32:28 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:35:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	init_struct(char **envp)
 	// init all args to null to start with
 	set_builtins();
 	g_data.sig.shell_pid = getpid();
+	g_data.sig.exec_pid = -1;
 	g_data.dir.start = (char *)malloc(1024);
 	g_data.env.paths = get_paths();
 	g_data.env.vars = get_env_vars(envp);

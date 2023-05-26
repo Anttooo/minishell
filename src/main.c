@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/25 14:02:13 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:30:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int main(int argc, char **argv, char **envp)
 	{
 		perror("init_struct");
 	}
-	// handles signals for example ctrl + C
-	signal_manager();
 	while (42)
 	{
+		signal_manager();
 		input = readline(g_data.env.prompt);
 		if (!input)
 		{
