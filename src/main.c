@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/26 15:10:23 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/26 16:02:20 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ int main(int argc, char **argv, char **envp)
 	while (42)
 	{
 		input = readline(g_data.env.prompt);
-		if (!input)
-		{
-				printf("\n");
-		}
-		else
+		if (ft_strlen(input) != 0)
 		{
 			if (input && *input)
 				add_history(input);
@@ -49,6 +45,11 @@ int main(int argc, char **argv, char **envp)
 				execute();
 			free(input);
 			clean_cur_struct();
+		}
+		if (input == NULL && g_data.sig.exec_pid == NO_CHILDS)
+		{
+			printf("exit\n");
+			exit(0);
 		}
 	}
 	clean_exit_shell();

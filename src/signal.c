@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/26 15:05:03 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/26 16:02:52 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern t_data	g_data;
 
 void	handle_ctrl_c(int sig)
 {
-	if (g_data.sig.exec_pid == -1)
+	if (g_data.sig.exec_pid == NO_CHILDS)
 	{
 		printf("\n");
 		rl_on_new_line();
@@ -25,12 +25,7 @@ void	handle_ctrl_c(int sig)
 	}
 }
 
-void	handle_ctrl_d(int sig)
-{
-	
-}
-
-void	signal_magic(void)
+void	c_signal(void)
 {
 	struct sigaction act;
 
@@ -42,5 +37,5 @@ void	signal_magic(void)
 
 void	signal_manager(void)
 {
-	signal_magic();
+	c_signal();
 }
