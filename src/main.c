@@ -95,4 +95,16 @@ void  clean_cur_struct(void)
 	g_data.cur.cmd_count = 0;
 	g_data.cur.cmd_index = 0;
 	g_data.cur.err_flag = 0;
+	if (g_data.cur.heredoc_flag == 1)
+	{
+		if (unlink("heredoc_temp_file") == -1)
+		{
+			perror("Error deleting the heredoc temp file");
+		}
+		else
+		{
+			printf("\n** Heredoc temp file deleted ** \n");
+		}
+		g_data.cur.heredoc_flag = 0;
+	}
 }

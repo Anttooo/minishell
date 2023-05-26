@@ -82,18 +82,11 @@ void	handle_multiline(char **input)
 
 	mode = is_multiline(*input); // 0 if not, 4 if heredoc
 	if (mode == HEREDOC_MODE)
-		printf("Heredoc isn't supported yet.\n");
+	{
+		*input = handle_heredoc(*input);
+	}
 	else if (mode == SINGLE_QUOTES_MODE || mode == DOUBLE_QUOTES_MODE)
 	{
 		*input = handle_unclosed_quote(*input, mode);
 	}
 }
-
-// void heredoc(char *delim)
-
-
-// Heredoc mode creates a temporary file and writes to it in append mode
-// When the delim is found, the file is closed but it's kept until the command has been run.
-// IF there are multiple heredocs, each overwrites the temporary file.
-// The file is then deleted.
-// The filename is saved as input for the command.

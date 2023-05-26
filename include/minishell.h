@@ -93,6 +93,7 @@ typedef struct  s_current
 	t_vec	tokens;
 	t_vec	token_buffer;
 	int		err_flag;
+	int		heredoc_flag;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given

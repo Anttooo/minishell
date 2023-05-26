@@ -66,7 +66,7 @@ int is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
+		if (c == ' ' || c == '>' || c == '<' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
 			return (false);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)

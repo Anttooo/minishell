@@ -63,6 +63,7 @@ int	is_delim_token(int i)
 // If the token type is something else than default, the token can not influence mode so checks are skipped
 int  check_mode(t_token *t, int cmd_idx)
 {
+	ft_printf("Are we checking modes? type: %d\n", t->type);
 	// if token->type = within quotes, return default mode
 	if (t->type == DEFAULT)
 	{
@@ -105,7 +106,7 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 		}
 		if (g_data.cur.cmd_list[cmd_idx]->cmd == NULL && mode == DEFAULT_MODE) // If cmd has not been defined for this cmd struct
 		{
-     		g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(t->token);
+     	g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(t->token);
 			g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100*sizeof(char *));
 			g_data.cur.cmd_list[cmd_idx]->args[args_index++] = ft_strdup(t->token);
 		}

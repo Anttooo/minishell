@@ -15,11 +15,10 @@ int	handle_input(char *input)
 	}
 	else
 	{
-    	while (is_multiline(input) != 0)
-			{
+    	// while (is_multiline(input) != 0) // remove comment to allow for multiple heredocs
 				handle_multiline(&input);
-			}
 			g_data.cur.raw = ft_strdup(input);
+			printf("Input after handle multiline: %s\n", g_data.cur.raw);
 	}
 	return (0);
 }
