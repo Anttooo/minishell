@@ -5,11 +5,12 @@ CFLAGS = -Iinclude -Itesting_framework/cpputest-3.8/include/CppUTest -Wall
 CXXFLAGS = $(CFLAGS)
 LDFLAGS = -Ltesting_framework/cpputest-3.8/cpputest_build/lib -lCppUTest -lCppUTestExt -L/opt/homebrew/opt/readline/lib -lreadline -L libft -lft
 
-SRC_FILES = $(wildcard src/*.c) $(wildcard src/tokenizer/*.c) $(wildcard src/builtins/*.c) $(wildcard src/parser/*.c)
+SRC_FILES = $(wildcard src/*.c) $(wildcard src/tokenizer/*.c) $(wildcard src/builtins/*.c) $(wildcard src/parser/*.c) $(wildcard src/input/*.c)
 OBJ_FILES = $(patsubst src/%.c, obj/%.o, $(wildcard src/*.c))  \
 						$(patsubst src/tokenizer/%.c, obj/tokenizer/%.o, $(wildcard src/tokenizer/*.c)) \
 						$(patsubst src/builtins/%.c, obj/builtins/%.o, $(wildcard src/builtins/*.c)) \
-						$(patsubst src/parser/%.c, obj/parser/%.o, $(wildcard src/parser/*.c))
+						$(patsubst src/parser/%.c, obj/parser/%.o, $(wildcard src/parser/*.c)) \
+						$(patsubst src/input/%.c, obj/input/%.o, $(wildcard src/input/*.c))
 
 TEST_SRC_FILES = $(wildcard tests/*.cpp) tests/AllTests.cpp
 TEST_OBJ_FILES = $(patsubst tests/%.cpp, obj/%.o, $(TEST_SRC_FILES))
