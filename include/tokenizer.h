@@ -44,10 +44,8 @@ int		is_stored_char(char c, int *mode);
 int		is_trigger_char(char c, int	*mode);
 int		is_mode_changing_char(char c, int *mode);
 
-
 int		tokenize_input(void);
 int		needs_blanc(char c, int *mode);
-
 int		is_terminating_char(char c, char next_c, int *mode);
 
 #endif

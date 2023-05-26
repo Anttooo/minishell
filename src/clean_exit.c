@@ -12,7 +12,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	clean_exit(void)
+void	clean_exit_shell(void)
 {
 	if (g_data.dir.current != g_data.dir.start && g_data.dir.start)
 	{

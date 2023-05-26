@@ -65,37 +65,34 @@ typedef struct	s_env
 // If path = "builtin" 
 typedef struct  s_command
 {
-	char   	*output;
-	char    *input;
+	char	*output;
+	char	*input;
 	int		output_mode; // 1 tai 2
 	int		builtin;
-	char 	**args;
-	char 	*cmd;
-}               t_cmd;
+	char	**args;
+	char	*cmd;
+}								t_cmd;
 
-typedef struct  s_token
+typedef struct	s_token
 {
-  char  *token;
-  int	type;
-}               t_token;
+	char	*token;
+	int		type;
+}								t_token;
 
 // where we store the parsed input we want to handle atm
 typedef struct  s_current
 {
-	// something something here to hold tokens for current task
-	// will execute from idx 0 -->
-	t_cmd 	**cmd_list;
-	int   	cmd_count;
-	char   	*output;
-	int		output_mode;
-	char    *input;
-	// added command index so that builtins can know
-	// what element from **cmd_list to access
+	t_cmd	**cmd_list;
+	int		cmd_count;
 	int		cmd_index;
-	char  	*raw;
+	char	*output;
+	int		output_mode;
+	char	*input;
+	char	*raw;
 	t_vec	types;
 	t_vec	tokens;
-	t_vec   token_buffer;
+	t_vec	token_buffer;
+	int		err_flag;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
@@ -113,7 +110,7 @@ typedef	struct	s_data
 	t_his	his;
 	t_cur	cur;
 	t_sig	sig;
-}							  t_data;
+}								t_data;
 
 // add functions here
 

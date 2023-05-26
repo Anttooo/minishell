@@ -23,8 +23,3 @@ int	handle_input(char *input)
 	}
 	return (0);
 }
-
-// heredoc (char delim)
-// create buffer
-// readline
-// 

@@ -79,6 +79,7 @@ int	init_struct(char **envp)
 	g_data.env.vars = get_env_vars(envp);
 	g_data.env.user = find_env_var("USER");
 	g_data.env.prompt = ft_strjoin(g_data.env.user, " --> ");
+	g_data.cur.err_flag = 0;
 	init_directories();
   return (0);
 }

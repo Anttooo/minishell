@@ -16,6 +16,6 @@ extern t_data g_data;
 
 void	ft_exit(void)
 {
-	clean_exit();
+	clean_exit_shell();
 	kill(g_data.sig.shell_pid, SIGTERM);
 }

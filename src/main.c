@@ -39,17 +39,19 @@ int main(int argc, char **argv, char **envp)
 			if (input && *input)
 				add_history(input);
 			handle_input(input);
-			tokenize_input();
-			debug_print_tokens(); // for debugging 
-			parse_commands();
-			debug_print_commands(); // for debugging
-			execute();
-			// exec_check(); // TODO: come up with a better way to check if all commands were executed
+			if (g_data.cur.err_flag == 0)
+				tokenize_input();
+			debug_print_tokens();
+			if (g_data.cur.err_flag == 0)
+				parse_commands();
+			debug_print_commands();
+			if (g_data.cur.err_flag == 0)
+				execute();
 			free(input);
 			clean_cur_struct();
 		}
-    }
-	clean_exit(); // This function cleans all the data when the shell is closed
+	}
+	clean_exit_shell();
     return (0);
 }
 
@@ -92,4 +94,5 @@ void  clean_cur_struct(void)
 	free(g_data.cur.cmd_list);
 	g_data.cur.cmd_count = 0;
 	g_data.cur.cmd_index = 0;
+	g_data.cur.err_flag = 0;
 }
