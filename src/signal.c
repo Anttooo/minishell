@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/26 16:02:52 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/26 16:07:31 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	handle_ctrl_c(int sig)
 	if (g_data.sig.exec_pid == NO_CHILDS)
 	{
 		printf("\n");
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
+	{
+		kill(g_data.sig.exec_pid, SIGINT);
 		rl_on_new_line();
 		rl_redisplay();
 	}
