@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/26 14:30:42 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/26 15:10:23 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ int main(int argc, char **argv, char **envp)
 {
   char    *input;
 
+	signal_manager();
+	termios_settings();
 	if (init_struct(envp) == 1)
 	{
 		perror("init_struct");
 	}
 	while (42)
 	{
-		signal_manager();
 		input = readline(g_data.env.prompt);
 		if (!input)
 		{

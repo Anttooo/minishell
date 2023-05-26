@@ -4,9 +4,10 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 
-void	set_builtins(void);
 void	reset_cur(void);
 char	**get_paths(void);
+void	set_builtins(void);
+void	termios_settings(void);
 int		init_struct(char **envp);
 char	*find_env_var(char *str);
 char	**get_env_vars(char **envp);
