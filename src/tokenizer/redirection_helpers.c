@@ -10,23 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/input.h"
-#include "../include/command.h"
-#include "../include/minishell.h"
+#include "../../include/tokenizer.h"
+#include "../../include/command.h"
+#include "../../include/minishell.h"
 
 extern	t_data g_data;
-
-void	add_double_greater_than_within_quotes(int *i)
-{
-	handle_double_greater_than(i);
-	store_token_within_quotes();
-}
-
-void	add_char_within_quotes(char c)
-{
-	add_char_to_buffer(c);
-	store_token_within_quotes();
-}
 
 int is_greater_than(char c)
 {

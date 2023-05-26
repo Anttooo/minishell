@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/command.h"
-#include "../include/minishell.h"
-#include "../include/debug.h"
+#include "../../include/command.h"
+#include "../../include/minishell.h"
+#include "../../include/debug.h"
 
 extern t_data	g_data;
 

@@ -10,25 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/input.h"
-#include "../include/command.h"
-#include "../include/minishell.h"
+#include "../../include/tokenizer.h"
+#include "../../include/command.h"
+#include "../../include/minishell.h"
 
 extern	t_data g_data;
 
-int	needs_blanc(char c, int *mode)
+// Evaluates a single character
+int	evaluate_char(char c, int *mode, int *i)
 {
-	if (*mode == DEFAULT_MODE && g_data.cur.token_buffer.len == 0)
+	char	next_c;
+
+	next_c = g_data.cur.raw[*i + 1];
+	if (is_terminating_char(c, next_c, mode) == true)
+		store_token();
+	if (is_edge_case(c, next_c, mode, i) == 0)
 	{
-		if (c == ' ')
+		return (0);
+	}
+	else
+	{
+		if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
+			return (1);
+		if (is_stored_char(c, mode))
 		{
-			printf("stored blanc token \n");
-			add_char_to_buffer(c);
-			store_token();
-			return (true);
+			add_char_to_buffer(g_data.cur.raw[*i]);
 		}
 	}
-	return (false);
+	return (0);
 }
 
 // Checks if character terminates a token
@@ -52,56 +61,20 @@ int	is_terminating_char(char c, char next_c, int *mode)
 	return (false);
 }
 
-// Check if the character is a letter or underscore
-int is_valid_first_character(char c)
+// Checks if character should be stored
+int is_stored_char(char c, int *mode) 
 {
-    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_') 
-        return 1;
-    return 0;
-}
-
-// Check if the character is a letter, digit, or underscore
-int is_valid_subsequent_character(char c)
-{
-    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
-        return 1;
-    return 0;
-}
-
-// Handles the expansion mode
-// Turn off expansion mode and continue evaluating chars as usual
-// The length of the env_var is checked to handle special case where $ is not followed by anything
-void	handle_expansion_mode(int *mode, int *i)
-{
-	int		j;
-	char	*expanded_value;
-	char	*env_var;
-
-	j = *i + 1;
-	if (is_valid_first_character(g_data.cur.raw[j]))
-		j++;
-	while (is_valid_subsequent_character(g_data.cur.raw[j]))
-		j++;
-	env_var = ft_substr(g_data.cur.raw, (*i + 1), (j - 1) - *i);
-	if (ft_strlen(env_var) > 0)
+	if (*mode == DEFAULT_MODE)
 	{
-		*i = j - 1;
-		expanded_value = fetch_env_var(env_var);
-		if (expanded_value)
-		{
-			j = 0;
-			while (expanded_value[j] != '\0')
-			{
-				printf("Adding char to buffer: %c\n", expanded_value[j]);
-				add_char_to_buffer(expanded_value[j]);
-				j++;
-			}
-		}
+		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
+			return (false);
 	}
-	else
-		add_char_to_buffer('$');
-	free(env_var);
-	*mode -= 10;
+	if (*mode == DOUBLE_QUOTES_MODE)
+	{
+		if (c == '$')
+			return (false);
+	}
+	return (true);
 }
 
 // Checks if character changes mode
@@ -133,6 +106,35 @@ int	is_mode_changing_char(char c, int *mode)
 		if (c == '\'')
 		{
 			*mode = DEFAULT_MODE;
+			return (true);
+		}
+	}
+	return (false);
+}
+
+// Checks if character triggers expansion
+int is_trigger_char(char c, int	*mode)
+{
+	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE)
+	{
+		if (c == '$')
+		{
+			*mode += 10;
+			return (true);
+		}
+	}
+	return (false);
+}
+
+int	needs_blanc(char c, int *mode)
+{
+	if (*mode == DEFAULT_MODE && g_data.cur.token_buffer.len == 0)
+	{
+		if (c == ' ')
+		{
+			printf("stored blanc token \n");
+			add_char_to_buffer(c);
+			store_token();
 			return (true);
 		}
 	}
