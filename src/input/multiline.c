@@ -5,7 +5,7 @@
 
 extern t_data g_data;
 
-char	*update_buffer(char *buffer, char *new_input)
+char	*update_multiline_buffer(char *buffer, char *new_input)
 {
 	char	*temp;
 
@@ -19,7 +19,8 @@ char	*update_buffer(char *buffer, char *new_input)
 	return temp;
 }
 
-char	*combine_inputs(char	*input, char *buffer)
+// Combines the original input with the buffer containing multiline input
+char	*combine_input_and_multiline_buffer(char *input, char *buffer)
 {
 	char	*temp;
 
@@ -27,8 +28,8 @@ char	*combine_inputs(char	*input, char *buffer)
 	// TODO: add error handling
 	ft_strlcpy(temp, input, ft_strlen(input) + 1);
 	ft_strlcat(temp, buffer, ft_strlen(temp) + ft_strlen(buffer) + 1);
-	free(input); // free the original input
-	free(buffer); // free the buffer
+	free(input);
+	free(buffer);
 	return (temp);
 }
 
@@ -49,9 +50,9 @@ char	*handle_unclosed_quote(char *input, int mode)
 			is_mode_changing_char(new_input[i], &mode);
 			i++;
 		}
-		buffer = update_buffer(buffer, new_input);
+		buffer = update_multiline_buffer(buffer, new_input);
 	}
-	return (combine_inputs(input, buffer));
+	return (combine_input_and_multiline_buffer(input, buffer));
 }
 
 int is_multiline(char *input)
@@ -65,13 +66,7 @@ int is_multiline(char *input)
 	{
 		is_mode_changing_char(input[i], &mode);
 		if (input[i] == '<' && input[i + 1] == '<' && mode == DEFAULT_MODE)
-		{
-			// printf("Heredoc should be handled here\n");
-			// get_delim();
-			// heredoc(delim);
-			// If there isn't a delim after <<, "syntax error near unexpected token `newline'"
 			return (HEREDOC_MODE);
-		}
 		i++;
 	}
 	if (mode != DEFAULT_MODE)
