@@ -121,7 +121,8 @@ char	*handle_heredoc(char **input)
 
 	printf("Delim: %s\n", delim);
 
-	combined = malloc(ft_strlen(part_a) + ft_strlen(delim) + ft_strlen(part_b) + 3);
+	combined = malloc(ft_strlen(part_a) + ft_strlen("heredoc_temp_file") + ft_strlen(part_b) + 3);
+	printf("Malloced in total: %lu space\n", (ft_strlen(part_a) + ft_strlen("heredoc_temp_file") + ft_strlen(part_b) + 3));
 	ft_strlcpy(combined, part_a, ft_strlen(part_a) + 1);
 	ft_printf("Parsing new input: %s\n", combined);
 	ft_strlcat(combined, "< ", ft_strlen(combined) + 3);

@@ -35,6 +35,7 @@ void	store_current_token(void) {
 	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
 	vec_push(&g_data.cur.tokens, &token);
 	vec_push(&g_data.cur.types, &type);
+	ft_printf("-- Stored token **%s** -- \n", token);
 }
 
 // Store token if buffer is not empty
@@ -55,6 +56,6 @@ void	store_current_token_within_quotes(void)
 	type = WITHIN_QUOTES;
 	add_char_to_buffer('\0');
 	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
-	vec_push(&g_data.cur.tokens, token);
+	vec_push(&g_data.cur.tokens, &token);
 	vec_push(&g_data.cur.types, &type);
 }
