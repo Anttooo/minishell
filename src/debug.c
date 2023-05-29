@@ -9,8 +9,9 @@ void	debug_print_list(char	**list, const char *func_name)
 	printf("Debugging list in function %s:\n", func_name);
 	for (int i = 0; list[i] != NULL; i++)
 	{
-		printf("%s	\n", list[i]);
+		printf("%d: %s	\n", i, list[i]);
 	}
+	printf("Finished printing list.\n");
 }
 
 void	print_list(char	**list)
@@ -34,7 +35,7 @@ void debug_print_tokens()
   for (int i = 0; i < g_data.cur.tokens.len; i++) {
     char *token = *(char **)vec_get(&g_data.cur.tokens, i);
     int *type = vec_get(&g_data.cur.types, i);
-    ft_printf("Token %d: \n Content: %s\n Type: %d\n", i, token, *type);
+    ft_printf("Token %d: \n Content: **%s**\n Type: %d\n", i, token, *type);
   }
   ft_printf("\n----- END OF TOKENIZE OUTPUT -----\n\n");
 }

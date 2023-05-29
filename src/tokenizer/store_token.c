@@ -33,7 +33,7 @@ void	store_current_token(void) {
 	type = DEFAULT;
 	add_char_to_buffer('\0');
 	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
-	vec_push(&g_data.cur.tokens, &token); 
+	vec_push(&g_data.cur.tokens, &token);
 	vec_push(&g_data.cur.types, &type);
 }
 
@@ -55,6 +55,6 @@ void	store_current_token_within_quotes(void)
 	type = WITHIN_QUOTES;
 	add_char_to_buffer('\0');
 	token = ft_strdup((char *)vec_get(&g_data.cur.token_buffer, 0));
-	vec_push(&g_data.cur.tokens, token);
+	vec_push(&g_data.cur.tokens, &token);
 	vec_push(&g_data.cur.types, &type);
 }

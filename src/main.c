@@ -47,7 +47,7 @@ int main(int argc, char **argv, char **envp)
 			debug_print_commands();
 			if (g_data.cur.err_flag == 0)
 				execute();
-			free(input);
+			// free(input); // freeing input here causes a double free for some reason
 			clean_cur_struct();
 		}
 	}
@@ -70,10 +70,6 @@ void  clean_cur_struct(void)
 		free(g_data.cur.output);
 		g_data.cur.output = NULL;
 	}
-	if (g_data.cur.output_mode)
-	{
-		g_data.cur.output_mode = NULL;
-	}
 	vec_free(&g_data.cur.token_buffer);
 	vec_free(&g_data.cur.tokens);
 	vec_free(&g_data.cur.types);
@@ -85,7 +81,7 @@ void  clean_cur_struct(void)
 			free(g_data.cur.cmd_list[i]->input);
 		if (g_data.cur.cmd_list[i]->output)
 			free(g_data.cur.cmd_list[i]->output);
-		g_data.cur.cmd_list[i]->output_mode = NULL;
+		g_data.cur.cmd_list[i]->output_mode = 0;
 		if (g_data.cur.cmd_list[i]->args)
 			free_arr(g_data.cur.cmd_list[i]->args);
 		free(g_data.cur.cmd_list[i]);
@@ -95,4 +91,16 @@ void  clean_cur_struct(void)
 	g_data.cur.cmd_count = 0;
 	g_data.cur.cmd_index = 0;
 	g_data.cur.err_flag = 0;
+	if (g_data.cur.heredoc_flag == 1)
+	{
+		if (unlink("heredoc_temp_file") == -1)
+		{
+			perror("Error deleting the heredoc temp file");
+		}
+		else
+		{
+			printf("\n** Heredoc temp file deleted ** \n");
+		}
+		g_data.cur.heredoc_flag = 0;
+	}
 }

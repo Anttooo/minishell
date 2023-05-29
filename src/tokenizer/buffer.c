@@ -10,7 +10,6 @@ extern	t_data g_data;
 void	add_char_to_buffer(char c) 
 {
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
-	char *buffer = vec_get(&g_data.cur.token_buffer, 0);
 }
 
 // Clear and initialize the buffer

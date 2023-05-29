@@ -75,7 +75,7 @@ int	allocate_cmd_list(void)
 		g_data.cur.cmd_list[i]->cmd = NULL;
 		g_data.cur.cmd_list[i]->input = NULL;
 		g_data.cur.cmd_list[i]->output = NULL;
-		g_data.cur.cmd_list[i]->output_mode = NULL;
+		g_data.cur.cmd_list[i]->output_mode = 0;
 		i++;
 	}
 	return (0);

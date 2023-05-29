@@ -23,15 +23,19 @@ int	evaluate_char(char c, int *mode, int *i)
 
 	next_c = g_data.cur.raw[*i + 1];
 	if (is_terminating_char(c, next_c, mode) == true)
+	{
 		store_token();
-	if (is_edge_case(c, next_c, mode, i) == 0)
+	}
+	if (is_edge_case(c, next_c, mode, i) == 1)
 	{
 		return (0);
 	}
 	else
 	{
 		if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
+		{
 			return (1);
+		}
 		if (is_stored_char(c, mode))
 		{
 			add_char_to_buffer(g_data.cur.raw[*i]);
@@ -66,7 +70,7 @@ int is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
+		if (c == ' ' || c == '>' || c == '<' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
 			return (false);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)
