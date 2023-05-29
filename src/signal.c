@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/26 16:07:31 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/29 19:28:15 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ extern t_data	g_data;
 
 void	handle_ctrl_c(int sig)
 {
+	if (g_data.cur.mode_heredoc == 1)
+	{
+		g_data.cur.mode_heredoc = 0;
+		g_data.cur.err_flag = 1;
+	}
 	if (g_data.sig.exec_pid == NO_CHILDS)
 	{
 		printf("\n");
@@ -26,8 +31,7 @@ void	handle_ctrl_c(int sig)
 	else
 	{
 		kill(g_data.sig.exec_pid, SIGINT);
-		rl_on_new_line();
-		rl_redisplay();
+		printf("\n");
 	}
 }
 

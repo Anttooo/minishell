@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 13:37:26 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:41:50 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct  s_current
 	t_vec	token_buffer;
 	int		err_flag;
 	int		heredoc_flag;
+	int		mode_heredoc;
 }								t_cur;
 
 // Struct which includes all non-blank lines of input user has given
