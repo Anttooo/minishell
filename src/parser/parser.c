@@ -42,7 +42,7 @@ t_token *get_token(int token_idx)
 
 	t = (t_token *)malloc(sizeof(t_token));
 	t->token = *(char **)vec_get(&g_data.cur.tokens, token_idx);
-	t->type = (int)vec_get(&g_data.cur.types, token_idx);
+	t->type = *(int *)vec_get(&g_data.cur.types, token_idx);
 	return (t);
 }
 
@@ -63,7 +63,7 @@ int	is_delim_token(int i)
 // If the token type is something else than default, the token can not influence mode so checks are skipped
 int  check_mode(t_token *t, int cmd_idx)
 {
-	ft_printf("Are we checking modes? type: %d\n", t->type);
+	ft_printf("In check_mode, token: %s	 type: %d\n", t->token, t->type);
 	// if token->type = within quotes, return default mode
 	if (t->type == DEFAULT)
 	{
