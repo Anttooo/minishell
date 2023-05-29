@@ -70,10 +70,6 @@ void  clean_cur_struct(void)
 		free(g_data.cur.output);
 		g_data.cur.output = NULL;
 	}
-	if (g_data.cur.output_mode)
-	{
-		g_data.cur.output_mode = NULL;
-	}
 	vec_free(&g_data.cur.token_buffer);
 	vec_free(&g_data.cur.tokens);
 	vec_free(&g_data.cur.types);
@@ -85,7 +81,7 @@ void  clean_cur_struct(void)
 			free(g_data.cur.cmd_list[i]->input);
 		if (g_data.cur.cmd_list[i]->output)
 			free(g_data.cur.cmd_list[i]->output);
-		g_data.cur.cmd_list[i]->output_mode = NULL;
+		g_data.cur.cmd_list[i]->output_mode = 0;
 		if (g_data.cur.cmd_list[i]->args)
 			free_arr(g_data.cur.cmd_list[i]->args);
 		free(g_data.cur.cmd_list[i]);

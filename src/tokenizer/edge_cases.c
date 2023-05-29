@@ -26,6 +26,7 @@ int	handle_within_quotes(char c, char next_c, int *i)
 			add_double_greater_than_within_quotes(i);
 			return (0);
 		}
+		return (0);
 }
 
 
@@ -55,6 +56,7 @@ int	handle_default_mode(char c, char next_c, int *i)
 		store_token();
 		return (0);
 	}
+	return (0);
 }
 
 int	is_edge_case(char c, char next_c, int *mode, int *i)
