@@ -4,5 +4,6 @@ testing_framework
 obj
 bin
 
-
+*.a
+*.o
 *.gch

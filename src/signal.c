@@ -6,30 +6,42 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/17 10:13:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/26 16:07:31 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/signal_manager.h"
 #include "../include/minishell.h"
 
 extern t_data	g_data;
 
-void	parent(void)
+void	handle_ctrl_c(int sig)
 {
-
+	if (g_data.sig.exec_pid == NO_CHILDS)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
+	{
+		kill(g_data.sig.exec_pid, SIGINT);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
-void	child(void)
+void	c_signal(void)
 {
-	struct sigaction action;
+	struct sigaction act;
 
-	sigemptyset(&action.sa_mask);
+	act.sa_handler = handle_ctrl_c;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &act, NULL);
 }
 
 void	signal_manager(void)
 {
-	// if (g_data.sig.child_pid = fork())
-	// 	parent();
-	// else
-	// 	child();
+	c_signal();
 }

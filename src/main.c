@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/25 14:02:13 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:02:20 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,16 @@ int main(int argc, char **argv, char **envp)
 {
   char    *input;
 
+	signal_manager();
+	termios_settings();
 	if (init_struct(envp) == 1)
 	{
 		perror("init_struct");
 	}
-	// handles signals for example ctrl + C
-	signal_manager();
 	while (42)
 	{
 		input = readline(g_data.env.prompt);
-		if (!input)
-		{
-				printf("\n");
-		}
-		else
+		if (ft_strlen(input) != 0)
 		{
 			if (input && *input)
 				add_history(input);
@@ -49,6 +45,11 @@ int main(int argc, char **argv, char **envp)
 				execute();
 			// free(input); // freeing input here causes a double free for some reason
 			clean_cur_struct();
+		}
+		if (input == NULL && g_data.sig.exec_pid == NO_CHILDS)
+		{
+			printf("exit\n");
+			exit(0);
 		}
 	}
 	clean_exit_shell();

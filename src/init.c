@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/25 12:32:28 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:09:59 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ char	**get_paths(void)
 	return (paths);
 }
 
+void	termios_settings(void)
+{
+	struct termios term;
+	
+	// Used to get current terminal settings to term struct
+	tcgetattr(STDIN_FILENO, &term);
+	// Setting c_lflag with ECHOCTL. It is wheter to print or not to print
+	// control characters "~" is bitwise NOT operator that basicly makes it
+	// turn to false. Default is true.
+	term.c_lflag &= ~ECHOCTL;
+	// Used to apply modified settings.
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
+
 void	set_builtins(void)
 {
 	g_data.dir.builtins[0] = "echo";
@@ -73,7 +87,9 @@ int	init_struct(char **envp)
 {
 	// init all args to null to start with
 	set_builtins();
+	// Change settings on terminal
 	g_data.sig.shell_pid = getpid();
+	g_data.sig.exec_pid = -1;
 	g_data.dir.start = (char *)malloc(1024);
 	g_data.env.paths = get_paths();
 	g_data.env.vars = get_env_vars(envp);
