@@ -39,10 +39,8 @@ int main(int argc, char **argv, char **envp)
 			if (input && *input)
 				add_history(input);
 			handle_input(input);
-			ft_printf("----- 1. INPUT HANDLING COMPLETE -----\n");
 			if (g_data.cur.err_flag == 0)
 				tokenize_input();
-			ft_printf("----- 2. TOKENIZATION COMPLETE -----\n");
 			debug_print_tokens();
 			if (g_data.cur.err_flag == 0)
 				parse_commands();

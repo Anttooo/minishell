@@ -30,7 +30,6 @@ void	handle_expansion_mode(int *mode, int *i)
 			j = 0;
 			while (expanded_value[j] != '\0')
 			{
-				printf("Adding char to buffer: %c\n", expanded_value[j]);
 				add_char_to_buffer(expanded_value[j]);
 				j++;
 			}

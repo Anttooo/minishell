@@ -22,27 +22,22 @@ int	evaluate_char(char c, int *mode, int *i)
 	char	next_c;
 
 	next_c = g_data.cur.raw[*i + 1];
-	printf("Evaluating char: %c with index: %d\n", c, *i);
 	if (is_terminating_char(c, next_c, mode) == true)
 	{
-		ft_printf("Terminates token, storing it now.\n");
 		store_token();
 	}
 	if (is_edge_case(c, next_c, mode, i) == 1)
 	{
-		ft_printf("Entering edge case handling\n");
 		return (0);
 	}
 	else
 	{
 		if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
 		{
-			ft_printf("this character changes the mode\n");
 			return (1);
 		}
 		if (is_stored_char(c, mode))
 		{
-			ft_printf("This char should be stored\n");
 			add_char_to_buffer(g_data.cur.raw[*i]);
 		}
 	}
