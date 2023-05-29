@@ -23,7 +23,7 @@ char	**get_env_vars(char **envp)
 	idx = -1;
 	while (envp[++idx] != NULL)
 		;
-	vars = malloc(sizeof(char *) * idx);
+	vars = malloc(sizeof(char *) * idx + 1);
 	if (!vars)
 		return (NULL);
 	idx = -1;

@@ -139,6 +139,8 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 			mode = DEFAULT_MODE;
 		}
 		*token_idx = *token_idx + 1;
+		ft_printf("int value: %d\n", args_index);
+		g_data.cur.cmd_list[cmd_idx]->args[args_index] = NULL;
 		free(t);
 	}
 }

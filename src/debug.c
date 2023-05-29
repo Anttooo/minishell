@@ -9,8 +9,9 @@ void	debug_print_list(char	**list, const char *func_name)
 	printf("Debugging list in function %s:\n", func_name);
 	for (int i = 0; list[i] != NULL; i++)
 	{
-		printf("%s	\n", list[i]);
+		printf("%d: %s	\n", i, list[i]);
 	}
+	printf("Finished printing list.\n");
 }
 
 void	print_list(char	**list)
