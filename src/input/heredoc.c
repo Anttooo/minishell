@@ -68,11 +68,11 @@ char	*handle_heredoc(char **input)
 	// Find heredoc from input
 	int	heredoc_start_idx;
 
-	heredoc_start_idx = heredoc_start_index(input);
+	heredoc_start_idx = heredoc_start_index(*input);
 	// Find the delim
 	char	*delim;
 
-	delim = heredoc_delim(input, heredoc_start_idx);
+	delim = heredoc_delim(*input, heredoc_start_idx);
 	printf("Heredoc deliminator is: **%s**\n", delim);
 	// Create temp file
 	int fd = open("heredoc_temp_file", O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
@@ -109,11 +109,11 @@ char	*handle_heredoc(char **input)
 	char	*part_b;
 	int	delim_end_index;
 
-	part_a = ft_substr(input, 0, heredoc_start_idx);
+	part_a = ft_substr(*input, 0, heredoc_start_idx);
 	printf("Part_a: **%s**\n", part_a);
 
-	delim_end_index = get_delim_end_index(input, get_delim_start_index(input, heredoc_start_idx));
-	part_b = ft_substr(input, delim_end_index, ft_strlen(input) - delim_end_index);
+	delim_end_index = get_delim_end_index(*input, get_delim_start_index(*input, heredoc_start_idx));
+	part_b = ft_substr(*input, delim_end_index, ft_strlen(*input) - delim_end_index);
 	printf("Part_b: **%s**\n", part_b);
 
 	// Now we have both of those parts, lets put it all together
@@ -123,20 +123,28 @@ char	*handle_heredoc(char **input)
 
 	combined = malloc(ft_strlen(part_a) + ft_strlen(delim) + ft_strlen(part_b) + 3);
 	ft_strlcpy(combined, part_a, ft_strlen(part_a) + 1);
-	ft_printf("Combined: %s\n", combined);
+	ft_printf("Parsing new input: %s\n", combined);
 	ft_strlcat(combined, "< ", ft_strlen(combined) + 3);
-	ft_printf("Combined: %s\n", combined);
+	ft_printf("Parsing new input: %s\n", combined);
 	ft_strlcat(combined, "heredoc_temp_file", ft_strlen(combined) + ft_strlen("heredoc_temp_file") + 1);
-	ft_printf("Combined: %s\n", combined);
+	ft_printf("Parsing new input: %s\n", combined);
 	ft_strlcat(combined, part_b, ft_strlen(combined) + ft_strlen(part_b) + 1);
-	ft_printf("Combined: %s\n", combined);
+	ft_printf("Parsing new input: %s\n", combined);
 	// Flag that there is a heredoc temp file that needs to be deleted
 	g_data.cur.heredoc_flag = 1;
 	// close the file
 	close(fd);
 	free(delim);
-	free(input);
-	free(part_a);
-	free(part_b);
+	free(*input);
+	if (part_a)
+	{
+		free(part_a);
+		part_a = NULL;
+	}
+	if (part_b)
+	{
+		free(part_b);
+		part_b = NULL;
+	}
 	return (combined);
 }

@@ -83,7 +83,7 @@ void	handle_multiline(char **input)
 	mode = is_multiline(*input); // 0 if not, 4 if heredoc
 	if (mode == HEREDOC_MODE)
 	{
-		*input = handle_heredoc(*input);
+		*input = handle_heredoc(input);
 	}
 	else if (mode == SINGLE_QUOTES_MODE || mode == DOUBLE_QUOTES_MODE)
 	{
