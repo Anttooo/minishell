@@ -69,11 +69,11 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 	while (*token_idx < g_data.cur.tokens.len && is_delim(*token_idx) == 0)
 	{
 		t = get_token(*token_idx);
-		mode = check_mode(t, cmd_idx);
+		mode = check_mode(t->token, t->type, cmd_idx);
 		if (mode != DEFAULT_MODE)
 			update_token(token_idx, &t, cmd_idx);
 		else
-			handle_cmd_and_args(cmd_idx, t, &args_index);
+			handle_cmd_and_args(cmd_idx, t->token, &args_index);
 		if (mode == INPUT_REDIR)
 			handle_input_redirection(cmd_idx, t->token, &mode);
 		else if (mode == OUTPUT_REDIR_APPEND || mode == OUTPUT_REDIR_OVERWRITE)

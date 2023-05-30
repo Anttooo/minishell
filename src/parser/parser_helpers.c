@@ -92,20 +92,20 @@ int	is_delim(int i)
 }
 
 /* Handles checking if mode should be changed during parsing */
-int	check_mode(t_token *t, int cmd_idx)
+int	check_mode(char *token, int type, int cmd_idx)
 {
-	if (t->type == DEFAULT)
+	if (type == DEFAULT)
 	{
-		if (ft_strncmp("<", t->token, ft_strlen(t->token)) == 0)
+		if (ft_strncmp("<", token, ft_strlen(token)) == 0)
 		{
 			return (INPUT_REDIR);
 		}
-		if (ft_strncmp(">", t->token, ft_strlen(t->token)) == 0)
+		if (ft_strncmp(">", token, ft_strlen(token)) == 0)
 		{
 			g_data.cur.cmd_list[cmd_idx]->output_mode = OVERWRITE_MODE;
 			return (OUTPUT_REDIR_OVERWRITE);
 		}
-		if (ft_strncmp(">>", t->token, ft_strlen(t->token)) == 0)
+		if (ft_strncmp(">>", token, ft_strlen(token)) == 0)
 		{
 			g_data.cur.cmd_list[cmd_idx]->output_mode = APPEND_MODE;
 			return (OUTPUT_REDIR_APPEND);

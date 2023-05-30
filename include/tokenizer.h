@@ -14,7 +14,7 @@
 
 // Expansion mode
 void	handle_expansion_mode(int *mode, int *i);
-int 	is_valid_subsequent_character(char c);
+int		is_valid_subsequent_character(char c);
 int		is_valid_first_character(char c);
 char	*fetch_env_var(char *str);
 
@@ -33,14 +33,14 @@ void	handle_double_greater_than(int *i);
 
 // Store token
 void	store_token(void);
-void 	store_current_token(void);
+void	store_current_token(void);
 void	store_token_within_quotes(void);
-void 	store_current_token_within_quotes(void);
+void	store_current_token_within_quotes(void);
 void	add_double_greater_than_within_quotes(int *i);
 void	add_char_within_quotes(char c);
 
 // Char evaluation
-int		evaluate_char(char	c, int *mode, int *i);
+int		evaluate_char(char c, int *mode, int *i);
 int		is_stored_char(char c, int *mode);
 int		is_trigger_char(char c, int	*mode);
 int		is_mode_changing_char(char c, int *mode);
