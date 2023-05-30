@@ -7,7 +7,7 @@
 extern	t_data g_data;
 
 // Add a character to the buffer and store the token if necessary
-void	add_char_to_buffer(char c) 
+void	add_char_to_buffer(char c)
 {
 	vec_push(&g_data.cur.token_buffer, (void *)&c);
 }
@@ -31,7 +31,10 @@ void	add_double_greater_than_within_quotes(int *i)
 	store_token_within_quotes();
 }
 
-// To handle double greater than ">>" we add both to buffer, store the buffer, and skip to next character
+/* 
+	To handle double greater than ">>" we add both to buffer, 
+	store the buffer, and skip to next character 
+*/
 void	handle_double_greater_than(int *i)
 {
 	add_char_to_buffer('>');

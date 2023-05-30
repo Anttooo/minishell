@@ -16,12 +16,12 @@
 
 extern	t_data g_data;
 
-int is_greater_than(char c)
+int	is_greater_than(char c)
 {
-    return (c == '>');
+	return (c == '>');
 }
 
-int is_smaller_than(char c)
+int	is_smaller_than(char c)
 {
 	return (c == '<');
 }

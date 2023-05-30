@@ -14,7 +14,9 @@
 
 extern t_data g_data;
 
-
+// Since child cannot add the last cmd_index++ since it wont return from execve
+// parent will do it. After this cmd_index sould be == cmd_count
+// If this is the case, shell can return to input mode for more inputs
 void	execute(void)
 {
 	t_pipes	p;
@@ -26,24 +28,17 @@ void	execute(void)
 		g_data.sig.exec_pid = fork();
 		if (g_data.sig.exec_pid == 0)
 		{
-			// Init function
 			init(&p);
-			// Main loop will go trough all but one command
 			while (++p.idx < g_data.cur.cmd_count - 1 && g_data.cur.cmd_count > 1)
 			{
 				pipes_and_forks(&p);
 			}
-			// ft_printf("int value after pipes and forks: %d\n", g_data.cur.cmd_index);
-			// last command gets executed witout redirections
 			execute_cmd(&p);
 			exit(1);
 		}
 		else
 		{
 			waitpid(g_data.sig.exec_pid, NULL, 0);
-			// Since child cannot add the last cmd_index++ since it wont return from execve
-			// parent will do it. After this cmd_index sould be == cmd_count
-			// If this is the case, shell can return to input mode for more inputs
 			g_data.cur.cmd_index++;
 		}
 		g_data.sig.exec_pid = -1;
@@ -63,7 +58,7 @@ void	init(t_pipes *p)
 		if (p->fdin < 0)
 		{
 			perror("input file");
-			// Do clean exit here
+			// TODO: Do clean exit here
 			exit(1);
 		}
 	}
@@ -78,14 +73,13 @@ void	init(t_pipes *p)
 		else
 		{
 			printf("invalid output mode\n");
-			// do clean exit here
+			// TODO: do clean exit here
 			exit(1);
 		}
-		
 		if (p->fdout < 0)
 		{
 			perror("output file");
-			// Do clean exit here
+			// TODO: Do clean exit here
 			exit(1);
 		}
 	}
@@ -132,7 +126,9 @@ char *get_command_path(char *token)
 	return("not found");
 }
 
-// only executes command and prints error if it fails
+/*
+	First tries to execute using absolute path and if that fails, uses get command path
+*/
 void	execute_cmd(t_pipes *p)
 {
 	char	*path;
@@ -140,8 +136,8 @@ void	execute_cmd(t_pipes *p)
 	int		return_value;
 
 	idx = g_data.cur.cmd_index;
-	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars); // if this does not work, get cmd path
-	path = get_command_path(g_data.cur.cmd_list[idx]->cmd); // check if there is an env path for the command
+	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
+	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	printf("Error: %s\n", strerror(errno));
 	// do clean exit here
@@ -152,20 +148,12 @@ void	pipes_and_forks(t_pipes *p)
 {
 	pipe(p->pipe);
 	p->pid = fork();
-	// Child process
-	// will close read end since it is not needed here
-	// redirects OUTPUT to pipes write end so that parent
-	// can read it from there, will exit after execute
 	if (p->pid == 0)
 	{
 		close(p->pipe[READ_END]);
 		dup2(p->pipe[WRITE_END], STDOUT);
 		execute_cmd(p);
 	}
-	// parent process
-	// will close write end since it will only read from childs input
-	// this is done by redirecting STDIN to pipes read end
-	// Will wait for child prodcess to be done
 	else
 	{
 		close(p->pipe[WRITE_END]);
