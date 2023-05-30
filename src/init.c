@@ -42,7 +42,6 @@ char	**get_paths(void)
 	if (!env_vars)
 		return (NULL);
 	paths = ft_split(env_vars, ':');
-	// debug_print_list(paths, __func__);
 	return (paths);
 }
 
@@ -74,7 +73,7 @@ void	set_builtins(void)
 // TODO Remember to add checks if opendir etc.. fails or not
 void	init_directories(void)
 {
-	getcwd(g_data.dir.start, 1024); // store the initial directory so that it can be returned before exiting
+	getcwd(g_data.dir.start, 1024);
 	g_data.dir.ptr_current = opendir(g_data.dir.start);
 	g_data.dir.current = ft_strdup(g_data.dir.start);
 	chdir(g_data.dir.current);

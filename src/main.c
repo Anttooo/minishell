@@ -15,11 +15,11 @@
 extern t_data	g_data;
 
 // static void	exec_check(void);
-void  clean_cur_struct(void);
+void	clean_cur_struct(void);
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-  char    *input;
+	char	*input;
 
 	signal_manager();
 	termios_settings();
@@ -53,13 +53,14 @@ int main(int argc, char **argv, char **envp)
 		}
 	}
 	clean_exit_shell();
-    return (0);
+	return (0);
 }
 
 void  clean_cur_struct(void)
 {
-	int i;
-  i = 0;
+	int	i;
+
+	i = 0;
 	free(g_data.cur.raw);
 	if (g_data.cur.input)
 	{

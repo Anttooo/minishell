@@ -14,7 +14,7 @@
 #include "../../include/minishell.h"
 
 extern t_data	g_data;
-	
+
 int	is_builtin(char *cmd)
 {
 	int	i;
@@ -29,35 +29,34 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-
-// start from the beginning of the command, go character by character looking for pipes
-// if there is a single or double quote, skips until the same character is seen again
-int get_cmd_count(void)
+/* 
+	Counts cmds in input by counting unquoted pipes
+*/
+int	get_cmd_count(void)
 {
+	int		i;
+	int		count;
+	char	skip_char;
 
-  int 	i;
-  int 	count;
-  char  skip_char;
-
-  i = 0;
-  count = 1;
-  while(g_data.cur.raw[i] != '\0')
-  {
-    if(g_data.cur.raw[i] == '|')
-    {
-      count++;
-    }
-    if(g_data.cur.raw[i] == '\"' || g_data.cur.raw[i] == '\'')
-    {
-      skip_char = g_data.cur.raw[i];
-      i++;
-      while(g_data.cur.raw[i] != skip_char && g_data.cur.raw[i] != '\0')
-        i++;
-    }
-    i++;
-  }
-  g_data.cur.cmd_count = count;
-  return (0);
+	i = 0;
+	count = 1;
+	while (g_data.cur.raw[i] != '\0')
+	{
+		if (g_data.cur.raw[i] == '|')
+		{
+			count++;
+		}
+		if (g_data.cur.raw[i] == '\"' || g_data.cur.raw[i] == '\'')
+		{
+			skip_char = g_data.cur.raw[i];
+			i++;
+			while (g_data.cur.raw[i] != skip_char && g_data.cur.raw[i] != '\0')
+				i++;
+		}
+			i++;
+	}
+	g_data.cur.cmd_count = count;
+	return (0);
 }
 
 // malloc space for each command in g_data.cur.cmd_list
@@ -66,11 +65,10 @@ int	allocate_cmd_list(void)
 	int	i;
 
 	i = 0;
-	g_data.cur.cmd_list = (t_cmd**)malloc(sizeof(t_cmd*) * g_data.cur.cmd_count);
-	// TODO: replace with code that allocated space for each cmd
+	g_data.cur.cmd_list = (t_cmd**)malloc(sizeof (t_cmd*) * g_data.cur.cmd_count);
 	while (i < g_data.cur.cmd_count)
 	{
-		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof(t_cmd));
+		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof (t_cmd));
 		g_data.cur.cmd_list[i]->args = NULL;
 		g_data.cur.cmd_list[i]->cmd = NULL;
 		g_data.cur.cmd_list[i]->input = NULL;
@@ -79,4 +77,39 @@ int	allocate_cmd_list(void)
 		i++;
 	}
 	return (0);
+}
+
+// Checks the token type and if it's within_quotes, does not even compare it
+int	is_delim(int i)
+{
+	t_token	*t;
+
+	t = get_token(i);
+	if (t->type == DEFAULT)
+		if (ft_strncmp("|", t->token, ft_strlen(t->token)) == 0)
+			return (1);
+	return (0);
+}
+
+/* Handles checking if mode should be changed during parsing */
+int	check_mode(char *token, int type, int cmd_idx)
+{
+	if (type == DEFAULT)
+	{
+		if (ft_strncmp("<", token, ft_strlen(token)) == 0)
+		{
+			return (INPUT_REDIR);
+		}
+		if (ft_strncmp(">", token, ft_strlen(token)) == 0)
+		{
+			g_data.cur.cmd_list[cmd_idx]->output_mode = OVERWRITE_MODE;
+			return (OUTPUT_REDIR_OVERWRITE);
+		}
+		if (ft_strncmp(">>", token, ft_strlen(token)) == 0)
+		{
+			g_data.cur.cmd_list[cmd_idx]->output_mode = APPEND_MODE;
+			return (OUTPUT_REDIR_APPEND);
+		}	
+	}
+	return (DEFAULT_MODE);
 }

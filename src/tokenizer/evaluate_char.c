@@ -66,7 +66,7 @@ int	is_terminating_char(char c, char next_c, int *mode)
 }
 
 // Checks if character should be stored
-int is_stored_char(char c, int *mode) 
+int	is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
@@ -97,27 +97,21 @@ int	is_mode_changing_char(char c, int *mode)
 			return (true);
 		}
 	}
-	else if (*mode == DOUBLE_QUOTES_MODE)
+	else if (*mode == DOUBLE_QUOTES_MODE && c == '\"')
 	{
-		if (c == '\"')
-		{
-			*mode = DEFAULT_MODE;
-			return (true);
-		}
+		*mode = DEFAULT_MODE;
+		return (true);
 	}
-	else if (*mode == SINGLE_QUOTES_MODE)
+	else if (*mode == SINGLE_QUOTES_MODE && c == '\'')
 	{
-		if (c == '\'')
-		{
-			*mode = DEFAULT_MODE;
-			return (true);
-		}
+		*mode = DEFAULT_MODE;
+		return (true);
 	}
 	return (false);
 }
 
 // Checks if character triggers expansion
-int is_trigger_char(char c, int	*mode)
+int	is_trigger_char(char c, int	*mode)
 {
 	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE)
 	{

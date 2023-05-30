@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "types.h"
 # include	"init.h"
 # include	"debug.h"
 # include	"input.h"
@@ -21,13 +22,10 @@
 # include	"colors.h"
 # include	<unistd.h>
 # include	"command.h"
-# include <stdbool.h>
 # include	"execute.h"
 # include	"builtins.h"
 # include	"clean_exit.h"
-# include 	<sys/_types.h>
 # include	"signal_manager.h"
-# include	"../libft/libft.h"
 # include	<readline/history.h>
 # include	<readline/readline.h>
 
@@ -115,5 +113,4 @@ typedef	struct	s_data
 }								t_data;
 
 // add functions here
-
 #endif

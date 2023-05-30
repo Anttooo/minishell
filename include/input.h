@@ -23,5 +23,4 @@ char	*combine_input_and_multiline_buffer(char	*input, char *buffer);
 char	*update_buffer(char *buffer, char *new_input);
 char	*handle_heredoc(char **input);
 
-
 #endif

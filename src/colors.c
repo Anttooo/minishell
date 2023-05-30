@@ -17,7 +17,7 @@
 void	reset_color(void)
 {
 	printf(regularWhite);
-	
+
 }
 
 static void	regular(char *color, int len)
