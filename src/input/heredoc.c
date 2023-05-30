@@ -77,7 +77,7 @@ char	*handle_heredoc(char **input)
 	delim = heredoc_delim(*input, heredoc_start_idx);
 	printf("Heredoc deliminator is: **%s**\n", delim);
 	// Create temp file
-	int fd = open("heredoc_temp_file", O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
+	int fd = open("heredoc_temp_file", O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 	{
 			perror("Error opening file");

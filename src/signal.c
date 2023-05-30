@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/29 19:28:15 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 16:31:45 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ extern t_data	g_data;
 
 void	handle_ctrl_c(int sig)
 {
+	const char nl[2] = {10, 0};
+	const char eof[2] = {4, 0};
+	
 	if (g_data.cur.mode_heredoc == 1)
 	{
 		g_data.cur.mode_heredoc = 0;
 		g_data.cur.err_flag = 1;
+		ioctl(1, TIOCSTI, eof);
 	}
 	if (g_data.sig.exec_pid == NO_CHILDS)
 	{
-		printf("\n");
+		ioctl(1, TIOCSTI, "\n");
 		rl_on_new_line();
-		rl_redisplay();
 	}
 	else
-	{
 		kill(g_data.sig.exec_pid, SIGINT);
-		printf("\n");
-	}
 }
 
-void	c_signal(void)
+void	signal_manager(void)
 {
 	struct sigaction act;
 
@@ -43,9 +43,4 @@ void	c_signal(void)
     sigemptyset(&act.sa_mask);
     act.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &act, NULL);
-}
-
-void	signal_manager(void)
-{
-	c_signal();
 }
