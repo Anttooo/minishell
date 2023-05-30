@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/26 14:34:39 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 17:03:47 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute(void)
 			{
 				pipes_and_forks(&p);
 			}
-			execute_cmd(&p);
+			execute_cmd();
 			exit(1);
 		}
 		else
@@ -129,19 +129,17 @@ char *get_command_path(char *token)
 /*
 	First tries to execute using absolute path and if that fails, uses get command path
 */
-void	execute_cmd(t_pipes *p)
+void	execute_cmd(void)
 {
 	char	*path;
 	int		idx;
-	int		return_value;
 
 	idx = g_data.cur.cmd_index;
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	printf("Error: %s\n", strerror(errno));
-	// do clean exit here
-	exit(1);
+	clean_exit_shell();
 }
 
 void	pipes_and_forks(t_pipes *p)
@@ -152,7 +150,7 @@ void	pipes_and_forks(t_pipes *p)
 	{
 		close(p->pipe[READ_END]);
 		dup2(p->pipe[WRITE_END], STDOUT);
-		execute_cmd(p);
+		execute_cmd();
 	}
 	else
 	{

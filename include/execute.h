@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/26 16:02:14 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 17:03:26 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_pipex_data
 
 void	execute(void);
 void	init(t_pipes *p);
+void	execute_cmd(void);
 void	execute_builtin(void);
-void	execute_cmd(t_pipes *p);
 void	pipes_and_forks(t_pipes *p);
 char	*get_command_path(char *token);
 

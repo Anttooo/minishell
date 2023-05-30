@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize_helpers_4.c                               :+:      :+:    :+:   */
+/*   evaluate_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 15:55:19 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:11:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	evaluate_char(char c, int *mode, int *i)
 	char	next_c;
 
 	next_c = g_data.cur.raw[*i + 1];
-	if (is_terminating_char(c, next_c, mode) == true)
+	if (is_terminating_char(c, mode) == true)
 	{
 		store_token();
 	}
@@ -45,7 +45,7 @@ int	evaluate_char(char c, int *mode, int *i)
 }
 
 // Checks if character terminates a token
-int	is_terminating_char(char c, char next_c, int *mode)
+int	is_terminating_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{

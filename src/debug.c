@@ -32,7 +32,7 @@ void debug_print_tokens()
 {
   ft_printf("\n\n----- TOKENIZE OUTPUT SUMMARY -----\n\n");
   ft_printf("number of tokens: %d\n",g_data.cur.tokens.len);
-  for (int i = 0; i < g_data.cur.tokens.len; i++) {
+  for (size_t i = 0; i < g_data.cur.tokens.len; i++) {
     char *token = *(char **)vec_get(&g_data.cur.tokens, i);
     int *type = vec_get(&g_data.cur.types, i);
     ft_printf("Token %d: \n Content: **%s**\n Type: %d\n", i, token, *type);

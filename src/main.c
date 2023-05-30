@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/26 16:02:20 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 17:08:55 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	clean_cur_struct(void);
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
-
+	
+	if (argc != 1 && argv[1] != NULL)
+		return (1);
 	signal_manager();
 	termios_settings();
 	if (init_struct(envp) == 1)

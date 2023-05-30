@@ -26,11 +26,6 @@ void	clean_exit_shell(void)
 		free (g_data.dir.start);
 		g_data.dir.start = NULL;
 	}
-	if (g_data.dir.builtins)
-	{
-		free (g_data.dir.builtins);
-		g_data.dir.start = NULL;
-	}
 	if (g_data.env.user)
 	{
 		free (g_data.env.user);
