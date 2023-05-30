@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:13:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/04/12 14:17:19 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 18:48:05 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@ void	reset_cur(void)
 {
 	g_data.cur.cmd_index = 0;
 	g_data.cur.cmd_count = 0;
+}
+
+char	**get_paths(void)
+{
+	char	*env_vars;
+	char	**paths;
+
+	env_vars = getenv("PATH");
+	if (!env_vars)
+		return (NULL);
+	paths = ft_split(env_vars, ':');
+	return (paths);
 }
 
 char	*find_env_var(char *str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 14:03:52 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:41:12 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,15 @@ int	get_cmd_count(void)
 // malloc space for each command in g_data.cur.cmd_list
 int	allocate_cmd_list(void)
 {
-	int	i;
+	unsigned long	size;
+	int				i;
 
 	i = 0;
-	g_data.cur.cmd_list = (t_cmd**)malloc(sizeof (t_cmd*) * g_data.cur.cmd_count);
+	size = sizeof(t_cmd *);
+	g_data.cur.cmd_list = (t_cmd **)malloc(g_data.cur.cmd_count * size);
 	while (i < g_data.cur.cmd_count)
 	{
-		g_data.cur.cmd_list[i] = (t_cmd*)malloc(sizeof (t_cmd));
+		g_data.cur.cmd_list[i] = (t_cmd *)malloc(sizeof (t_cmd));
 		g_data.cur.cmd_list[i]->args = NULL;
 		g_data.cur.cmd_list[i]->cmd = NULL;
 		g_data.cur.cmd_list[i]->input = NULL;

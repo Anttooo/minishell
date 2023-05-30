@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   types.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 18:26:28 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 18:26:33 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TYPES_H
 # define TYPES_H
 
-# include <stdbool.h>
-# include	<sys/_types.h>
-# include <dirent.h>
 # include "../libft/libft.h"
+# include	<sys/_types.h>
+# include <stdbool.h>
+# include <dirent.h>
 
 typedef struct s_sig
 {

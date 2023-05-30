@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/05/25 11:11:48 by oanttoor         ###   ########.fr       */
+/*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 18:27:10 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include "minishell.h"
 # include <signal.h>
 # include <dirent.h>
-# include "minishell.h"
 
 void	ft_cd(void);
 void	ft_pwd(void);

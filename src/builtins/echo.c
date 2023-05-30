@@ -6,13 +6,13 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 15:08:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 17:18:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-extern t_data g_data;
+extern t_data	g_data;
 
 static int	scan_for_options(int *ptr_idx)
 {
@@ -39,13 +39,13 @@ void	ft_echo(void)
 	cmd_idx = g_data.cur.cmd_index;
 	if (scan_for_options(&idx) == 0)
 	{
-		while(g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
+		while (g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
 			printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
 		printf("\n");
 	}
 	else
 	{
-		while(g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
+		while (g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
 			printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
 	}
 }

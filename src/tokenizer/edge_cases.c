@@ -1,8 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   edge_cases.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 18:16:08 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 18:16:19 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/tokenizer.h"
 #include "../../include/command.h"
 #include "../../include/minishell.h"
 
-extern	t_data g_data;
+extern t_data	g_data;
+
+int	needs_blanc(char c, int *mode)
+{
+	if (*mode == DEFAULT_MODE && g_data.cur.token_buffer.len == 0)
+	{
+		if (c == ' ')
+		{
+			printf("stored blanc token \n");
+			add_char_to_buffer(c);
+			store_token();
+			return (true);
+		}
+	}
+	return (false);
+}
 
 int	handle_within_quotes(char c, char next_c, int *i)
 {
@@ -11,7 +38,8 @@ int	handle_within_quotes(char c, char next_c, int *i)
 		add_char_within_quotes(c);
 		return (1);
 	}
-	else if (c == '>' && next_c != '>' && (g_data.cur.raw[*i + 1] == '\'' || g_data.cur.raw[*i + 1] == '\"'))
+	else if (c == '>' && next_c != '>' && (g_data.cur.raw[*i + 1] == '\''
+			|| g_data.cur.raw[*i + 1] == '\"'))
 	{
 		add_char_within_quotes(c);
 		return (1);
@@ -21,7 +49,8 @@ int	handle_within_quotes(char c, char next_c, int *i)
 		add_char_within_quotes(c);
 		return (1);
 	}
-	else if (c == '>' && next_c == '>' && (g_data.cur.raw[*i + 2] == '\'' || g_data.cur.raw[*i + 2] == '\"'))
+	else if (c == '>' && next_c == '>' && (g_data.cur.raw[*i + 2] == '\''
+			|| g_data.cur.raw[*i + 2] == '\"'))
 	{
 		add_double_greater_than_within_quotes(i);
 		return (1);

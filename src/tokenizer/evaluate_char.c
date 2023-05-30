@@ -6,15 +6,15 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:11:24 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 18:17:49 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/tokenizer.h"
-#include "../../include/command.h"
 #include "../../include/minishell.h"
+#include "../../include/command.h"
+#include "../../include/tokenizer.h"
 
-extern	t_data g_data;
+extern t_data	g_data;
 
 // Evaluates a single character
 int	evaluate_char(char c, int *mode, int *i)
@@ -23,23 +23,15 @@ int	evaluate_char(char c, int *mode, int *i)
 
 	next_c = g_data.cur.raw[*i + 1];
 	if (is_terminating_char(c, mode) == true)
-	{
 		store_token();
-	}
 	if (is_edge_case(c, next_c, mode, i) == 1)
-	{
 		return (0);
-	}
 	else
 	{
 		if (is_mode_changing_char(c, mode) || is_trigger_char(c, mode))
-		{
 			return (1);
-		}
 		if (is_stored_char(c, mode))
-		{
 			add_char_to_buffer(g_data.cur.raw[*i]);
-		}
 	}
 	return (0);
 }
@@ -49,7 +41,11 @@ int	is_terminating_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '\t' || c == '|' || c == '\'' || c == '<' || c == '>' || c == '\"' || c == '$' || c == '\n')
+		if (c == ' ' || c == '\t'
+			|| c == '|' || c == '\''
+			|| c == '<' || c == '>'
+			|| c == '\"' || c == '$'
+			|| c == '\n')
 			return (true);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)
@@ -70,7 +66,10 @@ int	is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '>' || c == '<' || c == '\t' || c == '\n' || c =='\'' || c == '\"' || c == '$')
+		if (c == ' ' || c == '>'
+			|| c == '<' || c == '\t'
+			|| c == '\n' || c == '\''
+			|| c == '\"' || c == '$')
 			return (false);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)
@@ -118,21 +117,6 @@ int	is_trigger_char(char c, int	*mode)
 		if (c == '$')
 		{
 			*mode += 10;
-			return (true);
-		}
-	}
-	return (false);
-}
-
-int	needs_blanc(char c, int *mode)
-{
-	if (*mode == DEFAULT_MODE && g_data.cur.token_buffer.len == 0)
-	{
-		if (c == ' ')
-		{
-			printf("stored blanc token \n");
-			add_char_to_buffer(c);
-			store_token();
 			return (true);
 		}
 	}

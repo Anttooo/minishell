@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 16:59:24 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 18:25:01 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include	"input.h"
 # include	"tokenizer.h"
 # include	<stdio.h>
-# include	"colors.h"
 # include	<unistd.h>
 # include	"command.h"
 # include	"execute.h"

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:10:30 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 18:34:38 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ extern t_data	g_data;
 
 void	handle_ctrl_c(int sig)
 {
-	const char nlc[2] = {10, 0};
-	const char eof[2] = {4, 0};
-	
+	const char	nlc[2] = {10, 0};
+	const char	eof[2] = {4, 0};
+
 	if (sig == SIGINT)
 	{
 		if (g_data.cur.heredoc_mode == 1)
@@ -40,10 +40,10 @@ void	handle_ctrl_c(int sig)
 
 void	signal_manager(void)
 {
-	struct sigaction act;
+	struct sigaction	act;
 
 	act.sa_handler = handle_ctrl_c;
-    sigemptyset(&act.sa_mask);
-    act.sa_flags = SA_RESTART;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &act, NULL);
 }

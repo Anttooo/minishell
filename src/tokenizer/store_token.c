@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize_helpers_2.c                               :+:      :+:    :+:   */
+/*   store_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/25 15:54:40 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "../../include/command.h"
 #include "../../include/minishell.h"
 
-extern	t_data g_data;
+extern t_data	g_data;
 
 // Store token if buffer is not empty
 void	store_token(void)
 {
-	if (g_data.cur.token_buffer.len != 0) 
+	if (g_data.cur.token_buffer.len != 0)
 	{
 		store_current_token();
 		clear_and_init_buffer();

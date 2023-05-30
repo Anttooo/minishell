@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/30 17:03:26 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/30 18:25:20 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define STDOUT 1
 # define STDIN 0
 
-typedef struct s_pipex_data 
+typedef struct s_pipex_data
 {
 	int			fdin;
 	int			fdout;
