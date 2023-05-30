@@ -1,10 +1,20 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   buffer.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 18:17:38 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 18:18:58 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/tokenizer.h"
 #include "../../include/command.h"
 #include "../../include/minishell.h"
 
-extern	t_data g_data;
+extern t_data	g_data;
 
 // Add a character to the buffer and store the token if necessary
 void	add_char_to_buffer(char c)
@@ -16,7 +26,7 @@ void	add_char_to_buffer(char c)
 void	clear_and_init_buffer(void)
 {
 	vec_free(&g_data.cur.token_buffer);
-	vec_new(&g_data.cur.token_buffer, 0 , sizeof(char));
+	vec_new(&g_data.cur.token_buffer, 0, sizeof(char));
 }
 
 void	add_char_within_quotes(char c)

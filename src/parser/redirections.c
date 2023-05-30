@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 17:22:37 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 17:23:57 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-#include "../../include/command.h"
 #include "../../include/minishell.h"
+#include "../../include/command.h"
 #include "../../include/debug.h"
 
 extern t_data	g_data;

@@ -1,5 +1,17 @@
-#include "../../include/command.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_cmds_and_args.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 17:21:26 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 17:22:10 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
+#include "../../include/command.h"
 #include "../../include/debug.h"
 
 extern t_data	g_data;
@@ -7,7 +19,7 @@ extern t_data	g_data;
 void	handle_cmd(int cmd_idx, char *token, int *args_index)
 {
 	g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
-	g_data.cur.cmd_list[cmd_idx]->args = (char**)malloc(100 * sizeof(char *));
+	g_data.cur.cmd_list[cmd_idx]->args = (char **)malloc(100 * sizeof(char *));
 	g_data.cur.cmd_list[cmd_idx]->args[(*args_index)++] = ft_strdup(token);
 }
 

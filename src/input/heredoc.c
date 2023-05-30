@@ -68,7 +68,7 @@ char	*handle_heredoc(char **input)
 	// Find heredoc from input
 	int	heredoc_start_idx;
 
-	g_data.cur.mode_heredoc = 1;
+	g_data.cur.heredoc_mode = 1;
 
 	heredoc_start_idx = heredoc_start_index(*input);
 	// Find the delim
@@ -88,7 +88,7 @@ char	*handle_heredoc(char **input)
 	int		delim_found;
 
 	delim_found = 0;
-	while (delim_found == 0 && g_data.cur.mode_heredoc == 1)
+	while (delim_found == 0 && g_data.cur.heredoc_mode == 1)
 	{
 		new_input = readline("> ");
 		// Scan each line looking for delim and once there is a line with just the delim stop the loop

@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multiline.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 18:22:42 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/05/30 18:24:49 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../../include/input.h"
-#include "../../include/command.h"
 #include "../../include/minishell.h"
+#include "../../include/command.h"
+#include "../../include/input.h"
 
-extern t_data g_data;
+extern t_data	g_data;
 
 char	*update_multiline_buffer(char *buffer, char *new_input)
 {
 	char	*temp;
 
 	temp = malloc(ft_strlen(buffer) + ft_strlen(new_input) + 2);
-	// TODO: add error handling
+	if (!temp)
+		clean_exit_shell();
 	ft_strlcpy(temp, buffer, ft_strlen(buffer) + 1);
 	ft_strlcat(temp, "\n", ft_strlen(buffer) + ft_strlen("\n") + 1);
 	ft_strlcat(temp, new_input, ft_strlen(temp) + ft_strlen(new_input) + 1);
 	free(buffer);
 	free(new_input);
-	return temp;
+	return (temp);
 }
 
 // Combines the original input with the buffer containing multiline input
@@ -25,7 +37,8 @@ char	*combine_input_and_multiline_buffer(char *input, char *buffer)
 	char	*temp;
 
 	temp = malloc(ft_strlen(input) + ft_strlen(buffer) + 1);
-	// TODO: add error handling
+	if (!temp)
+		clean_exit_shell();
 	ft_strlcpy(temp, input, ft_strlen(input) + 1);
 	ft_strlcat(temp, buffer, ft_strlen(temp) + ft_strlen(buffer) + 1);
 	free(input);
@@ -55,9 +68,9 @@ char	*handle_unclosed_quote(char *input, int mode)
 	return (combine_input_and_multiline_buffer(input, buffer));
 }
 
-int is_multiline(char *input)
+int	is_multiline(char *input)
 {
-	int i;
+	int	i;
 	int	mode;
 
 	i = 0;
@@ -80,7 +93,7 @@ void	handle_multiline(char **input)
 {
 	int	mode;
 
-	mode = is_multiline(*input); // 0 if not, 4 if heredoc
+	mode = is_multiline(*input);
 	if (mode == HEREDOC_MODE)
 	{
 		*input = handle_heredoc(input);

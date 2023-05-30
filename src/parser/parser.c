@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/25 12:28:44 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:16:04 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ t_token	*get_token(int token_idx)
 	return (t);
 }
 
-void	update_token(int *token_idx, t_token **t, int cmd_idx)
+void	update_token(int *token_idx, t_token **t)
 {
 	*token_idx = *token_idx + 1;
-	if (*token_idx < g_data.cur.tokens.len)
+	if (*token_idx < (int)g_data.cur.tokens.len)
 	{
 		*t = get_token(*token_idx);
 	}
@@ -60,18 +60,18 @@ void	update_token(int *token_idx, t_token **t, int cmd_idx)
 
 void	parse_single_cmd(int cmd_idx, int *token_idx)
 {
-	t_token		*t;
-	int			mode;
 	int			args_index;
+	int			mode;
+	t_token		*t;
 
 	args_index = 0;
 	mode = DEFAULT_MODE;
-	while (*token_idx < g_data.cur.tokens.len && is_delim(*token_idx) == 0)
+	while (*token_idx < (int)g_data.cur.tokens.len && is_delim(*token_idx) == 0)
 	{
 		t = get_token(*token_idx);
 		mode = check_mode(t->token, t->type, cmd_idx);
 		if (mode != DEFAULT_MODE)
-			update_token(token_idx, &t, cmd_idx);
+			update_token(token_idx, &t);
 		else
 			handle_cmd_and_args(cmd_idx, t->token, &args_index);
 		if (mode == INPUT_REDIR)
