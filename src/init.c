@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/26 15:09:59 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/29 18:42:18 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	init_struct(char **envp)
 	// init all args to null to start with
 	set_builtins();
 	// Change settings on terminal
+	g_data.cur.mode_heredoc = 0;
 	g_data.sig.shell_pid = getpid();
 	g_data.sig.exec_pid = -1;
 	g_data.dir.start = (char *)malloc(1024);
