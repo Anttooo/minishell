@@ -63,7 +63,6 @@ int	is_delim_token(int i)
 // If the token type is something else than default, the token can not influence mode so checks are skipped
 int  check_mode(t_token *t, int cmd_idx)
 {
-	ft_printf("In check_mode, token: %s	 type: %d\n", t->token, t->type);
 	// if token->type = within quotes, return default mode
 	if (t->type == DEFAULT)
 	{
@@ -84,6 +83,57 @@ int  check_mode(t_token *t, int cmd_idx)
 	}
 	return (DEFAULT_MODE);
 }
+
+int	is_valid_arg_for_redirection(char *token)
+{
+	if (ft_strncmp("|", token, ft_strlen(token)) == 0)
+		return (0);
+	if (ft_strncmp("<", token, ft_strlen(token)) == 0)
+		return (0);
+	if (ft_strncmp(">", token, ft_strlen(token)) == 0)
+		return (0);
+	return (1);
+}
+
+int	handle_input_redirection(int cmd_idx, char *token, int *mode)
+{
+	// TODO: validate that the token is valid (e.g. < > | are not valid)
+	if (is_valid_arg_for_redirection(token) == 0)
+	{
+		g_data.cur.err_flag = 1;
+		printf("syntax error near unexpected token `%s'\n", token);
+		return (1);
+	}
+	if (cmd_idx == 0)
+		g_data.cur.input = ft_strdup(token);
+	else
+		g_data.cur.cmd_list[cmd_idx]->input = ft_strdup(token);
+	*mode = DEFAULT_MODE;
+	return (0);
+}
+
+int	handle_output_redirection(int cmd_idx, char *token, int *mode)
+{
+	if (is_valid_arg_for_redirection(token) == 0)
+	{
+		g_data.cur.err_flag = 1;
+		printf("syntax error near unexpected token `%s'\n", token);
+		return (1);
+	}
+	if (cmd_idx == g_data.cur.cmd_count - 1)
+	{
+		g_data.cur.output = ft_strdup(token);
+		if (*mode == OUTPUT_REDIR_APPEND)
+			g_data.cur.output_mode = APPEND_MODE;
+		else if (*mode == OUTPUT_REDIR_OVERWRITE)
+			g_data.cur.output_mode = OVERWRITE_MODE;
+	}
+	else
+		g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(token);
+	*mode = DEFAULT_MODE;
+	return (0);
+}
+
 
 void	parse_single_cmd(int cmd_idx, int *token_idx)
 {
@@ -116,30 +166,13 @@ void	parse_single_cmd(int cmd_idx, int *token_idx)
 		}
 		else if (mode == INPUT_REDIR)
 		{
-			// TODO: validate that the token is valid (e.g. < > | are not valid)
-			printf("cmd_idx = %d and g_data.cur.input == NULL : %d\n", cmd_idx, g_data.cur.input == NULL);
-			if (cmd_idx == 0)
-				g_data.cur.input = ft_strdup(t->token);
-			else
-				g_data.cur.cmd_list[cmd_idx]->input = ft_strdup(t->token);
-			mode = DEFAULT_MODE;
+			handle_input_redirection(cmd_idx, t->token, &mode); // TODO: add error handling
 		}
 		else if (mode == OUTPUT_REDIR_APPEND || mode == OUTPUT_REDIR_OVERWRITE)
 		{
-			if (cmd_idx == g_data.cur.cmd_count - 1)
-			{
-				g_data.cur.output = ft_strdup(t->token);
-				if (mode == OUTPUT_REDIR_APPEND)
-					g_data.cur.output_mode = APPEND_MODE;
-				else if (mode == OUTPUT_REDIR_OVERWRITE)
-					g_data.cur.output_mode = OVERWRITE_MODE;
-			}
-			else
-				g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(t->token);
-			mode = DEFAULT_MODE;
+			handle_output_redirection(cmd_idx, t->token, &mode); // TODO: add error handling
 		}
 		*token_idx = *token_idx + 1;
-		ft_printf("int value: %d\n", args_index);
 		g_data.cur.cmd_list[cmd_idx]->args[args_index] = NULL;
 		free(t);
 	}
