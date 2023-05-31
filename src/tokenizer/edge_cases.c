@@ -16,21 +16,6 @@
 
 extern t_data	g_data;
 
-int	needs_blanc(char c, int *mode)
-{
-	if (*mode == DEFAULT_MODE && g_data.cur.token_buffer.len == 0)
-	{
-		if (c == ' ')
-		{
-			printf("stored blanc token \n");
-			add_char_to_buffer(c);
-			store_token();
-			return (true);
-		}
-	}
-	return (false);
-}
-
 int	handle_within_quotes(char c, char next_c, int *i)
 {
 	if (c == '<' && (next_c == '\'' || next_c == '\"'))

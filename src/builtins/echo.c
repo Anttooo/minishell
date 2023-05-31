@@ -40,7 +40,11 @@ void	ft_echo(void)
 	if (scan_for_options(&idx) == 0)
 	{
 		while (g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
+		{
+			if (idx > 1)
+				printf(" ");
 			printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
+		}
 		printf("\n");
 	}
 	else
