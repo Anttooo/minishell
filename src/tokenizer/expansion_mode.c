@@ -52,7 +52,7 @@ void	handle_expansion_mode(int *mode, int *i)
 		*i = j - 1;
 		handle_expanded_value(env_var);
 	}
-	else
+	else if (g_data.cur.raw[*i + 1] == ' ')
 		add_char_to_buffer('$');
 	*mode -= 10;
 }

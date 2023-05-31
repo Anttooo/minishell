@@ -21,7 +21,7 @@ static int	scan_for_options(int *ptr_idx)
 	if (g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1] != NULL)
 	{
 		arg = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1]);
-		if (ft_strnstr(arg, "-n", ft_strlen(arg)) != NULL)
+		if (ft_strncmp(arg, "-n", ft_strlen(arg)) == 0)
 		{
 			*ptr_idx += 1;
 			return (1);
