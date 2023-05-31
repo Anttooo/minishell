@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:06:12 by jmykkane          #+#    #+#             */
-/*   Updated: 2023/05/17 16:35:47 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/31 15:52:12 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ typedef struct s_list
 int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
+int		ft_isalnum(char *str);
 void	dir_check(char *file);
 char	*ft_strdup(char *src);
 char	*ft_itoa(long long n);

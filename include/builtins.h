@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:27:10 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/05/31 15:29:45 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 # include "minishell.h"
+# include <sys/wait.h>
 # include <signal.h>
 # include <dirent.h>
 

@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmykkane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:32:31 by jmykkane          #+#    #+#             */
-/*   Updated: 2022/10/24 16:32:33 by jmykkane         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:57:41 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+int	ft_isalnum(char *str)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	else if (c >= 65 && c <= 90)
-		return (1);
-	else if (c >= 97 && c <= 122)
-		return (1);
-	else
-		return (0);
+	int	id;
+
+	id = 0;
+	while (str[id] != '\0')
+	{
+		if (str[id] >= 48 && str[id] <= 57)
+			id++;
+		else
+			return (1);
+
+	}
+	return (0);
 }
