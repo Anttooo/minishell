@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:26:28 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:26:33 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 15:42:40 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_dir
 
 	DIR		*ptr_home;
 	DIR		*ptr_start;
+	DIR		*ptr_target;
 	DIR		*ptr_current;
 }								t_dir;
 
