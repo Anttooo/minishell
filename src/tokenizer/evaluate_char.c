@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   evaluate_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:17:49 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 17:05:08 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,9 @@ int	is_terminating_char(char c, int *mode)
 	if (*mode == DEFAULT_MODE)
 	{
 		if (c == ' ' || c == '\t'
-			|| c == '|' || c == '\''
+			|| c == '|'
 			|| c == '<' || c == '>'
-			|| c == '\"' || c == '$'
 			|| c == '\n')
-			return (true);
-	}
-	if (*mode == DOUBLE_QUOTES_MODE)
-	{
-		if (c == '\"')
-			return (true);
-	}
-	if (*mode == SINGLE_QUOTES_MODE)
-	{
-		if (c == '\'')
 			return (true);
 	}
 	return (false);
