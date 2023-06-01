@@ -6,41 +6,13 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 18:37:37 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:50:03 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
 extern t_data	g_data;
-
-void	ft_export(int cmd_idx)
-{
-	int	i;
-	int	env_var_idx;
-
-	i = 1;
-	env_var_idx = 0;
-	ft_printf("Command index: %d\n", cmd_idx);
-	// input value: all arguments given to export
-	// go through them one by one so if there's an error with one of them, it does not prevent from adding the ones before
-	// Also if there are problems while adding multiple, the process does not stop at invalid identified
-	if (g_data.cur.cmd_list[cmd_idx]->args[1] == NULL)
-	{
-		ft_printf("No arguments were given.\n");
-		// without arguments, prints out env vars with declare-x before each
-		while (g_data.env.vars[env_var_idx] != NULL)
-		{
-			ft_printf("declare -x %s\n", g_data.env.vars[env_var_idx]);
-			env_var_idx++;
-		}
-	}
-	while (g_data.cur.cmd_list[cmd_idx]->args[i] != NULL)
-	{
-		handle_export_argument(g_data.cur.cmd_list[cmd_idx]->args[i]);
-		i++;
-	}
-}
 
 int	is_valid_env_variable_value(char *arg)
 {
@@ -156,4 +128,32 @@ void	handle_export_argument(char *arg)
 	}
 	else
 		ft_printf("export: `%s': not a valid identifier\n", arg);
+}
+
+void	ft_export(int cmd_idx)
+{
+	int	i;
+	int	env_var_idx;
+
+	i = 1;
+	env_var_idx = 0;
+	ft_printf("Command index: %d\n", cmd_idx);
+	// input value: all arguments given to export
+	// go through them one by one so if there's an error with one of them, it does not prevent from adding the ones before
+	// Also if there are problems while adding multiple, the process does not stop at invalid identified
+	if (g_data.cur.cmd_list[cmd_idx]->args[1] == NULL)
+	{
+		ft_printf("No arguments were given.\n");
+		// without arguments, prints out env vars with declare-x before each
+		while (g_data.env.vars[env_var_idx] != NULL)
+		{
+			ft_printf("declare -x %s\n", g_data.env.vars[env_var_idx]);
+			env_var_idx++;
+		}
+	}
+	while (g_data.cur.cmd_list[cmd_idx]->args[i] != NULL)
+	{
+		handle_export_argument(g_data.cur.cmd_list[cmd_idx]->args[i]);
+		i++;
+	}
 }
