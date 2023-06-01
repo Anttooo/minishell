@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:47:02 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:47:11 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 20:49:33 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,10 @@ void	free_arr(char **arr)
 
 void	clean_exit_shell(void)
 {
-	if (g_data.dir.current != g_data.dir.start && g_data.dir.start)
+	if (g_data.dir.current)
 	{
-		if (chdir(g_data.dir.start) == -1)
-		{
-			perror("chdir error in clean_exit");
-		}
-	}
-	if (g_data.dir.start)
-	{
-		free (g_data.dir.start);
-		g_data.dir.start = NULL;
+		free (g_data.dir.current);
+		g_data.dir.current = NULL;
 	}
 	if (g_data.env.user)
 	{

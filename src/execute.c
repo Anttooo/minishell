@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:33:32 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 20:53:40 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,16 @@ void	execute_cmd(t_pipes *p, int idx)
 {
 	char	*path;
 
-	printf("trying to execute %d \n", idx);
+	// printf("trying to execute %d \n", idx);
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
-	printf("trying AGAIN to execute %d \n", idx);
+	// printf("trying AGAIN to execute %d \n", idx);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
-	printf("execute cannot be done %d \n", idx);
-	perror("Error executing");
+	// printf("execute cannot be done %d \n", idx);
+	// perror("Error executing");
 	clean_exit_shell();
 	exit(1);
 }
-
-// void	handle_pipes(t_pipes *p, int cmd_idx)
-// {
-
-// 	close(p->pipe[READ_END]);
-// 	dup2(p->pipe[WRITE_END], STDOUT);
-// 	execute_cmd();
-// }
 
 void	execute(void)
 {
@@ -84,6 +76,7 @@ void	execute(void)
 		{
 			// printf("waiting for main shit to return \n");
 			waitpid(g_data.sig.exec_pid, NULL, 0);
+			g_data.sig.exec_pid = -1;
 		}
 	}
 }
