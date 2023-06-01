@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/30 18:25:20 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 19:19:15 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@
 
 typedef struct s_pipex_data
 {
-	int			fdin;
+	int			pipes[1000][2];
 	int			fdout;
-	int			pipe[2];
+	int			fdin;
 	int			idx;
 	pid_t		pid;
 }				t_pipes;
 
 void	execute(void);
 void	init(t_pipes *p);
-void	execute_cmd(void);
 void	execute_builtin(void);
+int		what_builtin(char *cmd);
 void	pipes_and_forks(t_pipes *p);
 char	*get_command_path(char *token);
+void    execute_cmd(t_pipes *p, int idx);
 
 #endif

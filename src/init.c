@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/30 18:32:48 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 20:30:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,19 @@ char	**get_env_vars(char **envp)
 	char	**vars;
 	int		idx;
 
-	idx = -1;
-	while (envp[++idx] != NULL)
-		;
-	vars = malloc(sizeof(char *) * idx + 1);
+	idx = 0;
+	while (envp[idx] != NULL)
+		idx++;
+	vars = malloc(sizeof(char *) * (idx + 1));
+	int len = idx;
 	if (!vars)
 		return (NULL);
-	idx = -1;
-	while (envp[++idx] != NULL)
+	idx = 0;
+	while (envp[idx] != NULL)
+	{
 		vars[idx] = ft_strdup(envp[idx]);
+		idx++;
+	}
 	vars[idx] = NULL;
 	return (vars);
 }

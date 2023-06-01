@@ -1,0 +1,67 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_helpers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/01 17:24:26 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/06/01 18:32:34 by joonasmykka      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/execute.h"
+
+extern t_data g_data;
+
+int	what_builtin(char *cmd)
+{
+	int	idx;
+
+	idx = -1;
+	while (++idx < 7)
+	{
+		if (ft_strncmp(cmd, g_data.dir.builtins[idx], ft_strlen(g_data.dir.builtins[idx])) == 0)
+			break ;
+	}
+	return (idx);
+}
+
+char *get_command_path(char *token)
+{
+	int		i;
+	char	*cmd_path;
+	char	*path_with_slash;
+
+	// TODO: restructure this code to check from an array of possible builtins, this code is invalid
+	if(is_builtin(token) == 1) // 1 = true
+	{
+		g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 1;
+		cmd_path = (ft_strdup("builtin"));
+		return(cmd_path);
+	}
+	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
+	i = 0;
+	if (ft_strncmp(token, "./", 2) == 0) // if token starts with ./
+	{
+		
+	}
+	else
+	{
+		while (g_data.env.paths[i])
+		{
+			path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
+			cmd_path = ft_strjoin(path_with_slash, token);
+			free(path_with_slash);
+			if(access(cmd_path, X_OK) == 0)
+			{
+				// printf("Command is an environment command, can be executed\n");
+				return (cmd_path);
+			}
+			free(cmd_path); // MEMORY_LEAK: this does not get freed if the command is found
+			i++;	
+		}
+		printf("command not found\n");
+	}
+	return("not found");
+}
