@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/31 17:52:11 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 13:30:24 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,21 @@ static int	arr_len(void)
 	return (idx);
 }
 
-// static char	*build_str(void)
-// {
-// 	char	*str;
+static int	ft_isnum(char *str)
+{
+	int	id;
 
-// 	return (str);
-// }
+	id = 0;
+	while (str[id] != '\0')
+	{
+		if (str[id] >= 48 && str[id] <= 57)
+			id++;
+		else
+			return (1);
+
+	}
+	return (0);
+}
 
 void	ft_exit(void)
 {
@@ -43,7 +52,7 @@ void	ft_exit(void)
 	if (len > 1)
 	{
 		arg = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1]);
-		if (ft_isalnum(arg) == 0)
+		if (ft_isnum(arg) == 0)
 		{
 			status = ft_atoi(arg);
 			free(arg);

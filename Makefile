@@ -1,7 +1,7 @@
 NAME = minishell
 CC = gcc
 CXX = g++
-FLAGS = -Wall -Werror -Wextra
+FLAGS =
 LDFLAGS = -L/opt/homebrew/opt/readline/lib -lreadline -L libft -lft
 
 SRC_FILES = $(wildcard src/*.c) $(wildcard src/tokenizer/*.c) $(wildcard src/builtins/*.c) $(wildcard src/parser/*.c) $(wildcard src/input/*.c)
