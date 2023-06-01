@@ -1,0 +1,10 @@
+-r-xr-xr-x   1 root   wheel   112M May  4  2019 emacs
+-rwxr-xr-x   1 root   wheel    11M Jul 11  2021 php
+-r-xr-xr-x   1 root   wheel   5.1M May  4  2019 parl5.18
+-rwxr-xr-x   1 root   wheel   4.7M May 27  2020 norminette-old
+-rwx------   1 root   wheel   3.6M Apr 14  2022 macreport
+-rwxr-xr-x   1 root   wheel   3.0M May  4  2019 emacs-undumped
+-rwxr-xr-x   1 root   wheel   2.1M Jul 17  2019 sqlite3
+-rwxr-xr-x   1 root   wheel   2.0M May  4  2019 ssh
+-r-xr-xr-x   1 root   wheel   2.0M May  4  2019 db_printlog
+-r-xr-xr-x   1 root   wheel   1.9M May  4  2019 db_verify

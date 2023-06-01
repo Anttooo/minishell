@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:17:51 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 14:45:54 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	handle_expansion_mode(int *mode, int *i)
 		*i = j - 1;
 		handle_expanded_value(env_var);
 	}
-	else if (g_data.cur.raw[*i + 1] == ' ')
+	else if (g_data.cur.raw[*i + 1] == ' ' || g_data.cur.raw[*i + 1] == '\0')
 		add_char_to_buffer('$');
 	*mode -= 10;
 }

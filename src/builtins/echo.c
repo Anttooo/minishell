@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:18:25 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 13:43:33 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	ft_echo(void)
 	else
 	{
 		while (g_data.cur.cmd_list[cmd_idx]->args[++idx] != NULL)
+		{
+			if (idx > 1)
+				printf(" ");
 			printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
+		}
 	}
 }
