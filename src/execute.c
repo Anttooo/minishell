@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:36:06 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 15:24:50 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/01 19:07:14 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ void	execute_builtin(void)
 	if (idx == 3)
 		ft_export(g_data.cur.cmd_index);
 	if (idx == 4)
-		ft_unset();
+		ft_unset(g_data.cur.cmd_index);
 	if (idx == 5)
 		ft_env();
 	if (idx == 6)

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 18:50:03 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:09:51 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,13 @@ char	**add_arg_to_env_vars(char *arg)
 	return (new_env_vars);
 }
 
-void	handle_export_argument(char *arg)
+void	handle_export_argument(char *arg, int cmd_idx)
 {
 	ft_printf("Current argument: %s\n", arg);
 	if(is_valid_identifier(arg) == 1)
 	{
 		ft_printf("Valid identifier\n");
+		ft_unset(cmd_idx); // this line removes the existing variable with same name if it exits
 		g_data.env.vars = add_arg_to_env_vars(arg);
 	}
 	else
@@ -153,7 +154,7 @@ void	ft_export(int cmd_idx)
 	}
 	while (g_data.cur.cmd_list[cmd_idx]->args[i] != NULL)
 	{
-		handle_export_argument(g_data.cur.cmd_list[cmd_idx]->args[i]);
+		handle_export_argument(g_data.cur.cmd_list[cmd_idx]->args[i], cmd_idx);
 		i++;
 	}
 }
