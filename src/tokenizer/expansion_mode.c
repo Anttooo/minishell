@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 19:26:52 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:54:42 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,24 @@ void	handle_expansion_mode(int *mode, int *i)
 {
 	char	*env_var;
 	int		j;
+	int		k;
 
 	j = *i + 1;
+	k = 0;
+	if (g_data.cur.raw[j] == '?' && g_data.cur.raw[j + 1] == ' ')
+	{
+		char *exit_status = get_last_exit_status(); // this function does not exit yet
+		while (exit_status[k] != '\0')
+		{
+			add_char_to_buffer(exit_status[k]);
+			k++;
+		}
+		free(exit_status);
+		*i = j + 1;
+		*mode -= 10;
+		return;
+	}
+
 	if (is_valid_first_character(g_data.cur.raw[j]))
 		j++;
 	while (is_valid_subsequent_character(g_data.cur.raw[j]))
