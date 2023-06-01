@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 16:08:41 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 16:37:28 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	handle_quit(int sig)
 {
 	if (sig == SIGQUIT)
 	{
-		printf("SIGQUIT CAPTURED \n");	
+		rl_redisplay();
 	}
 }
 
