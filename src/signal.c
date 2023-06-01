@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:07:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:34:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 16:08:41 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 extern t_data	g_data;
 
-void	handle_ctrl_c(int sig)
+static void	handle_int(int sig)
 {
 	const char	nlc[2] = {10, 0};
 	const char	eof[2] = {4, 0};
@@ -38,12 +38,36 @@ void	handle_ctrl_c(int sig)
 	}
 }
 
-void	signal_manager(void)
+static void	handle_quit(int sig)
+{
+	if (sig == SIGQUIT)
+	{
+		printf("SIGQUIT CAPTURED \n");	
+	}
+}
+
+static void	init_sigint(void)
 {
 	struct sigaction	act;
 
-	act.sa_handler = handle_ctrl_c;
+	act.sa_handler = handle_int;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &act, NULL);
+}
+
+static void	init_sigquit(void)
+{
+	struct sigaction	act;
+
+	act.sa_handler = handle_quit;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_RESTART;
+	sigaction(SIGQUIT, &act, NULL);
+}
+
+void	signal_manager(void)
+{
+	init_sigint();
+	init_sigquit();
 }
