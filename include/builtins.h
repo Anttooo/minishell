@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:27:10 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 16:05:20 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_pwd(void);
 void	ft_env(void);
 void	ft_echo(void);
 void	ft_exit(void);
+int		arr_len(void);
 void	ft_unset(void);
 void	ft_export(void);
 
