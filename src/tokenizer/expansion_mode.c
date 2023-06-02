@@ -41,21 +41,23 @@ void	handle_expansion_mode(int *mode, int *i)
 	char	*env_var;
 	int		j;
 	int		k;
+	char	*exit_status;
 
 	j = *i + 1;
 	k = 0;
-	if (g_data.cur.raw[j] == '?' && g_data.cur.raw[j + 1] == ' ')
+	if (g_data.cur.raw[j] == '?' && (g_data.cur.raw[j + 1] == ' ' || g_data.cur.raw[j + 1] == '\0'))
 	{
-		char *exit_status = get_last_exit_status(); // this function does not exit yet
+		ft_printf("Exit status expansion triggered!\n");
+		exit_status = "123"; // get_last_exit_status(); // this function does not exit yet
 		while (exit_status[k] != '\0')
 		{
 			add_char_to_buffer(exit_status[k]);
 			k++;
 		}
-		free(exit_status);
+		// free(exit_status);
 		*i = j + 1;
 		*mode -= 10;
-		return;
+		return ;
 	}
 
 	if (is_valid_first_character(g_data.cur.raw[j]))
