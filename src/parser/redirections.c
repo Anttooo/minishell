@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:37 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:23:57 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 18:08:16 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ int	handle_input_redirection(int cmd_idx, char *token, int *mode)
 		printf("syntax error near unexpected token `%s'\n", token);
 		return (1);
 	}
-	if (cmd_idx == 0)
-		g_data.cur.input = ft_strdup(token);
-	else
-		g_data.cur.cmd_list[cmd_idx]->input = ft_strdup(token);
+	g_data.cur.cmd_list[cmd_idx]->input = ft_strdup(token);
 	*mode = DEFAULT_MODE;
 	return (0);
 }
@@ -55,16 +52,11 @@ int	handle_output_redirection(int cmd_idx, char *token, int *mode)
 		printf("syntax error near unexpected token `%s'\n", token);
 		return (1);
 	}
-	if (cmd_idx == g_data.cur.cmd_count - 1)
-	{
-		g_data.cur.output = ft_strdup(token);
-		if (*mode == OUTPUT_REDIR_APPEND)
-			g_data.cur.output_mode = APPEND_MODE;
-		else if (*mode == OUTPUT_REDIR_OVERWRITE)
-			g_data.cur.output_mode = OVERWRITE_MODE;
-	}
-	else
-		g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(token);
+	g_data.cur.cmd_list[cmd_idx]->output = ft_strdup(token);
+	if (*mode == OUTPUT_REDIR_APPEND)
+		g_data.cur.cmd_list[cmd_idx]->output_mode = APPEND_MODE;
+	else if (*mode == OUTPUT_REDIR_OVERWRITE)
+		g_data.cur.cmd_list[cmd_idx]->output_mode = OVERWRITE_MODE;
 	*mode = DEFAULT_MODE;
 	return (0);
 }

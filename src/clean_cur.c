@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_cur.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:35:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:30:23 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 18:10:22 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,12 @@ static void	handle_heredoc_flag(void)
 	}
 }
 
-static void	reset_fds(void)
-{
-	if (g_data.cur.input)
-	{
-		free(g_data.cur.input);
-		g_data.cur.input = NULL;
-	}
-	if (g_data.cur.output)
-	{
-		free(g_data.cur.output);
-		g_data.cur.output = NULL;
-	}
-}
-
 void	clean_cur_struct(void)
 {
 	int	i;
 
 	i = -1;
 	free(g_data.cur.raw);
-	reset_fds();
 	vec_free(&g_data.cur.token_buffer);
 	vec_free(&g_data.cur.tokens);
 	vec_free(&g_data.cur.types);

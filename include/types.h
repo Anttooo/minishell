@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:26:28 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 12:54:25 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 18:05:06 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ typedef struct s_current
 	t_cmd	**cmd_list;
 	int		cmd_count;
 	int		cmd_index;
-	char	*output;
-	int		output_mode;
-	char	*input;
 	char	*raw;
 	t_vec	types;
 	t_vec	tokens;

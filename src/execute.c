@@ -52,7 +52,7 @@ void	handle_input_redirection_for_first_cmd(t_pipes *p)
 {
 	if (p->idx == 0)
 	{
-		if (g_data.cur.input == NULL)
+		if (g_data.cur.cmd_list[p->idx]->input == NULL)
 			p->fdin = STDIN;
 		else
 			redir_input(p);
@@ -66,24 +66,23 @@ void	handle_input_redirection_for_first_cmd(t_pipes *p)
 
 void	handle_output_redirection_for_last_cmd(t_pipes *p)
 {
-	ft_putstr_fd("are we setting the output redirection?\n", 2);
-	if (p->idx == g_data.cur.cmd_count - 1)
+	// ft_putstr_fd("are we setting the output redirection?\n", 2);
+	// ft_putstr_fd("setting the output redirection for last command\n", 2);
+	// ft_putstr_fd(g_data.cur.output, 2);
+	// ft_putstr_fd("  \n", 2);
+
+
+	if (g_data.cur.cmd_list[p->idx]->output == NULL)
+		p->fdout = STDOUT;
+	else
+		redir_out(p);
+	if (p->fdout != STDOUT)
 	{
-		ft_putstr_fd("setting the output redirection for last command\n", 2);
-		ft_putstr_fd(g_data.cur.output, 2);
-		ft_putstr_fd("  \n", 2);
-		if (g_data.cur.output == NULL)
-			p->fdout = STDOUT;
-		else
-			redir_out(p);
-		if (p->fdout != STDOUT)
-		{
-			dup2(p->fdout, STDOUT);
-			close(p->fdout);
-		}
-		ft_putnbr_fd(p->fdout, 2);
-		ft_putstr_fd("  \n", 2);
+		dup2(p->fdout, STDOUT);
+		close(p->fdout);
 	}
+	ft_putnbr_fd(p->fdout, 2);
+	ft_putstr_fd("  \n", 2);
 }
 
 void	handle_pipes(t_pipes *p)
