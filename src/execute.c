@@ -6,11 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/05 14:44:07 by oanttoor         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/05 15:28:56 by joonasmykka      ###   ########.fr       */
->>>>>>> 44017a174c167be3e124e5d396304fa3ba3afac9
+/*   Updated: 2023/06/05 15:43:08 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +24,8 @@ void	execute_cmd(t_pipes *p, int idx)
 		exit(0);
 	}
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
+	if (!path)
+		perror()
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	clean_exit_shell();
@@ -36,11 +34,8 @@ void	execute_cmd(t_pipes *p, int idx)
 void	execute(void)
 {
 	t_pipes p;
-<<<<<<< HEAD
-=======
 	int		status;
 
->>>>>>> 44017a174c167be3e124e5d396304fa3ba3afac9
 	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin();
 	else
