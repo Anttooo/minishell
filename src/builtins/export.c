@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:09:51 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:00:07 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	handle_export_argument(char *arg, int cmd_idx)
 		ft_printf("export: `%s': not a valid identifier\n", arg);
 }
 
-void	ft_export(int cmd_idx)
+int	ft_export(int cmd_idx)
 {
 	int	i;
 	int	env_var_idx;
@@ -157,4 +157,5 @@ void	ft_export(int cmd_idx)
 		handle_export_argument(g_data.cur.cmd_list[cmd_idx]->args[i], cmd_idx);
 		i++;
 	}
+	return (0);
 }

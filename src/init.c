@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/05 10:43:52 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:55:14 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	init_struct(char **envp)
 	g_data.cur.heredoc_mode = 0;
 	g_data.sig.shell_pid = getpid();
 	g_data.sig.exec_pid = -1;
+	g_data.env.exit_status = 0;
 	g_data.env.paths = get_paths();
 	g_data.env.vars = get_env_vars(envp);
 	g_data.env.user = find_env_var("USER");

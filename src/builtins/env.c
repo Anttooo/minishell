@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:47:13 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:20:44 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 13:07:12 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_data	g_data;
 
-void	ft_env(void)
+int	ft_env(void)
 {
 	int	idx;
 
@@ -28,5 +28,7 @@ void	ft_env(void)
 	{
 		perror("problem with env");
 		clean_exit_shell();
+		return (1);
 	}
+	return (0);
 }

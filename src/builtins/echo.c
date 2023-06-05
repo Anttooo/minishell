@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:42:14 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:07:26 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	scan_for_options(int *ptr_idx)
     return (1);
 }
 
-void	ft_echo(void)
+int	ft_echo(void)
 {
     int	idx;
     int	cmd_idx;
@@ -65,5 +65,6 @@ void	ft_echo(void)
 			printed_idx++;
         }
     }
+	return (0);
 }
 
