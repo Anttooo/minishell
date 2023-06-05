@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 15:43:08 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:44:11 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	execute_cmd(t_pipes *p, int idx)
 		exit(0);
 	}
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
-	if (!path)
-		perror()
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	clean_exit_shell();
