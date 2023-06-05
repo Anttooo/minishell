@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/05 15:27:12 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 16:01:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <sys/types.h>
 # include "minishell.h"
 

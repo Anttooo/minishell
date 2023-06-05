@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 15:44:11 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:06:41 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,34 @@
 
 extern t_data g_data;
 
+int do_checks(char *cmd)
+{
+	struct stat statbuf;
+
+	if (ft_strcmp(cmd, ".") == 0)
+	{
+		ft_putstr_fd("Shell: .: File name argument requiered\n", 2);
+		exit(2);
+	}
+	if (stat(cmd, &statbuf) != 0)
+	{
+		perror("\n");
+		clean_exit_shell();
+		exit(errno);
+	}
+	if (statbuf.st_mode != 0)
+	{
+		ft_putstr_fd("Shell: /: is a directory\n", 2);
+		exit(126);
+	}
+	return (0);
+}
+
 void	execute_cmd(t_pipes *p, int idx)
 {
 	char	*path;
 
+	do_checks(g_data.cur.cmd_list[idx]->cmd);
 	if (is_builtin(g_data.cur.cmd_list[idx]->cmd) == 1)
 	{
 		execute_builtin();
@@ -27,6 +51,7 @@ void	execute_cmd(t_pipes *p, int idx)
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	clean_exit_shell();
+	exit(errno);
 }
 
 void	execute(void)
