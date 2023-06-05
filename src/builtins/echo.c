@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 13:07:26 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:13:31 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ static int	scan_for_options(int *ptr_idx)
     return (1);
 }
 
-int	ft_echo(void)
+int	ft_echo(int cmd_index)
 {
     int	idx;
-    int	cmd_idx;
 	int	printed_idx;
 
-    cmd_idx = g_data.cur.cmd_index;
 	printed_idx = 0;
     if (scan_for_options(&idx) == 0)
     {

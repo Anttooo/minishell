@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 13:43:02 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:13:18 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	execute_cmd(t_pipes *p, int idx)
 	char	*path;
 
 	g_data.env.exit_status = 0;
-	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
-	if (g_data.cur.cmd_list[idx]->builtin == 1)
+	if (is_builtin(g_data.cur.cmd_list[idx]->cmd) == 1)
 	{
 		execute_builtin();
-		clean_exit_shell();
 		exit(0);
 	}
+	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	clean_exit_shell();
@@ -71,7 +70,6 @@ void	execute(void)
 							close(p.pipes[p.idx][WRITE_END]);
 						}
 					}
-
 					execute_cmd(&p, p.idx);
 				}
 				else
@@ -86,6 +84,7 @@ void	execute(void)
 						p.fdin = p.pipes[p.idx][READ_END];
 					}
 				}
+				g_data.cur.cmd_index++;
 			}
 			while (waitpid(-1, NULL, 0) > 0)
 				;
