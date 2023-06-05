@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:17:51 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 20:54:42 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,26 @@ void	handle_expansion_mode(int *mode, int *i)
 {
 	char	*env_var;
 	int		j;
+	int		k;
+	char	*exit_status;
 
 	j = *i + 1;
+	k = 0;
+	if (g_data.cur.raw[j] == '?' && (g_data.cur.raw[j + 1] == ' ' || g_data.cur.raw[j + 1] == '\0'))
+	{
+		ft_printf("Exit status expansion triggered!\n");
+		exit_status = "123"; // get_last_exit_status(); // this function does not exit yet
+		while (exit_status[k] != '\0')
+		{
+			add_char_to_buffer(exit_status[k]);
+			k++;
+		}
+		// free(exit_status);
+		*i = j + 1;
+		*mode -= 10;
+		return ;
+	}
+
 	if (is_valid_first_character(g_data.cur.raw[j]))
 		j++;
 	while (is_valid_subsequent_character(g_data.cur.raw[j]))
@@ -52,7 +70,7 @@ void	handle_expansion_mode(int *mode, int *i)
 		*i = j - 1;
 		handle_expanded_value(env_var);
 	}
-	else if (g_data.cur.raw[*i + 1] == ' ')
+	else if (g_data.cur.raw[*i + 1] == ' ' || g_data.cur.raw[*i + 1] == '\0')
 		add_char_to_buffer('$');
 	*mode -= 10;
 }
@@ -60,7 +78,7 @@ void	handle_expansion_mode(int *mode, int *i)
 // Check if the character is a letter or underscore
 int	is_valid_first_character(char c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_' || c == '=')
 		return (1);
 	return (0);
 }
@@ -97,7 +115,11 @@ char	*fetch_env_var(char *str)
 	word_len = ft_strlen(g_data.env.vars[idx]) - len;
 	var = malloc((word_len + 1) * sizeof(char));
 	if (!var)
+	{
+		free(needle);
 		return (NULL);
+	}
 	ft_strlcpy(var, &g_data.env.vars[idx][len], word_len + 1);
+	free(needle);
 	return (var);
 }

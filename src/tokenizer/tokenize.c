@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:17:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 15:06:59 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,10 @@ int	tokenize_input(void)
 		idx++;
 	}
 	store_token();
+	if (g_data.cur.tokens.len == 0)
+	{
+		g_data.cur.err_flag = 1;
+		return (1);
+	}
 	return (0);
 }

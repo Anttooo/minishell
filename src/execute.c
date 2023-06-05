@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
 /*   Updated: 2023/06/01 20:53:40 by joonasmykka      ###   ########.fr       */
@@ -96,9 +96,9 @@ void	execute_builtin(void)
 	if (idx == 2)
 		ft_pwd();
 	if (idx == 3)
-		ft_export();
+		ft_export(g_data.cur.cmd_index);
 	if (idx == 4)
-		ft_unset();
+		ft_unset(g_data.cur.cmd_index);
 	if (idx == 5)
 		ft_env();
 	if (idx == 6)
