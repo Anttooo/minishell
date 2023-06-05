@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/05/30 18:32:48 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/01 20:43:41 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,19 @@ char	**get_env_vars(char **envp)
 	char	**vars;
 	int		idx;
 
-	idx = -1;
-	while (envp[++idx] != NULL)
-		;
-	vars = malloc(sizeof(char *) * idx + 1);
+	idx = 0;
+	while (envp[idx] != NULL)
+		idx++;
+	vars = malloc(sizeof(char *) * (idx + 1));
+	int len = idx;
 	if (!vars)
 		return (NULL);
-	idx = -1;
-	while (envp[++idx] != NULL)
+	idx = 0;
+	while (envp[idx] != NULL)
+	{
 		vars[idx] = ft_strdup(envp[idx]);
+		idx++;
+	}
 	vars[idx] = NULL;
 	return (vars);
 }
@@ -60,9 +64,9 @@ void	set_builtins(void)
 
 void	init_directories(void)
 {
-	getcwd(g_data.dir.start, 1024);
-	g_data.dir.ptr_current = opendir(g_data.dir.start);
-	g_data.dir.current = ft_strdup(g_data.dir.start);
+	g_data.dir.current = (char *)malloc(1024);
+	getcwd(g_data.dir.current, 1024);
+	g_data.dir.ptr_current = opendir(g_data.dir.current);
 	chdir(g_data.dir.current);
 	g_data.dir.home = getenv("HOME");
 }
@@ -73,7 +77,6 @@ int	init_struct(char **envp)
 	g_data.cur.heredoc_mode = 0;
 	g_data.sig.shell_pid = getpid();
 	g_data.sig.exec_pid = -1;
-	g_data.dir.start = (char *)malloc(1024);
 	g_data.env.paths = get_paths();
 	g_data.env.vars = get_env_vars(envp);
 	g_data.env.user = find_env_var("USER");
