@@ -39,7 +39,7 @@ void	execute_cmd(t_pipes *p, int idx)
 	do_checks(g_data.cur.cmd_list[idx]->cmd);
 	if (is_builtin(g_data.cur.cmd_list[idx]->cmd) == 1)
 	{
-		execute_builtin();
+		execute_builtin(p);
 		exit(0);
 	}
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
@@ -66,17 +66,21 @@ void	handle_input_redirection_for_execution(t_pipes *p)
 
 void	handle_output_redirection_for_execution(t_pipes *p)
 {
+	p->out_redirected = FALSE;
 	if (g_data.cur.cmd_list[p->idx]->output == NULL)
+	{
 		p->fdout = STDOUT;
+	}
 	else
+	{
 		redir_out(p);
+		p->out_redirected = TRUE;
+	}
 	if (p->fdout != STDOUT)
 	{
 		dup2(p->fdout, STDOUT);
 		close(p->fdout);
 	}
-	ft_putnbr_fd(p->fdout, 2);
-	ft_putstr_fd("  \n", 2);
 }
 
 void	handle_pipes(t_pipes *p)
@@ -139,7 +143,7 @@ void	execute(void)
 
 	p.idx = 0;
 	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
-		execute_builtin();
+		execute_builtin(&p);
 	else
 	{
 		p.fdin = STDIN;
@@ -155,29 +159,37 @@ void	execute(void)
 	}
 }
 
-
 // Function to execute one single builtin command
-int	execute_builtin(void)
+int	execute_builtin(t_pipes *p)
 {
+	int 	original_stdout;
+	int		return_value;
 	char	*cmd;
 	int		idx;
 
+	original_stdout = dup(STDOUT);
+	handle_output_redirection_for_execution(p);
 	cmd = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->cmd);
 	idx = what_builtin(cmd);
 	if (idx == 0)
-		return (ft_echo(g_data.cur.cmd_index));
+		return_value = ft_echo(g_data.cur.cmd_index);
 	if (idx == 1)
-		return (ft_cd());
+		return_value = ft_cd();
 	if (idx == 2)
-		return (ft_pwd());
+		return_value = ft_pwd();
 	if (idx == 3)
-		return (ft_export(g_data.cur.cmd_index));
+		return_value = ft_export(g_data.cur.cmd_index);
 	if (idx == 4)
-		return (ft_unset(g_data.cur.cmd_index));
+		return_value = ft_unset(g_data.cur.cmd_index);
 	if (idx == 5)
-		return (ft_env());
+		return_value = ft_env();
 	if (idx == 6)
 		ft_exit();
+	if (p->out_redirected == TRUE)
+	{
+		dup2(original_stdout, STDOUT);	
+	}
+	close(original_stdout);
 	free(cmd);
-	return (0);
+	return (return_value);
 }

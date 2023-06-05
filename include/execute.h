@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 10:46:59 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/05 17:47:17 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:37:02 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@
 # define STDOUT 1
 # define STDIN 0
 
+# define TRUE 1
+# define FALSE 0
+
 typedef struct s_pipex_data
 {
 	int			pipes[1000][2];
+	int			out_redirected;
 	int			fdout;
 	int			fdin;
 	int			idx;
@@ -43,7 +47,7 @@ typedef struct s_pipex_data
 void	execute(void);
 void	init(t_pipes *p);
 void	redir_out(t_pipes *p);
-int		execute_builtin(void);
+int	execute_builtin(t_pipes *p);
 void	redir_input(t_pipes *p);
 int		what_builtin(char *cmd);
 void	pipes_and_forks(t_pipes *p);

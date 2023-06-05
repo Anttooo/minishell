@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:32:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 18:15:38 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:00:02 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	redir_out(t_pipes *p)
 	if (g_data.cur.cmd_list[p->idx]->output_mode == APPEND_MODE)
 		p->fdout = open(g_data.cur.cmd_list[p->idx]->output, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (g_data.cur.cmd_list[p->idx]->output_mode == OVERWRITE_MODE)
+	{
 		p->fdout = open(g_data.cur.cmd_list[p->idx]->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
 	else
 	{
 		perror("invalid output mode");
