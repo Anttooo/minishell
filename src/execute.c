@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:53:40 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 12:20:41 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ void	execute_cmd(t_pipes *p, int idx)
 {
 	char	*path;
 
+	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
+	if (g_data.cur.cmd_list[idx]->builtin == 1)
+	{
+		// perror("GOING TO EXECUTE BUILTIN");
+		execute_builtin();
+		clean_exit_shell();
+		exit(0);
+	}
 	// printf("trying to execute %d \n", idx);
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
-	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
 	// printf("trying AGAIN to execute %d \n", idx);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	// printf("execute cannot be done %d \n", idx);
@@ -37,49 +44,70 @@ void	execute(void)
 		execute_builtin();
 	else
 	{
-		// printf("NUMBER OF COMMANDS %d \n", g_data.cur.cmd_count);
 		g_data.sig.exec_pid = fork();
 		if (g_data.sig.exec_pid == 0)
 		{
 			init(&p);
-			while (p.idx < g_data.cur.cmd_count - 1)
+			// int pipefd[2];
+			p.fdin = STDIN;
+
+			for (p.idx = 0; p.idx < g_data.cur.cmd_count; p.idx++)
 			{
-				pipe(p.pipes[g_data.cur.cmd_index]);
+				// Prepare the pipe for the next command, if there is one
+				if (p.idx < g_data.cur.cmd_count - 1)
+				{
+					pipe(p.pipes[p.idx]);
+				}
+
 				g_data.sig.child_pid = fork();
 				if (g_data.sig.child_pid == 0)
 				{
-					// printf("CMD ID %d STARTED \n", p.idx);
-					close(p.pipes[g_data.cur.cmd_index][READ_END]);
-					dup2(p.pipes[g_data.cur.cmd_index][WRITE_END], STDOUT);
-					execute_cmd(&p, g_data.cur.cmd_index);
+					if (p.fdin != STDIN)
+					{
+						dup2(p.fdin, STDIN);
+						close(p.fdin);
+					}
+					if (p.idx < g_data.cur.cmd_count - 1)
+					{
+						close(p.pipes[p.idx][READ_END]); // We don't need this in the current child
+						if (p.pipes[p.idx][WRITE_END] != STDOUT)
+						{
+							dup2(p.pipes[p.idx][WRITE_END], STDOUT);
+							close(p.pipes[p.idx][WRITE_END]);
+						}
+					}
+
+					execute_cmd(&p, p.idx);
 				}
 				else
 				{
-					close(p.pipes[g_data.cur.cmd_index][WRITE_END]);
-					dup2(p.pipes[g_data.cur.cmd_index][READ_END], STDIN);
-					// printf("going for next command \n");
+					// Parent doesn't need these
+					if (p.fdin != STDIN)
+					{
+						close(p.fdin);
+					}
+					if (p.idx < g_data.cur.cmd_count - 1)
+					{
+						close(p.pipes[p.idx][WRITE_END]);
+						p.fdin = p.pipes[p.idx][READ_END];
+					}
 				}
-				g_data.cur.cmd_index++;
-				p.idx++;
 			}
-			p.idx = -1;
-			while (++p.idx < g_data.cur.cmd_count - 1)
-			{
-				wait(NULL);
-			}
-			// printf("ALL CHILDS HAVE RETURNED \n");
-			pipe(p.pipes[g_data.cur.cmd_index]);	
-			// printf("going for last command... id: %d\n", g_data.cur.cmd_index);
-			execute_cmd(&p, g_data.cur.cmd_index);
+
+			// Wait for all child processes
+			while (waitpid(-1, NULL, 0) > 0);
+
+			exit(0);
 		}
 		else
 		{
-			// printf("waiting for main shit to return \n");
+			// Parent just waits for the main child to finish
 			waitpid(g_data.sig.exec_pid, NULL, 0);
 			g_data.sig.exec_pid = -1;
 		}
 	}
 }
+
 
 // Function to execute one single builtin command
 void	execute_builtin(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:22:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:24:49 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 10:45:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*handle_unclosed_quote(char *input, int mode)
 	char	*buffer;
 
 	buffer = malloc(1);
+	// TODO: add error handling
 	buffer[0] = '\0';
 	while (mode != DEFAULT_MODE)
 	{
