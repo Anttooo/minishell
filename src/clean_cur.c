@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_cur.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:35:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:47:49 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 10:37:24 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ void	clean_cur_struct(void)
 	vec_free(&g_data.cur.types);
 	while (++i < g_data.cur.cmd_count)
 		reset_cmd_struct(i);
-	free(g_data.cur.cmd_list);
+	if (g_data.cur.cmd_list)
+	{
+		free(g_data.cur.cmd_list);
+		g_data.cur.cmd_list = NULL;
+	}
 	g_data.cur.cmd_count = 0;
 	g_data.cur.cmd_index = 0;
 	g_data.cur.err_flag = 0;
