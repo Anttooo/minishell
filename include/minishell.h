@@ -6,14 +6,14 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:44:55 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:25:01 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:36:53 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "types.h"
+# include	"types.h"
 # include	"init.h"
 # include	"debug.h"
 # include	"input.h"

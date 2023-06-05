@@ -27,4 +27,4 @@ clean:
 	rm -f obj/*.o obj/*/*.o bin/*
 
 obj/%.o: src/%.c
-	$(CC) -g $(FLAGS) -c $< -o $@
+	$(CC) -fsanitize=address -g $(FLAGS) -c $< -o $@

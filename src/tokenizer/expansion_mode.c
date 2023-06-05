@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 15:10:08 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:39:56 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ void	handle_expansion_mode(int *mode, int *i)
 			k++;
 		}
 		free(exit_status);
-		// if (g_data.cur.raw[j + 1] != '\0')
 		*i = j + 1;
 		*mode -= 10;
+		return ;
 	}
-
 	if (is_valid_first_character(g_data.cur.raw[j]))
 		j++;
 	while (is_valid_subsequent_character(g_data.cur.raw[j]))

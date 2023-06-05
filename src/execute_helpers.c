@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:24:26 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 15:03:58 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:40:05 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ char *get_command_path(char *token)
 	// TODO: restructure this code to check from an array of possible builtins, this code is invalid
 	if(is_builtin(token) == 1) // 1 = true
 	{
-		g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 1;
 		cmd_path = (ft_strdup("builtin"));
 		return(cmd_path);
 	}
-	g_data.cur.cmd_list[g_data.cur.cmd_index]->builtin = 0;
 	i = 0;
 	if (ft_strncmp(token, "./", 2) == 0) // if token starts with ./
 	{
