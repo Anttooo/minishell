@@ -48,7 +48,7 @@ void	execute_cmd(t_pipes *p, int idx)
 	clean_exit_shell();
 }
 
-void	handle_input_redirection_for_first_cmd(t_pipes *p)
+void	handle_input_redirection_for_execution(t_pipes *p)
 {
 	if (p->idx == 0)
 	{
@@ -64,14 +64,8 @@ void	handle_input_redirection_for_first_cmd(t_pipes *p)
 	}
 }
 
-void	handle_output_redirection_for_last_cmd(t_pipes *p)
+void	handle_output_redirection_for_execution(t_pipes *p)
 {
-	// ft_putstr_fd("are we setting the output redirection?\n", 2);
-	// ft_putstr_fd("setting the output redirection for last command\n", 2);
-	// ft_putstr_fd(g_data.cur.output, 2);
-	// ft_putstr_fd("  \n", 2);
-
-
 	if (g_data.cur.cmd_list[p->idx]->output == NULL)
 		p->fdout = STDOUT;
 	else
@@ -98,12 +92,12 @@ void	handle_pipes(t_pipes *p)
 void	handle_child(t_pipes *p)
 {
 	// Handle input redir
-	handle_input_redirection_for_first_cmd(p);
+	handle_input_redirection_for_execution(p);
 	if (p->idx < g_data.cur.cmd_count - 1) // if not last command, handle pipes
 	{
 		handle_pipes(p);
 	}
-	handle_output_redirection_for_last_cmd(p);
+	handle_output_redirection_for_execution(p);
 	execute_cmd(p, p->idx);
 }
 
