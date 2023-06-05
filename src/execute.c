@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:13:18 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:25:05 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	execute_builtin(void)
 	cmd = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->cmd);
 	idx = what_builtin(cmd);
 	if (idx == 0)
-		return (ft_echo());
+		return (ft_echo(g_data.cur.cmd_index));
 	if (idx == 1)
 		return (ft_cd());
 	if (idx == 2)
