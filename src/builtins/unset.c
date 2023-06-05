@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:34:09 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:58:56 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	handle_unset_env_var(char *arg)
 		g_data.env.vars = remove_env_var(arg);
 }
 
-void	ft_unset(int cmd_idx)
+int	ft_unset(int cmd_idx)
 {
 	int	i;
 
@@ -87,4 +87,5 @@ void	ft_unset(int cmd_idx)
 		handle_unset_env_var(g_data.cur.cmd_list[cmd_idx]->args[i]);
 		i++;
 	}
+	return (0);
 }

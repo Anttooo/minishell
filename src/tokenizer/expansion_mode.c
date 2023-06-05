@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:54:42 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:25:29 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,16 @@ void	handle_expansion_mode(int *mode, int *i)
 	k = 0;
 	if (g_data.cur.raw[j] == '?' && (g_data.cur.raw[j + 1] == ' ' || g_data.cur.raw[j + 1] == '\0'))
 	{
-		ft_printf("Exit status expansion triggered!\n");
-		exit_status = "123"; // get_last_exit_status(); // this function does not exit yet
+		exit_status = ft_itoa(g_data.env.exit_status);
 		while (exit_status[k] != '\0')
 		{
 			add_char_to_buffer(exit_status[k]);
 			k++;
 		}
-		// free(exit_status);
+		free(exit_status);
+		// if (g_data.cur.raw[j + 1] != '\0')
 		*i = j + 1;
 		*mode -= 10;
-		return ;
 	}
 
 	if (is_valid_first_character(g_data.cur.raw[j]))

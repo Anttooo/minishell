@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(filter-out obj/AllTests.o, $(OBJ_FILES))
 	make -C libft
-	$(CC) -fsanitize=address -g $(LDFLAGS) $^ -o bin/$@ -lreadline
+	$(CC) -g $(LDFLAGS) $^ -o bin/$@ -lreadline
 
 run: $(NAME)
 	./bin/$(NAME)
@@ -27,4 +27,4 @@ clean:
 	rm -f obj/*.o obj/*/*.o bin/*
 
 obj/%.o: src/%.c
-	$(CC) -fsanitize=address -g $(FLAGS) -c $< -o $@
+	$(CC) -g $(FLAGS) -c $< -o $@

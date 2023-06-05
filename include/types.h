@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:26:28 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:43:38 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 12:54:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_env
 	char	**paths;
 	char	*prompt;
 	char	*machine;
+	int		exit_status;
 }								t_env;
 
 // struct which contains details for one command

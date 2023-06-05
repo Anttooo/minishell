@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 09:57:54 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 20:50:51 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 13:06:48 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	open_and_close(char *target)
 	return (0);
 }
 
-void	ft_cd(void)
+int	ft_cd(void)
 {
 	char	*target;
 	int		len;
@@ -47,8 +47,9 @@ void	ft_cd(void)
 		target = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[1]);
 		g_data.dir.ptr_target = opendir(target);
 		if (open_and_close(target) == 1)
-			return ;
+			return (errno);
 		getcwd(g_data.dir.current, 1024);
 		g_data.dir.ptr_current = g_data.dir.ptr_target;
 	}
+	return (0);
 }
