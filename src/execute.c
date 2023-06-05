@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 16:06:41 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 17:110:22 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@ int do_checks(char *cmd)
 		ft_putstr_fd("Shell: .: File name argument requiered\n", 2);
 		exit(2);
 	}
-	if (stat(cmd, &statbuf) != 0)
-	{
-		perror("\n");
-		clean_exit_shell();
-		exit(errno);
-	}
+	stat(cmd, &statbuf);
 	if (statbuf.st_mode != 0)
 	{
 		ft_putstr_fd("Shell: /: is a directory\n", 2);
@@ -51,7 +46,6 @@ void	execute_cmd(t_pipes *p, int idx)
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	clean_exit_shell();
-	exit(errno);
 }
 
 void	execute(void)

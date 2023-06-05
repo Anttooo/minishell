@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:32:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 12:55:20 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 17:18:50 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,4 @@ void	init(t_pipes *p)
 		p->fdout = STDOUT;
 	else
 		redir_out(p);
-	// do correct pipes for first and last command
-	dup2(p->fdin, STDIN);
-	dup2(p->fdout, STDOUT);
 }
