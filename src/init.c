@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/05 12:55:14 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:27:40 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	init_directories(void)
 int	init_struct(char **envp)
 {
 	set_builtins();
+	g_data.cur.cmd_list = NULL;
 	g_data.cur.heredoc_mode = 0;
 	g_data.sig.shell_pid = getpid();
 	g_data.sig.exec_pid = -1;

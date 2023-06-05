@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 13:30:47 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:41:10 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_exit(void)
 	idx = g_data.cur.cmd_index;
 	printf("exit\n");
 	clean_exit_shell();
-
+	if (arr_len() == 1)
+		exit(g_data.env.exit_status);
 	if (arr_len() == 2)
 	{
 		g_data.env.exit_status = ft_atoi(g_data.cur.cmd_list[idx]->args[1]);

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:25:05 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 15:28:56 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	execute_cmd(t_pipes *p, int idx)
 {
 	char	*path;
 
-	g_data.env.exit_status = 0;
 	if (is_builtin(g_data.cur.cmd_list[idx]->cmd) == 1)
 	{
 		execute_builtin();
@@ -28,72 +27,65 @@ void	execute_cmd(t_pipes *p, int idx)
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	clean_exit_shell();
-	g_data.env.exit_status = errno;
-	exit(errno);	
 }
 
 void	execute(void)
 {
 	t_pipes p;
+	int		status;
 
 	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin();
 	else
 	{
-		g_data.sig.exec_pid = fork();
-		if (g_data.sig.exec_pid == 0)
-		{
-			init(&p);
-			p.fdin = STDIN;
+		init(&p);
+		p.fdin = STDIN;
 
-			for (p.idx = 0; p.idx < g_data.cur.cmd_count; p.idx++)
+		for (p.idx = 0; p.idx < g_data.cur.cmd_count; p.idx++)
+		{
+			if (p.idx < g_data.cur.cmd_count - 1)
 			{
+				pipe(p.pipes[p.idx]);
+			}
+
+			g_data.sig.child_pid = fork();
+			if (g_data.sig.child_pid == 0)
+			{
+				if (p.fdin != STDIN)
+				{
+					dup2(p.fdin, STDIN);
+					close(p.fdin);
+				}
 				if (p.idx < g_data.cur.cmd_count - 1)
 				{
-					pipe(p.pipes[p.idx]);
-				}
-
-				g_data.sig.child_pid = fork();
-				if (g_data.sig.child_pid == 0)
-				{
-					if (p.fdin != STDIN)
+					close(p.pipes[p.idx][READ_END]);
+					if (p.pipes[p.idx][WRITE_END] != STDOUT)
 					{
-						dup2(p.fdin, STDIN);
-						close(p.fdin);
-					}
-					if (p.idx < g_data.cur.cmd_count - 1)
-					{
-						close(p.pipes[p.idx][READ_END]);
-						if (p.pipes[p.idx][WRITE_END] != STDOUT)
-						{
-							dup2(p.pipes[p.idx][WRITE_END], STDOUT);
-							close(p.pipes[p.idx][WRITE_END]);
-						}
-					}
-					execute_cmd(&p, p.idx);
-				}
-				else
-				{
-					if (p.fdin != STDIN)
-					{
-						close(p.fdin);
-					}
-					if (p.idx < g_data.cur.cmd_count - 1)
-					{
+						dup2(p.pipes[p.idx][WRITE_END], STDOUT);
 						close(p.pipes[p.idx][WRITE_END]);
-						p.fdin = p.pipes[p.idx][READ_END];
 					}
 				}
-				g_data.cur.cmd_index++;
+				execute_cmd(&p, p.idx);
 			}
-			while (waitpid(-1, NULL, 0) > 0)
-				;
-			exit(0);
+			else
+			{
+				if (p.fdin != STDIN)
+				{
+					close(p.fdin);
+				}
+				if (p.idx < g_data.cur.cmd_count - 1)
+				{
+					close(p.pipes[p.idx][WRITE_END]);
+					p.fdin = p.pipes[p.idx][READ_END];
+				}
+			}
+			g_data.cur.cmd_index++;
 		}
-		else
+		while (waitpid(-1, &g_data.env.exit_status, 0) > 0)
+			;
+		if (WIFEXITED(g_data.env.exit_status))
 		{
-			waitpid(g_data.sig.exec_pid, NULL, 0);
-			g_data.sig.exec_pid = -1;
+			g_data.env.exit_status = WEXITSTATUS(g_data.env.exit_status);
 		}
 	}
 }
