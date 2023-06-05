@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:13:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:48:05 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:48:21 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ char	**get_paths(void)
 {
 	char	*env_vars;
 	char	**paths;
-
-	env_vars = getenv("PATH");
+	char	*path_str;
+	
+	path_str = ft_strdup("PATH");
+	env_vars = fetch_env_var(path_str);
 	if (!env_vars)
 		return (NULL);
 	paths = ft_split(env_vars, ':');

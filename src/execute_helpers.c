@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:24:26 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 10:48:13 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:03:58 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	what_builtin(char *cmd)
 			break ;
 	}
 	return (idx);
+}
+
+void	update_env_paths(void)
+{
+	free_arr(g_data.env.paths);
+	g_data.env.paths = get_paths();
 }
 
 char *get_command_path(char *token)
@@ -48,7 +54,8 @@ char *get_command_path(char *token)
 	}
 	else
 	{
-		while (g_data.env.paths[i]) // TODO: should check from env rather than paths, or update paths first
+		update_env_paths();
+		while (g_data.env.paths != NULL && g_data.env.paths[i]) // TODO: should check from env rather than paths, or update paths first
 		{
 			path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
 			cmd_path = ft_strjoin(path_with_slash, token);

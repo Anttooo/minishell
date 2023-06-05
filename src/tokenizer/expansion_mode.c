@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 13:25:29 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 15:10:08 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ char	*fetch_env_var(char *str)
 		if (ft_strncmp(g_data.env.vars[idx], needle, len) == 0)
 			break ;
 	}
+	if (g_data.env.vars[idx] == NULL)
+		return (NULL);
 	word_len = ft_strlen(g_data.env.vars[idx]) - len;
 	var = malloc((word_len + 1) * sizeof(char));
 	if (!var)

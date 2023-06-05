@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(filter-out obj/AllTests.o, $(OBJ_FILES))
 	make -C libft
-	$(CC) -g $(LDFLAGS) $^ -o bin/$@ -lreadline
+	$(CC) -fsanitize=address -g $(LDFLAGS) $^ -o bin/$@ -lreadline
 
 run: $(NAME)
 	./bin/$(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:25:05 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:44:07 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	execute_cmd(t_pipes *p, int idx)
 void	execute(void)
 {
 	t_pipes p;
-
 	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin();
 	else

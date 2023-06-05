@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 12:58:56 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:54:59 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**remove_env_var(char *arg)
 		}
 		i++;
 	}
-	new_env_vars[i] = NULL;
+	new_env_vars[j] = NULL;
 	free_env_vars();
 	return (new_env_vars);
 }

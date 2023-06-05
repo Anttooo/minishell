@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/05 12:55:14 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/05 14:39:18 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	init_struct(char **envp)
 	g_data.sig.shell_pid = getpid();
 	g_data.sig.exec_pid = -1;
 	g_data.env.exit_status = 0;
-	g_data.env.paths = get_paths();
 	g_data.env.vars = get_env_vars(envp);
+	g_data.env.paths = get_paths();
 	g_data.env.user = find_env_var("USER");
 	g_data.env.prompt = ft_strjoin(g_data.env.user, " --> ");
 	g_data.cur.err_flag = 0;
