@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_parent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:53:39 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:25:58 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 16:35:46 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handle_child(t_pipes *p)
 	execute_cmd(p, p->idx);
 }
 
-void	handle_parent(t_pipes *p)
+void handle_parent(t_pipes *p)
 {
 	if (p->fdin != STDIN)
 	{
@@ -40,6 +40,11 @@ void	handle_parent(t_pipes *p)
 	{
 		close(p->pipes[p->idx][WRITE_END]);
 		p->fdin = p->pipes[p->idx][READ_END];
+	}
+	else if (p->idx == g_data.cur.cmd_count - 1)
+	{
 		dup2(p->fdin, STDIN);
+		close(p->fdin);
 	}
 }
+
