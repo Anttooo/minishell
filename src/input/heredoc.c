@@ -3,53 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:08:28 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 15:44:05 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:00:50 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/input.h"
 #include "../../include/command.h"
+#include "../../include/input.h"
 #include "../../include/minishell.h"
 
-extern t_data g_data;
+extern t_data	g_data;
 
-void heredoc_free_part_a_and_b(char **part_a, char **part_b)
+void	heredoc_free_delim_and_input(char **delim, char **input)
 {
-    if (*part_a)
-    {
-        free(*part_a);
-        *part_a = NULL;
-    }
-
-    if (*part_b)
-    {
-        free(*part_b);
-        *part_b = NULL;
-    }
-}
-
-void heredoc_free_delim_and_input(char **delim, char **input)
-{
-    free(*delim);
-    *delim = NULL;
-    free(*input);
-    *input = NULL;
+	free(*delim);
+	*delim = NULL;
+	free(*input);
+	*input = NULL;
 }
 
 int	open_temp_file(void)
 {
-	int		fd;
+	int	fd;
 
-	fd = open("heredoc_temp_file", O_WRONLY | O_TRUNC | \
-							O_CREAT, S_IRUSR | S_IWUSR);
+	fd = open("heredoc_temp_file", O_WRONLY | O_TRUNC | O_CREAT,
+			S_IRUSR | S_IWUSR);
 	if (fd == -1)
 	{
 		perror("");
 		clean_exit_shell();
-		exit (errno);
+		exit(errno);
 	}
 	return (fd);
 }
@@ -85,18 +70,17 @@ char	*get_edited_input(int heredoc_start_idx, char **input)
 	int		delim_end_index;
 
 	part_a = ft_substr(*input, 0, heredoc_start_idx);
-
-	delim_end_index = get_delim_end_index(*input, \
-			get_delim_start_index(*input, heredoc_start_idx));
-	part_b = ft_substr(*input, delim_end_index, \
-			ft_strlen(*input) - delim_end_index);
-	combined = malloc(ft_strlen(part_a) + ft_strlen("heredoc_temp_file") + \
-													ft_strlen(part_b) + 3);
+	delim_end_index = get_delim_end_index(*input, get_delim_start_index(*input, \
+		heredoc_start_idx));
+	part_b = ft_substr(*input, delim_end_index, ft_strlen(*input) \
+		- delim_end_index);
+	combined = malloc(ft_strlen(part_a) + ft_strlen("heredoc_temp_file") \
+		+ ft_strlen(part_b) + 3);
 	malloc_error_check(combined);
 	ft_strlcpy(combined, part_a, ft_strlen(part_a) + 1);
 	ft_strlcat(combined, "< ", ft_strlen(combined) + 3);
-	ft_strlcat(combined, "heredoc_temp_file", ft_strlen(combined) + \
-									ft_strlen("heredoc_temp_file") + 1);
+	ft_strlcat(combined, "heredoc_temp_file", ft_strlen(combined)
+		+ ft_strlen("heredoc_temp_file") + 1);
 	ft_strlcat(combined, part_b, ft_strlen(combined) + ft_strlen(part_b) + 1);
 	heredoc_free_part_a_and_b(&part_a, &part_b);
 	return (combined);

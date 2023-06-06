@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 18:11:12 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:58:36 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,6 @@ int	is_valid_unset_identified(char *arg)
 	}
 	return (1);
 }
-
-// add the functio nto extract until first '=' here
-char	*extract_until_equal(char *arg)
-{
-	int		i;
-	char	*result;
-
-	i = 0;
-	while (arg[i] != '\0' && arg[i] != '=')
-		i++;
-	result = (char *)malloc((i + 1) * sizeof(char));
-	malloc_error_check(result);
-	ft_strlcpy(result, arg, i + 1);
-	return (result);
-}
-
 
 void	handle_unset_env_var(char *arg, int caller)
 {

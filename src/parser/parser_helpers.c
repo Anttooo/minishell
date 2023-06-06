@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:07:36 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:48:39 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-/* 
+/*
 	Counts cmds in input by counting unquoted pipes
 */
 int	get_cmd_count(void)
@@ -53,7 +53,7 @@ int	get_cmd_count(void)
 			while (g_data.cur.raw[i] != skip_char && g_data.cur.raw[i] != '\0')
 				i++;
 		}
-			i++;
+		i++;
 	}
 	g_data.cur.cmd_count = count;
 	return (0);
@@ -67,11 +67,11 @@ int	allocate_cmd_list(void)
 	i = 0;
 	size = sizeof(t_cmd *);
 	g_data.cur.cmd_list = (t_cmd **)malloc(g_data.cur.cmd_count * size);
-	// TODO: add malloc error check (malloc error check takes only char*)
+	string_array_malloc_error_check(g_data.cur.cmd_list);
 	while (i < g_data.cur.cmd_count)
 	{
-		g_data.cur.cmd_list[i] = (t_cmd *)malloc(sizeof (t_cmd));
-		// TODO: add malloc error check (malloc error check takes only char*)
+		g_data.cur.cmd_list[i] = (t_cmd *)malloc(sizeof(t_cmd));
+		malloc_error_check();
 		g_data.cur.cmd_list[i]->args = NULL;
 		g_data.cur.cmd_list[i]->cmd = NULL;
 		g_data.cur.cmd_list[i]->input = NULL;
@@ -112,7 +112,7 @@ int	check_mode(char *token, int type, int cmd_idx)
 		{
 			g_data.cur.cmd_list[cmd_idx]->output_mode = APPEND_MODE;
 			return (OUTPUT_REDIR_APPEND);
-		}	
+		}
 	}
 	return (DEFAULT_MODE);
 }

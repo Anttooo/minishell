@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   evaluate_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 10:46:46 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:52:03 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
 #include "../../include/command.h"
+#include "../../include/minishell.h"
 #include "../../include/tokenizer.h"
 
 extern t_data	g_data;
@@ -41,9 +41,7 @@ int	is_terminating_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE || *mode == DEFAULT_MODE + 10)
 	{
-		if (c == ' ' || c == '\t'
-			|| c == '|'
-			|| c == '<' || c == '>'
+		if (c == ' ' || c == '\t' || c == '|' || c == '<' || c == '>'
 			|| c == '\n')
 			return (true);
 	}
@@ -55,10 +53,8 @@ int	is_stored_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == ' ' || c == '>'
-			|| c == '<' || c == '\t'
-			|| c == '\n' || c == '\''
-			|| c == '\"' || c == '$')
+		if (c == ' ' || c == '>' || c == '<' || c == '\t' || c == '\n'
+			|| c == '\'' || c == '\"' || c == '$')
 			return (false);
 	}
 	if (*mode == DOUBLE_QUOTES_MODE)
@@ -69,21 +65,26 @@ int	is_stored_char(char c, int *mode)
 	return (true);
 }
 
+static void	change_mode_check(int *mode)
+{
+	if (c == '\'')
+	{
+		*mode = SINGLE_QUOTES_MODE;
+		return (true);
+	}
+	if (c == '\"')
+	{
+		*mode = DOUBLE_QUOTES_MODE;
+		return (true);
+	}
+}
+
 // Checks if character changes mode
 int	is_mode_changing_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		if (c == '\'')
-		{
-			*mode = SINGLE_QUOTES_MODE;
-			return (true);
-		}
-		if (c == '\"')
-		{
-			*mode = DOUBLE_QUOTES_MODE;
-			return (true);
-		}
+		change_mode_check(mode);
 	}
 	else if (*mode == DOUBLE_QUOTES_MODE && c == '\"')
 	{
@@ -98,20 +99,6 @@ int	is_mode_changing_char(char c, int *mode)
 		if (g_data.cur.token_buffer.len == 0)
 			store_empty_token();
 		return (true);
-	}
-	return (false);
-}
-
-// Checks if character triggers expansion
-int	is_trigger_char(char c, int	*mode)
-{
-	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE)
-	{
-		if (c == '$')
-		{
-			*mode += 10;
-			return (true);
-		}
 	}
 	return (false);
 }

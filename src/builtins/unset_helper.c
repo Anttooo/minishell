@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_checking.c                                   :+:      :+:    :+:   */
+/*   unset_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 14:47:54 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 18:57:48 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/06/06 18:58:44 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/06/06 18:58:52 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/builtins.h"
 
-void	malloc_error_check(char *string)
-{
-	if (!string)
-	{
-		perror("");
-		clean_exit_shell();
-		exit(errno);
-	}
-}
+extern t_data	g_data;
 
-void	string_array_malloc_error_check(char **string)
+// add the functio nto extract until first '=' here
+char	*extract_until_equal(char *arg)
 {
-	if (!string)
-	{
-		perror("");
-		clean_exit_shell();
-		exit(errno);
-	}
+	int		i;
+	char	*result;
+
+	i = 0;
+	while (arg[i] != '\0' && arg[i] != '=')
+		i++;
+	result = (char *)malloc((i + 1) * sizeof(char));
+	malloc_error_check(result);
+	ft_strlcpy(result, arg, i + 1);
+	return (result);
 }

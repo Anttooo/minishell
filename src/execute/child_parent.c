@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_parent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:53:39 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 16:35:46 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:47:35 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handle_child(t_pipes *p)
 	execute_cmd(p, p->idx);
 }
 
-void handle_parent(t_pipes *p)
+void	handle_parent(t_pipes *p)
 {
 	if (p->fdin != STDIN)
 	{
@@ -47,4 +47,3 @@ void handle_parent(t_pipes *p)
 		close(p->fdin);
 	}
 }
-

@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_checking.c                                   :+:      :+:    :+:   */
+/*   tokenizer_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 14:47:54 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 18:57:48 by joonasmykka      ###   ########.fr       */
+/*   Created: 2023/06/06 18:51:42 by joonasmykka       #+#    #+#             */
+/*   Updated: 2023/06/06 18:53:42 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/tokenizer.h"
+#include "../../include/command.h"
+#include "../../include/minishell.h"
 
-void	malloc_error_check(char *string)
-{
-	if (!string)
-	{
-		perror("");
-		clean_exit_shell();
-		exit(errno);
-	}
-}
+extern t_data	g_data;
 
-void	string_array_malloc_error_check(char **string)
+// Checks if character triggers expansion
+int	is_trigger_char(char c, int *mode)
 {
-	if (!string)
+	if (*mode == DEFAULT_MODE || *mode == DOUBLE_QUOTES_MODE)
 	{
-		perror("");
-		clean_exit_shell();
-		exit(errno);
+		if (c == '$')
+		{
+			*mode += 10;
+			return (true);
+		}
 	}
+	return (false);
 }

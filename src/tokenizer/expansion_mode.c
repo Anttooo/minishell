@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:07:18 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_exit_status_expansion(int *mode, int *input_idx)
 
 	env_var_idx = 0;
 	exit_status = ft_itoa(g_data.env.exit_status);
-	// TODO: check if this needs error handling?
+	malloc_error_check();
 	while (exit_status[env_var_idx] != '\0')
 	{
 		add_char_to_buffer(exit_status[env_var_idx]);
