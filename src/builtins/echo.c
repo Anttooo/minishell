@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 10:16:43 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:22:56 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,33 @@
 
 extern t_data	g_data;
 
-static int	scan_for_options(int *ptr_idx)
+static int	is_option_n(char *arg)
+{
+	if (ft_strncmp(arg, "-n", ft_strlen(arg)) == 0)
+	{
+		return (1);
+	}
+	return (0);
+}
+
+static int	has_option_n(int *ptr_idx)
 {
     char	*arg;
-    int i = 1;
+    int 	i;
+	int		has_option_n;
 
+	i = 1;
+	has_option_n = 0;
     while (g_data.cur.cmd_list[g_data.cur.cmd_index]->args[i] != NULL)
     {
-        arg = ft_strdup(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[i]);
-        if (ft_strncmp(arg, "-n", ft_strlen(arg)) != 0)
+        if (is_option_n(g_data.cur.cmd_list[g_data.cur.cmd_index]->args[i]))
         {
-            *ptr_idx = i;
-            return (0);
+            (*ptr_idx)++;
+			has_option_n = 1;
         }
         i++;
     }
-
-    *ptr_idx = i;
-    return (1);
+    return (has_option_n);
 }
 
 int	ft_echo(int cmd_idx)
@@ -40,9 +49,10 @@ int	ft_echo(int cmd_idx)
 	int	printed_idx;
 
 	printed_idx = 0;
-    if (scan_for_options(&idx) == 0)
+	idx = 1;
+    if (has_option_n(&idx) == 0)
     {
-        while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)
+		while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)
         {
             if (printed_idx > 0)
                 printf(" ");
@@ -56,7 +66,7 @@ int	ft_echo(int cmd_idx)
     {
         while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)
         {
-            if (printed_idx > 0)
+			if (printed_idx > 0)
                 printf(" ");
             printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
             idx++;

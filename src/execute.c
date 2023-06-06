@@ -45,7 +45,21 @@ void	execute_cmd(t_pipes *p, int idx)
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
 	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
+	if (ft_strchr(g_data.cur.cmd_list[idx]->cmd, '/'))
+	{
+		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd(g_data.cur.cmd_list[idx]->cmd, 2);
+		ft_putstr_fd(": ", 2);
+		perror("");
+	}
+	else
+	{
+		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd(g_data.cur.cmd_list[idx]->cmd, 2);
+		ft_putstr_fd(": Command not found\n", 2);
+	}
 	clean_exit_shell();
+	exit(errno);
 }
 
 void	handle_input_redirection_for_execution(t_pipes *p)
