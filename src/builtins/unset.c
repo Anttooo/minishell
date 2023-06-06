@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:54:59 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 08:26:35 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,40 @@ int	is_env_var(char *arg)
 	return (0);
 }
 
+// Unset identifiers can not contain = and they obey the same rules for first
+// and subsequent characters as export variables
+int	is_valid_unset_identified(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (ft_strchr(arg, '=') != NULL)
+	{
+		return (0);
+	}
+	if (is_valid_first_character(arg[0]) == 0)
+	{
+		return (0);
+	}
+	while (arg[i] != '\0')
+	{
+		if (is_valid_subsequent_character(arg[i]) == 0)
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
+
 void	handle_unset_env_var(char *arg)
 {
-	if (is_env_var(arg) == 1)
-		g_data.env.vars = remove_env_var(arg);
+	if (is_valid_unset_identified(arg))
+	{
+		if (is_env_var(arg) == 1)
+			g_data.env.vars = remove_env_var(arg);
+	}
+	else
+		printf("shell: unset: `%s': not a valid identifier\n", arg);
 }
 
 int	ft_unset(int cmd_idx)
