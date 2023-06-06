@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+         #
+#    By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 14:22:41 by jmykkane          #+#    #+#              #
-#    Updated: 2023/05/25 13:04:13 by joonasmykka      ###   ########.fr        #
+#    Updated: 2023/06/06 15:43:26 by oanttoor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ convert_d_i.c convert_p.c convert_s.c convert_u.c convert_x.c\
 convert_precentage.c dir_check.c\
 vec_append.c vec_copy.c vec_filter.c vec_free.c vec_from.c vec_get.c\
 vec_insert.c vec_iter.c vec_map.c vec_new.c vec_pop.c vec_prepend.c\
-vec_push.c vec_remove.c vec_resize.c ft_strcmp.c
+vec_push.c vec_remove.c vec_resize.c ft_strcmp.c ft_isnum.c
 
 SRC_O = $(SRC:.c=.o)
 
