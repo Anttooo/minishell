@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 10:27:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:46:46 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	evaluate_char(char c, int *mode, int *i)
 // Checks if character terminates a token
 int	is_terminating_char(char c, int *mode)
 {
-	if (*mode == DEFAULT_MODE)
+	if (*mode == DEFAULT_MODE || *mode == DEFAULT_MODE + 10)
 	{
 		if (c == ' ' || c == '\t'
 			|| c == '|'

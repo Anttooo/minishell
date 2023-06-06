@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 10:13:24 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:45:42 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	handle_env_var_expansion(int *mode, int *input_idx, int identifier_idx)
 		*input_idx = identifier_idx - 1;
 		handle_expanded_value(identifier);
 	}
-	else if (g_data.cur.raw[*input_idx + 1] == ' ' || g_data.cur.raw[*input_idx + 1] == '\0')
+	else if (is_terminating_char(g_data.cur.raw[*input_idx + 1], mode))
 		add_char_to_buffer('$');
 	else if (*mode == DOUBLE_QUOTES_MODE + 10)
 		add_char_to_buffer('$');
