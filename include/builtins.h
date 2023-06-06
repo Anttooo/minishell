@@ -6,12 +6,15 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:30:53 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 17:52:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+# define EXPORT 1
+# define SHELL 2
 
 # include "minishell.h"
 # include <signal.h>

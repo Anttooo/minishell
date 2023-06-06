@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:40:33 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:52:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,12 @@ int	is_valid_unset_identified(char *arg)
 		{
 			return (0);
 		}
+		i++;
 	}
 	return (1);
 }
 
-void	handle_unset_env_var(char *arg)
+void	handle_unset_env_var(char *arg, int caller)
 {
 	if (is_valid_unset_identified(arg))
 	{
@@ -82,17 +83,20 @@ void	handle_unset_env_var(char *arg)
 			g_data.env.vars = remove_env_var(arg);
 	}
 	else
-		printf("shell: unset: `%s': not a valid identifier\n", arg);
+	{
+		if (caller == SHELL)
+			printf("shell: unset: `%s': not a valid identifier\n", arg);
+	}
 }
 
-int	ft_unset(int cmd_idx)
+int	ft_unset(int cmd_idx, int caller)
 {
 	int	i;
 
 	i = 1;
 	while (g_data.cur.cmd_list[cmd_idx]->args[i] != NULL)
 	{
-		handle_unset_env_var(g_data.cur.cmd_list[cmd_idx]->args[i]);
+		handle_unset_env_var(g_data.cur.cmd_list[cmd_idx]->args[i], caller);
 		i++;
 	}
 	return (0);
