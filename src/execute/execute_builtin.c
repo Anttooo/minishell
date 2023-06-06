@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:51:24 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 13:52:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:19:37 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	execute_builtin(t_pipes *p)
 	}
 	close(original_stdout);
 	free(cmd);
-	exit(return_value);
+	if (g_data.cur.cmd_count > 1)
+		exit(return_value);
 }
