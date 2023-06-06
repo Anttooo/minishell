@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:51:24 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:26:44 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 17:28:44 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	choose_builtin(int idx)
 {
 	int	return_value;
 
+	return_value = 0;
 	if (idx == 0)
 		return_value = ft_echo(g_data.cur.cmd_index);
 	if (idx == 1)
@@ -56,4 +57,5 @@ void	execute_builtin(t_pipes *p)
 	free(cmd);
 	if (g_data.cur.cmd_count > 1)
 		exit(return_value);
+	ft_putstr_fd("WE SGHOULD NOT EXIT\n", 2);
 }

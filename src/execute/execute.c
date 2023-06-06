@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:26:34 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 17:23:41 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	execute(void)
 	t_pipes	p;
 
 	p.idx = 0;
-	original_stdin = dup(STDIN);
-	if (g_data.cur.cmd_count == 1
+	if (g_data.cur.cmd_count == 1 \
 		&& is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin(&p);
 	else
 	{
+		original_stdin = dup(STDIN);
 		p.fdin = STDIN;
 		while (p.idx < g_data.cur.cmd_count)
 		{
