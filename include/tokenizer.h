@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:25:58 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 18:26:00 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 10:26:00 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	add_char_within_quotes(char c);
 void	store_current_token(void);
 void	store_current_token_within_quotes(void);
 void	store_token(void);
+void	store_empty_token(void);
 
 // Char evaluation
 int		evaluate_char(char c, int *mode, int *i);

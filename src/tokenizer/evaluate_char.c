@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/01 19:26:50 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:27:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,15 @@ int	is_mode_changing_char(char c, int *mode)
 	else if (*mode == DOUBLE_QUOTES_MODE && c == '\"')
 	{
 		*mode = DEFAULT_MODE;
+		if (g_data.cur.token_buffer.len == 0)
+			store_empty_token();
 		return (true);
 	}
 	else if (*mode == SINGLE_QUOTES_MODE && c == '\'')
 	{
 		*mode = DEFAULT_MODE;
+		if (g_data.cur.token_buffer.len == 0)
+			store_empty_token();
 		return (true);
 	}
 	return (false);
