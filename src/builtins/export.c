@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 17:48:20 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 18:00:20 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ft_export(int cmd_idx)
 	{
 		if (is_valid_identifier(arg) == 1)
 		{
-			ft_unset(cmd_idx);
+			ft_unset(cmd_idx, EXPORT);
 			g_data.env.vars = add_arg_to_env_vars(arg);
 		}
 		else

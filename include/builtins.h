@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 17:52:25 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 17:57:24 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_cd(void);
 int		ft_pwd(void);
 int		ft_env(void);
 void	ft_exit(void);
-int		ft_unset(int cmd_idx);
+int		ft_unset(int cmd_idx, int caller);
 int		ft_export(int cmd_idx);
 int		ft_echo(int cmd_index);
 

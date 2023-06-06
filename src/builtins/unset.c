@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 17:52:25 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 18:11:12 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,41 @@ int	is_valid_unset_identified(char *arg)
 	return (1);
 }
 
+// add the functio nto extract until first '=' here
+char	*extract_until_equal(char *arg)
+{
+	int		i;
+	char	*result;
+
+	i = 0;
+	while (arg[i] != '\0' && arg[i] != '=')
+		i++;
+	result = (char *)malloc((i + 1) * sizeof(char));
+	malloc_error_check(result);
+	ft_strlcpy(result, arg, i + 1);
+	return (result);
+}
+
+
 void	handle_unset_env_var(char *arg, int caller)
 {
+	char	*arg_without_equal;
+
 	if (is_valid_unset_identified(arg))
 	{
 		if (is_env_var(arg) == 1)
 			g_data.env.vars = remove_env_var(arg);
 	}
+	else if (caller == EXPORT)
+	{
+		arg_without_equal = extract_until_equal(arg);
+		if (is_env_var(arg_without_equal) == 1)
+			g_data.env.vars = remove_env_var(arg_without_equal);
+		free(arg_without_equal);
+	}
 	else
 	{
-		if (caller == SHELL)
-			printf("shell: unset: `%s': not a valid identifier\n", arg);
+		printf("shell: unset: `%s': not a valid identifier\n", arg);
 	}
 }
 
