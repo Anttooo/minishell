@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:49:15 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 13:23:01 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 13:33:04 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,22 @@ static int	ft_isvalid_int(char *str)
 void	ft_exit(void)
 {
 	int idx;
+	int	len;
 
 	idx = g_data.cur.cmd_index;
+	len = arr_len();
 	printf("exit\n");
-	if (arr_len() == 1)
+	if (len > 2)
+	{
+		ft_putstr_fd("Shell: Exit: too many arguments\n", 2);
+		return ;
+	}
+	if (len == 1)
 	{
 		clean_exit_shell();
 		exit(g_data.env.exit_status);
 	}
-	else if (arr_len() == 2)
+	else if (len == 2)
 	{
 		if (ft_isvalid_int(g_data.cur.cmd_list[idx]->args[1]))
 		{
