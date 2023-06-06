@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:33 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 15:39:56 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:13:24 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,52 @@
 
 extern t_data	g_data;
 
-// Expansion mode helper
-static void	handle_expanded_value(char *env_var)
+
+int	is_exit_status_expansion(int j)
+{
+	if (g_data.cur.raw[j] == '?' && (g_data.cur.raw[j + 1] == ' ' || g_data.cur.raw[j + 1] == '\0'))
+		return (1);
+	else
+		return (0);
+}
+
+// env_var_idx = index in the value e.g. 123 in abc=123
+void	handle_exit_status_expansion(int *mode, int *input_idx)
+{
+	int		env_var_idx;
+	char	*exit_status;
+
+	env_var_idx = 0;
+	exit_status = ft_itoa(g_data.env.exit_status);
+	// TODO: check if this needs error handling?
+	while (exit_status[env_var_idx] != '\0')
+	{
+		add_char_to_buffer(exit_status[env_var_idx]);
+		env_var_idx++;
+	}
+	free(exit_status);
+	(*input_idx)++;
+	*mode -= 10;
+}
+
+char	*get_identifier(int *input_idx, int *identifier_idx)
+{
+	char	*identifier;
+
+	if (is_valid_first_character(g_data.cur.raw[*identifier_idx]))
+		(*identifier_idx)++;
+	while (is_valid_subsequent_character(g_data.cur.raw[*identifier_idx]))
+		(*identifier_idx)++;
+	identifier = ft_substr(g_data.cur.raw, (*input_idx + 1), (*identifier_idx - 1) - *input_idx);
+	return (identifier);
+}
+
+static void	handle_expanded_value(char *identifier)
 {
 	char	*expanded_value;
 	int		j;
 
-	expanded_value = fetch_env_var(env_var);
+	expanded_value = fetch_env_var(identifier);
 	if (expanded_value)
 	{
 		j = 0;
@@ -35,42 +74,39 @@ static void	handle_expanded_value(char *env_var)
 	}
 }
 
-// Handles expansion mode
-void	handle_expansion_mode(int *mode, int *i)
+void	handle_env_var_expansion(int *mode, int *input_idx, int identifier_idx)
 {
-	char	*env_var;
-	int		j;
-	int		k;
-	char	*exit_status;
-
-	j = *i + 1;
-	k = 0;
-	if (g_data.cur.raw[j] == '?' && (g_data.cur.raw[j + 1] == ' ' || g_data.cur.raw[j + 1] == '\0'))
+	char	*identifier;
+	
+	identifier = get_identifier(input_idx, &identifier_idx);
+	if (ft_strlen(identifier) > 0)
 	{
-		exit_status = ft_itoa(g_data.env.exit_status);
-		while (exit_status[k] != '\0')
-		{
-			add_char_to_buffer(exit_status[k]);
-			k++;
-		}
-		free(exit_status);
-		*i = j + 1;
-		*mode -= 10;
-		return ;
+		*input_idx = identifier_idx - 1;
+		handle_expanded_value(identifier);
 	}
-	if (is_valid_first_character(g_data.cur.raw[j]))
-		j++;
-	while (is_valid_subsequent_character(g_data.cur.raw[j]))
-		j++;
-	env_var = ft_substr(g_data.cur.raw, (*i + 1), (j - 1) - *i);
-	if (ft_strlen(env_var) > 0)
-	{
-		*i = j - 1;
-		handle_expanded_value(env_var);
-	}
-	else if (g_data.cur.raw[*i + 1] == ' ' || g_data.cur.raw[*i + 1] == '\0')
+	else if (g_data.cur.raw[*input_idx + 1] == ' ' || g_data.cur.raw[*input_idx + 1] == '\0')
+		add_char_to_buffer('$');
+	else if (*mode == DOUBLE_QUOTES_MODE + 10)
 		add_char_to_buffer('$');
 	*mode -= 10;
+}
+
+// Handles expansion mode
+// input_idx = index in the raw input
+// identifier_idx = index in the identifier, e.g. abc in abc=123
+void	handle_expansion_mode(int *mode, int *input_idx)
+{
+	int		identifier_idx;
+	
+	identifier_idx = *input_idx + 1;
+	if (is_exit_status_expansion(identifier_idx) == 1)
+	{
+		handle_exit_status_expansion(mode, input_idx);
+	}
+	else
+	{
+		handle_env_var_expansion(mode, input_idx, identifier_idx);
+	}
 }
 
 // Check if the character is a letter or underscore
