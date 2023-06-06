@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/05 15:33:15 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 11:25:02 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ int	main(int argc, char **argv, char **envp)
 			execute_loop(input);
 			clean_cur_struct();
 		}
-		if (input == NULL && g_data.sig.exec_pid == NO_CHILDS)
+		else if (input == NULL && g_data.sig.exec_pid == NO_CHILDS)
+		{
+			printf("We're exiting here.\n");
 			ft_exit();
+		}
 	}
 	clean_exit_shell();
 	return (g_data.env.exit_status);

@@ -83,23 +83,18 @@ void	handle_output_redirection_for_execution(t_pipes *p)
 	}
 }
 
-void	handle_pipes(t_pipes *p)
-{
-	close(p->pipes[p->idx][READ_END]);
-	if (p->pipes[p->idx][WRITE_END] != STDOUT)
-	{
-		dup2(p->pipes[p->idx][WRITE_END], STDOUT);
-		close(p->pipes[p->idx][WRITE_END]);
-	}
-}
-
 void	handle_child(t_pipes *p)
 {
 	// Handle input redir
 	handle_input_redirection_for_execution(p);
 	if (p->idx < g_data.cur.cmd_count - 1) // if not last command, handle pipes
 	{
-		handle_pipes(p);
+		close(p->pipes[p->idx][READ_END]);
+		if (p->pipes[p->idx][WRITE_END] != STDOUT)
+		{
+			dup2(p->pipes[p->idx][WRITE_END], STDOUT);
+			close(p->pipes[p->idx][WRITE_END]);
+		}
 	}
 	handle_output_redirection_for_execution(p);
 	execute_cmd(p, p->idx);
@@ -116,6 +111,7 @@ void	handle_parent(t_pipes *p)
 	{
 		close(p->pipes[p->idx][WRITE_END]);
 		p->fdin = p->pipes[p->idx][READ_END];
+		dup2(p->fdin, STDIN);
 	}
 }
 
@@ -125,11 +121,11 @@ void	command_loop(t_pipes *p)
 	if (p->idx < g_data.cur.cmd_count - 1)
 		pipe(p->pipes[p->idx]);
 	g_data.sig.child_pid = fork();
-	if (g_data.sig.child_pid == 0) // child process
+	if (g_data.sig.child_pid == 0)
 	{
 		handle_child(p);
 	}
-	else // Parent process
+	else
 	{
 		handle_parent(p);
 	}
@@ -138,10 +134,12 @@ void	command_loop(t_pipes *p)
 
 void	execute(void)
 {
+	int	original_stdin;
 	t_pipes p;
 	int		status;
 
 	p.idx = 0;
+	original_stdin = dup(STDIN);
 	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin(&p);
 	else
@@ -154,6 +152,8 @@ void	execute(void)
 		}
 		while (waitpid(-1, &g_data.env.exit_status, 0) > 0) // this waits for the commands to all finish
 			;
+		dup2(original_stdin, STDIN);
+		close(original_stdin);
 		if (WIFEXITED(g_data.env.exit_status))
 			g_data.env.exit_status = WEXITSTATUS(g_data.env.exit_status);
 	}
