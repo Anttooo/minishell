@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 18:59:37 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:16:43 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_echo(int cmd_idx)
     {
         while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)
         {
-            if (printed_idx > 1)
+            if (printed_idx > 0)
                 printf(" ");
             printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
             idx++;
@@ -56,7 +56,7 @@ int	ft_echo(int cmd_idx)
     {
         while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)
         {
-            if (idx > 1)
+            if (printed_idx > 0)
                 printf(" ");
             printf("%s", g_data.cur.cmd_list[cmd_idx]->args[idx]);
             idx++;
