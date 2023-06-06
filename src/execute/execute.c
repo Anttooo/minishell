@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../include/execute.h"
 
 extern t_data g_data;
 
@@ -187,7 +187,7 @@ int	execute_builtin(t_pipes *p)
 		ft_exit();
 	if (p->out_redirected == TRUE)
 	{
-		dup2(original_stdout, STDOUT);	
+		dup2(original_stdout, STDOUT);
 	}
 	close(original_stdout);
 	free(cmd);

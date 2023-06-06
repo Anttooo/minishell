@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:32:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 19:00:02 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:30:17 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../include/execute.h"
 
 extern t_data g_data;
 
