@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:13:41 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 14:42:29 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,21 @@
 # include <signal.h>
 # include <dirent.h>
 
+// Builtin functions
 int		ft_cd(void);
 int		ft_pwd(void);
 int		ft_env(void);
-int		ft_echo(int cmd_index);
 void	ft_exit(void);
 int		ft_unset(int cmd_idx);
 int		ft_export(int cmd_idx);
+int		ft_echo(int cmd_index);
 
-// Helpers for export and unset
-int		get_env_var_count(void);
-void	free_env_vars(void);
+// Helpers for builtins
 int		arr_len(void);
+int		ft_isnum(int c);
+void	free_env_vars(void);
+int		get_env_var_count(void);
+int		get_env_var_count(void);
+int		ft_isvalid_int(char *str);
 
 #endif

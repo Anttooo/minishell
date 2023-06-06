@@ -6,11 +6,11 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:32:23 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 19:00:02 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../include/execute.h"
 
 extern t_data g_data;
 

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:25:58 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 10:26:00 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	handle_expansion_mode(int *mode, int *i);
 int		is_valid_subsequent_character(char c);
 int		is_valid_first_character(char c);
 char	*fetch_env_var(char *str);
+int		is_exit_status_expansion(int j);
 
 // Edge cases
 int		is_edge_case(char c, char next_c, int *mode, int *i);

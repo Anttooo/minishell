@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 09:57:54 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 13:05:05 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 14:10:28 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	open_and_close(char *target)
 	if (closedir(g_data.dir.ptr_current) != 0)
 	{
 		perror("closedir function failed \n");
-		clean_exit_shell();		
+		clean_exit_shell();
 	}
 	if (chdir(target) != 0)
 	{

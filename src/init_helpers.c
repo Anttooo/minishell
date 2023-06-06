@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:13:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 14:48:21 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**get_paths(void)
 	char	*env_vars;
 	char	**paths;
 	char	*path_str;
-	
+
 	path_str = ft_strdup("PATH");
 	env_vars = fetch_env_var(path_str);
 	if (!env_vars)

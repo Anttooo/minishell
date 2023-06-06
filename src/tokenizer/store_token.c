@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:45:49 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 10:32:51 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	store_empty_token(void)
 
 	type = WITHIN_QUOTES;
 	token = (char *) malloc(sizeof(char));
-	if (token == NULL) 
+	if (token == NULL)
 	{
 		ft_printf("malloc failed\n");
 		return ;
