@@ -67,16 +67,16 @@ int	allocate_cmd_list(void)
 	i = 0;
 	size = sizeof(t_cmd *);
 	g_data.cur.cmd_list = (t_cmd **)malloc(g_data.cur.cmd_count * size);
-	string_array_malloc_error_check(g_data.cur.cmd_list);
+	if (!g_data.cur.cmd_list[i])
+	{
+		perror("");
+		clean_exit_shell();
+		exit(errno);
+	}
 	while (i < g_data.cur.cmd_count)
 	{
-		g_data.cur.cmd_list[i] = (t_cmd *)malloc(sizeof(t_cmd));
-		malloc_error_check();
-		g_data.cur.cmd_list[i]->args = NULL;
-		g_data.cur.cmd_list[i]->cmd = NULL;
-		g_data.cur.cmd_list[i]->input = NULL;
-		g_data.cur.cmd_list[i]->output = NULL;
-		g_data.cur.cmd_list[i]->output_mode = 0;
+		if (parser_allocate(i) != 0)
+			exit(errno);
 		i++;
 	}
 	return (0);

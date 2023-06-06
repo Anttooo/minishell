@@ -65,7 +65,7 @@ int	is_stored_char(char c, int *mode)
 	return (true);
 }
 
-static void	change_mode_check(int *mode)
+static bool	change_mode_check(int *mode, char c)
 {
 	if (c == '\'')
 	{
@@ -77,6 +77,7 @@ static void	change_mode_check(int *mode)
 		*mode = DOUBLE_QUOTES_MODE;
 		return (true);
 	}
+	return (false);
 }
 
 // Checks if character changes mode
@@ -84,7 +85,8 @@ int	is_mode_changing_char(char c, int *mode)
 {
 	if (*mode == DEFAULT_MODE)
 	{
-		change_mode_check(mode);
+		if (change_mode_check(mode, c) == true)
+			return (true);
 	}
 	else if (*mode == DOUBLE_QUOTES_MODE && c == '\"')
 	{

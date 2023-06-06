@@ -24,7 +24,7 @@ void	handle_exit_status_expansion(int *mode, int *input_idx)
 
 	env_var_idx = 0;
 	exit_status = ft_itoa(g_data.env.exit_status);
-	malloc_error_check();
+	malloc_error_check(exit_status);
 	while (exit_status[env_var_idx] != '\0')
 	{
 		add_char_to_buffer(exit_status[env_var_idx]);

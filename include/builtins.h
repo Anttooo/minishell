@@ -25,9 +25,9 @@ int		ft_cd(void);
 int		ft_pwd(void);
 int		ft_env(void);
 void	ft_exit(void);
-int		ft_unset(int cmd_idx, int caller);
 int		ft_export(int cmd_idx);
 int		ft_echo(int cmd_index);
+int		ft_unset(int cmd_idx, int caller);
 
 // Helpers for builtins
 int		arr_len(void);
@@ -37,5 +37,6 @@ int		is_env_var(char *arg);
 int		get_env_var_count(void);
 int		get_env_var_count(void);
 int		ft_isvalid_int(char *str);
+char	*extract_until_equal(char *arg);
 
 #endif

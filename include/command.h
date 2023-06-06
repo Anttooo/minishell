@@ -24,19 +24,20 @@
 # define APPEND_MODE 	1
 # define OVERWRITE_MODE 2
 
-t_token			*get_token(int token_idx);
+int				is_delim(int i);
 int				get_cmd_count(void);
 int				parse_commands(void);
 int				tokenize_input(void);
-int				allocate_cmd_list(void);
-void			parse_single_cmd(int cmd_idx, int *token_idx);
-int				is_delim(int i);
 int				is_builtin(char *cmd);
-void			handle_cmd(int cmd_idx, char *token, int *args_index);
+int             parser_allocate(int i);
+int				allocate_cmd_list(void);
+t_token			*get_token(int token_idx);
+void			parse_single_cmd(int cmd_idx, int *token_idx);
 int				check_mode(char *token, int type, int cmd_idx);
+void			handle_cmd(int cmd_idx, char *token, int *args_index);
 void			handle_args(int cmd_idx, char *token, int *args_index);
-void			handle_cmd_and_args(int cmd_idx, char *token, int *args_index);
 int				handle_input_redirection(int cmd_idx, char *token, int *mode);
+void			handle_cmd_and_args(int cmd_idx, char *token, int *args_index);
 int				handle_output_redirection(int cmd_idx, char *token, int *mode);
 
 #endif
