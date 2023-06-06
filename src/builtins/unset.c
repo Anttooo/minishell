@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:04:53 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:40:33 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,6 @@ char	**remove_env_var(char *arg)
 	new_env_vars[j] = NULL;
 	free_env_vars();
 	return (new_env_vars);
-}
-
-int	is_env_var(char *arg)
-{
-	int		idx;
-	char	*needle;
-
-	idx = -1;
-	needle = ft_strjoin(arg, "=");
-	while (g_data.env.vars[++idx] != NULL)
-	{
-		if (ft_strncmp(g_data.env.vars[idx], needle, ft_strlen(needle)) == 0)
-		{
-			free (needle);
-			return (1);
-		}
-	}
-	free(needle);
-	return (0);
 }
 
 // Unset identifiers can not contain = and they obey the same rules for first

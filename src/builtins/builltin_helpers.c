@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builltin_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:11:12 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:27:06 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:30:49 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_env_vars(void)
 	free (g_data.env.vars);
 }
 
-int		get_env_var_count(void)
+int	get_env_var_count(void)
 {
 	int	i;
 
@@ -36,13 +36,6 @@ int		get_env_var_count(void)
 	while (g_data.env.vars[i] != NULL)
 		i++;
 	return (i);
-}
-
-int	ft_isnum(int c)
-{
-	if (c >= 47 && c <= 57)
-		return (1);
-	return (0);
 }
 
 int	arr_len(void)
@@ -73,4 +66,23 @@ int	ft_isvalid_int(char *str)
 		i++;
 	}
 	return (1);
+}
+
+int	is_env_var(char *arg)
+{
+	int		idx;
+	char	*needle;
+
+	idx = -1;
+	needle = ft_strjoin(arg, "=");
+	while (g_data.env.vars[++idx] != NULL)
+	{
+		if (ft_strncmp(g_data.env.vars[idx], needle, ft_strlen(needle)) == 0)
+		{
+			free(needle);
+			return (1);
+		}
+	}
+	free(needle);
+	return (0);
 }

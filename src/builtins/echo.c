@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:04:33 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 14:42:22 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:27:01 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	has_option_n(int *ptr_idx)
 	}
 	return (has_option_n);
 }
+
 static void	with_option(int cmd_idx, int idx, int printed_idx)
 {
 	while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)
@@ -53,6 +54,7 @@ static void	with_option(int cmd_idx, int idx, int printed_idx)
 	}
 	printf("\n");
 }
+
 static void	without_option(int cmd_idx, int idx)
 {
 	while (g_data.cur.cmd_list[cmd_idx]->args[idx] != NULL)

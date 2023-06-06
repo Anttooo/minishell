@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 15:08:29 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:39:11 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ char	**get_env_vars(char **envp)
 {
 	char	**vars;
 	int		idx;
-	int		len;
 
 	idx = 0;
 	while (envp[idx] != NULL)
 		idx++;
 	vars = malloc(sizeof(char *) * (idx + 1));
 	string_array_malloc_error_check(vars);
-	len = idx;
 	idx = 0;
 	while (envp[idx] != NULL)
 	{
@@ -37,11 +35,6 @@ char	**get_env_vars(char **envp)
 	return (vars);
 }
 
-// Used to get current terminal settings to term struct
-// Setting c_lflag with ECHOCTL. It is wheter to print or not to print
-// control characters "~" is bitwise NOT operator that basicly makes it
-// turn to false. Default is true.
-// Used to apply modified settings.
 void	termios_settings(void)
 {
 	struct termios	term;
