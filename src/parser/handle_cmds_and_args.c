@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmds_and_args.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:21:26 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:22:10 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 15:06:02 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	handle_cmd(int cmd_idx, char *token, int *args_index)
 {
 	g_data.cur.cmd_list[cmd_idx]->cmd = ft_strdup(token);
 	g_data.cur.cmd_list[cmd_idx]->args = (char **)malloc(100 * sizeof(char *));
+	string_array_malloc_error_check(g_data.cur.cmd_list[cmd_idx]->args);
 	g_data.cur.cmd_list[cmd_idx]->args[(*args_index)++] = ft_strdup(token);
 }
 

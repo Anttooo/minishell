@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
+/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/05/30 17:41:12 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 15:07:36 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	get_cmd_count(void)
 	return (0);
 }
 
-// malloc space for each command in g_data.cur.cmd_list
 int	allocate_cmd_list(void)
 {
 	unsigned long	size;
@@ -68,9 +67,11 @@ int	allocate_cmd_list(void)
 	i = 0;
 	size = sizeof(t_cmd *);
 	g_data.cur.cmd_list = (t_cmd **)malloc(g_data.cur.cmd_count * size);
+	// TODO: add malloc error check (malloc error check takes only char*)
 	while (i < g_data.cur.cmd_count)
 	{
 		g_data.cur.cmd_list[i] = (t_cmd *)malloc(sizeof (t_cmd));
+		// TODO: add malloc error check (malloc error check takes only char*)
 		g_data.cur.cmd_list[i]->args = NULL;
 		g_data.cur.cmd_list[i]->cmd = NULL;
 		g_data.cur.cmd_list[i]->input = NULL;

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:44:07 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:05:33 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,7 @@ char	**add_arg_to_env_vars(char *arg)
 
 	i = 0;
 	new_env_vars = (char **)malloc((get_env_var_count() + 2) * sizeof(char *));
-	if (!new_env_vars)
-	{
-		clean_exit_shell();
-		perror("Shell: ");
-		exit(1);
-	}
+	string_array_malloc_error_check(new_env_vars);
 	while (g_data.env.vars[i] != NULL)
 	{
 		new_env_vars[i] = ft_strdup(g_data.env.vars[i]);

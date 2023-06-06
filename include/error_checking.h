@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:46:09 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 14:54:03 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:05:21 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include <errno.h>
 
 void	malloc_error_check(char *string);
+void	string_array_malloc_error_check(char **string);
 
 #endif

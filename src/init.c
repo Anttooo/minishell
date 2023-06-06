@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:08:29 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ char	**get_env_vars(char **envp)
 	while (envp[idx] != NULL)
 		idx++;
 	vars = malloc(sizeof(char *) * (idx + 1));
+	string_array_malloc_error_check(vars);
 	len = idx;
-	if (!vars)
-		return (NULL);
 	idx = 0;
 	while (envp[idx] != NULL)
 	{
@@ -66,6 +65,7 @@ void	set_builtins(void)
 void	init_directories(void)
 {
 	g_data.dir.current = (char *)malloc(1024);
+	malloc_error_check(g_data.dir.current);
 	getcwd(g_data.dir.current, 1024);
 	g_data.dir.ptr_current = opendir(g_data.dir.current);
 	chdir(g_data.dir.current);

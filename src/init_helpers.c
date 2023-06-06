@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:13:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:57:54 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ char	*find_env_var(char *str)
 	}
 	word_len = ft_strlen(g_data.env.vars[idx]) - len - 1;
 	user = malloc((word_len + 1) * sizeof(char));
-	if (!user)
-		return (NULL);
+	malloc_error_check(user);
 	ft_memcpy(user, &g_data.env.vars[idx][len + 1], word_len);
 	user[word_len] = '\0';
 	return (user);

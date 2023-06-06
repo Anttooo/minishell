@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:47:01 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/01 15:05:11 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:01:46 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ t_token	*get_token(int token_idx)
 	t_token	*t;
 
 	t = (t_token *)malloc(sizeof(t_token));
+	if (!t)
+	{
+		perror("");
+		clean_exit_shell();
+		exit (errno);
+	}
 	t->token = *(char **)vec_get(&g_data.cur.tokens, token_idx);
 	t->type = *(int *)vec_get(&g_data.cur.types, token_idx);
 	return (t);

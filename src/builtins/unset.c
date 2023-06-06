@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 07:55:31 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 08:26:35 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:04:53 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ char	**remove_env_var(char *arg)
 	i = 0;
 	j = 0;
 	new_env_vars = (char **)malloc(get_env_var_count() * sizeof(char *));
-	if (!new_env_vars)
-	{
-		// handle error
-	}
+	string_array_malloc_error_check(new_env_vars);
 	while (g_data.env.vars[i] != NULL)
 	{
 		if (is_var_to_be_removed(arg, g_data.env.vars[i]) == 0)

@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:51:57 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 14:12:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:02:24 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,7 @@ char	*fetch_env_var(char *str)
 		return (NULL);
 	word_len = ft_strlen(g_data.env.vars[idx]) - len;
 	var = malloc((word_len + 1) * sizeof(char));
-	if (!var)
-	{
-		free(needle);
-		return (NULL);
-	}
+	malloc_error_check(var);
 	ft_strlcpy(var, &g_data.env.vars[idx][len], word_len + 1);
 	free(needle);
 	return (var);

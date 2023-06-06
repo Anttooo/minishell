@@ -6,7 +6,7 @@
 /*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:22:42 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/05 10:45:04 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:00:06 by oanttoor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ char	*update_multiline_buffer(char *buffer, char *new_input)
 	char	*temp;
 
 	temp = malloc(ft_strlen(buffer) + ft_strlen(new_input) + 2);
-	if (!temp)
-		clean_exit_shell();
+	malloc_error_check(temp);
 	ft_strlcpy(temp, buffer, ft_strlen(buffer) + 1);
 	ft_strlcat(temp, "\n", ft_strlen(buffer) + ft_strlen("\n") + 1);
 	ft_strlcat(temp, new_input, ft_strlen(temp) + ft_strlen(new_input) + 1);
@@ -37,8 +36,7 @@ char	*combine_input_and_multiline_buffer(char *input, char *buffer)
 	char	*temp;
 
 	temp = malloc(ft_strlen(input) + ft_strlen(buffer) + 1);
-	if (!temp)
-		clean_exit_shell();
+	malloc_error_check(temp);
 	ft_strlcpy(temp, input, ft_strlen(input) + 1);
 	ft_strlcat(temp, buffer, ft_strlen(temp) + ft_strlen(buffer) + 1);
 	free(input);
@@ -53,7 +51,7 @@ char	*handle_unclosed_quote(char *input, int mode)
 	char	*buffer;
 
 	buffer = malloc(1);
-	// TODO: add error handling
+	malloc_error_check(buffer);
 	buffer[0] = '\0';
 	while (mode != DEFAULT_MODE)
 	{
