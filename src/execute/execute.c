@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:07:37 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:26:34 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	execute_cmd(t_pipes *p, int idx)
 	if (is_builtin(g_data.cur.cmd_list[idx]->cmd) == 1)
 		execute_builtin(p);
 	path = get_command_path(g_data.cur.cmd_list[idx]->cmd);
-	execve(g_data.cur.cmd_list[idx]->cmd,
-			g_data.cur.cmd_list[idx]->args,
-			g_data.env.vars);
+	execve(g_data.cur.cmd_list[idx]->cmd, g_data.cur.cmd_list[idx]->args,
+		g_data.env.vars);
 	execve(path, g_data.cur.cmd_list[idx]->args, g_data.env.vars);
 	ft_putstr_fd("Shell: ", 2);
 	if (ft_strchr(g_data.cur.cmd_list[idx]->cmd, '/'))
@@ -78,12 +77,13 @@ void	command_loop(t_pipes *p)
 
 void	execute(void)
 {
-	int	original_stdin;
-	t_pipes p;
+	int		original_stdin;
+	t_pipes	p;
 
 	p.idx = 0;
 	original_stdin = dup(STDIN);
-	if (g_data.cur.cmd_count == 1 && is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
+	if (g_data.cur.cmd_count == 1
+		&& is_builtin(g_data.cur.cmd_list[0]->cmd) == 1)
 		execute_builtin(&p);
 	else
 	{
@@ -101,4 +101,3 @@ void	execute(void)
 			g_data.env.exit_status = WEXITSTATUS(g_data.env.exit_status);
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 15:21:39 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 15:24:11 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ char	**get_env_vars(char **envp)
 	return (vars);
 }
 
-// Used to get current terminal settings to term struct
-// Setting c_lflag with ECHOCTL. It is wheter to print or not to print
-// control characters "~" is bitwise NOT operator that basicly makes it
-// turn to false. Default is true.
-// Used to apply modified settings.
 void	termios_settings(void)
 {
 	struct termios	term;

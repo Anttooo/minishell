@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:27:09 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:42:29 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:30:53 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_echo(int cmd_index);
 int		arr_len(void);
 int		ft_isnum(int c);
 void	free_env_vars(void);
+int		is_env_var(char *arg);
 int		get_env_var_count(void);
 int		get_env_var_count(void);
 int		ft_isvalid_int(char *str);

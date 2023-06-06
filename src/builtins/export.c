@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:38:38 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:44:07 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:27:13 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int	is_valid_identifier(char *arg)
 	{
 		is_valid = 0;
 	}
-	if(is_valid == 1 && is_valid_env_variable_name(arg) != 1)
+	if (is_valid == 1 && is_valid_env_variable_name(arg) != 1)
 	{
 		is_valid = 0;
 	}
-	if(is_valid == 1 && is_valid_env_variable_value(equal_sign_ptr + 1) != 1)
+	if (is_valid == 1 && is_valid_env_variable_value(equal_sign_ptr + 1) != 1)
 	{
 		is_valid = 0;
 	}
@@ -100,7 +100,7 @@ int	ft_export(int cmd_idx)
 	}
 	while (g_data.cur.cmd_list[cmd_idx]->args[i] != NULL)
 	{
-		if(is_valid_identifier(arg) == 1)
+		if (is_valid_identifier(arg) == 1)
 		{
 			ft_unset(cmd_idx);
 			g_data.env.vars = add_arg_to_env_vars(arg);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:24:26 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 14:04:44 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:25:46 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execute.h"
 
-extern t_data g_data;
+extern t_data	g_data;
 
 int	what_builtin(char *cmd)
 {
@@ -21,7 +21,8 @@ int	what_builtin(char *cmd)
 	idx = -1;
 	while (++idx < 7)
 	{
-		if (ft_strncmp(cmd, g_data.dir.builtins[idx], ft_strlen(g_data.dir.builtins[idx])) == 0)
+		if (ft_strncmp(cmd, g_data.dir.builtins[idx],
+				ft_strlen(g_data.dir.builtins[idx])) == 0)
 			break ;
 	}
 	return (idx);
@@ -33,11 +34,11 @@ void	update_env_paths(void)
 	g_data.env.paths = get_paths();
 }
 
-char *get_command_path(char *token)
+char	*get_command_path(char *token)
 {
-	int		i;
-	char	*cmd_path;
 	char	*path_with_slash;
+	char	*cmd_path;
+	int		i;
 
 	if (is_builtin(token) == 1)
 	{
@@ -51,10 +52,10 @@ char *get_command_path(char *token)
 		path_with_slash = ft_strjoin(g_data.env.paths[i], "/");
 		cmd_path = ft_strjoin(path_with_slash, token);
 		free(path_with_slash);
-		if(access(cmd_path, X_OK) == 0)
+		if (access(cmd_path, X_OK) == 0)
 			return (cmd_path);
 		free(cmd_path);
-		i++;	
+		i++;
 	}
-	return("not found");
+	return ("not found");
 }

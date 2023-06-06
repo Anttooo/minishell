@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   child_parent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oanttoor <oanttoor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:53:39 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 13:53:55 by oanttoor         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:25:58 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execute.h"
 
-extern t_data g_data;
+extern t_data	g_data;
 
 void	handle_child(t_pipes *p)
 {
-	// Handle input redir
 	handle_input_redirection_for_execution(p);
 	if (p->idx < g_data.cur.cmd_count - 1)
 	{
@@ -30,7 +29,6 @@ void	handle_child(t_pipes *p)
 	handle_output_redirection_for_execution(p);
 	execute_cmd(p, p->idx);
 }
-
 
 void	handle_parent(t_pipes *p)
 {

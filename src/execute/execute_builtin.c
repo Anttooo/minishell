@@ -6,18 +6,18 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:51:24 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 15:21:26 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/06 15:26:44 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execute.h"
 
-extern t_data g_data;
+extern t_data	g_data;
 
 static int	choose_builtin(int idx)
 {
-	int return_value;
-	
+	int	return_value;
+
 	if (idx == 0)
 		return_value = ft_echo(g_data.cur.cmd_index);
 	if (idx == 1)
@@ -38,7 +38,7 @@ static int	choose_builtin(int idx)
 // Function to execute one single builtin command
 void	execute_builtin(t_pipes *p)
 {
-	int 	original_stdout;
+	int		original_stdout;
 	int		return_value;
 	char	*cmd;
 	int		idx;
@@ -50,7 +50,7 @@ void	execute_builtin(t_pipes *p)
 	return_value = choose_builtin(idx);
 	if (p->out_redirected == TRUE)
 	{
-		dup2(original_stdout, STDOUT);	
+		dup2(original_stdout, STDOUT);
 	}
 	close(original_stdout);
 	free(cmd);
