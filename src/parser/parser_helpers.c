@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:02:11 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 18:48:39 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/08 11:21:49 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int	allocate_cmd_list(void)
 	i = 0;
 	size = sizeof(t_cmd *);
 	g_data.cur.cmd_list = (t_cmd **)malloc(g_data.cur.cmd_count * size);
-	if (!g_data.cur.cmd_list[i])
+	if (!g_data.cur.cmd_list)
 	{
-		perror("");
+		perror("Error allocating command lists, will exit");
 		clean_exit_shell();
 		exit(errno);
 	}

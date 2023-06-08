@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:26:35 by oanttoor          #+#    #+#             */
-/*   Updated: 2023/06/06 17:33:17 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/08 11:32:20 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	execute_loop(char *input)
 	handle_input(input);
 	if (g_data.cur.err_flag == 0)
 		tokenize_input();
-	debug_print_tokens();
+	// debug_print_tokens();
 	if (g_data.cur.err_flag == 0)
 		parse_commands();
-	debug_print_commands();
+	// debug_print_commands();
 	if (g_data.cur.err_flag == 0)
 		execute();
 }

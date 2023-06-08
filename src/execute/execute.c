@@ -6,7 +6,7 @@
 /*   By: joonasmykkanen <joonasmykkanen@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:23:57 by joonasmykka       #+#    #+#             */
-/*   Updated: 2023/06/06 17:23:41 by joonasmykka      ###   ########.fr       */
+/*   Updated: 2023/06/08 16:15:25 by joonasmykka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	command_loop(t_pipes *p)
 {
 	if (p->idx < g_data.cur.cmd_count - 1)
 		pipe(p->pipes[p->idx]);
-	g_data.sig.child_pid = fork();
-	if (g_data.sig.child_pid == 0)
+	g_data.sig.exec_pid = fork();
+	if (g_data.sig.exec_pid == 0)
 	{
 		handle_child(p);
 	}
@@ -73,8 +73,8 @@ void	command_loop(t_pipes *p)
 		handle_parent(p);
 	}
 	g_data.cur.cmd_index++;
+	p->idx++;
 }
-
 void	execute(void)
 {
 	int		original_stdin;
@@ -86,16 +86,15 @@ void	execute(void)
 		execute_builtin(&p);
 	else
 	{
-		original_stdin = dup(STDIN);
-		p.fdin = STDIN;
+		original_stdin = dup(STDIN_FILENO);
+		p.fdin = STDIN_FILENO;
 		while (p.idx < g_data.cur.cmd_count)
 		{
 			command_loop(&p);
-			p.idx++;
 		}
 		while (waitpid(-1, &g_data.env.exit_status, 0) > 0)
 			;
-		dup2(original_stdin, STDIN);
+		dup2(original_stdin, STDIN_FILENO);
 		close(original_stdin);
 		if (WIFEXITED(g_data.env.exit_status))
 			g_data.env.exit_status = WEXITSTATUS(g_data.env.exit_status);
